@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import logo from "./logo.svg";
 
 export class ShowApplicant extends Component {
+
     showLabel = (label, value) =>
         <div className="row form-inline border-bottom">
             <label className="col-4 col-form-label pr-5 border-right">{label}</label>

@@ -6,18 +6,18 @@ export default class App extends Component {
 
   constructor() {
     super();
-    // Determine the actual page to render
-    this.renderPage = "ShowApplicant";
+    this.state = {
+      // Determine the actual page to render
+      renderPage: "ShowApplicant"
+    }
   }
 
-  switchRenderPage(toRender){
-    this.renderPage = toRender;
-  }
+  setRenderPage = (toRender) => this.setState({renderPage: toRender});
 
   render() {
-    if(this.renderPage === "ShowApplicant") {
-      return <ShowApplicant callback={this.switchRenderPage}/>
-    } else if (this.renderPage === "AddApplicant") {
+    if(this.state.renderPage === "ShowApplicant") {
+      return <ShowApplicant callback={this.setRenderPage}/>
+    } else if (this.state.renderPage === "AddApplicant") {
       return <AddApplicant/>
     }
   }
