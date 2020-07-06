@@ -12,7 +12,17 @@ export default class App extends Component {
         }
     }
 
-    setRenderPage = (toRender) => this.setState({renderPage: toRender});
+    setRenderPage = (toRender) => {
+        this.setState({renderPage: toRender});
+        localStorage.setItem("todos", JSON.stringify(this.state));
+    };
+
+    componentDidMount = () => {
+        let data = localStorage.getItem("todos");
+        this.setState(data != null ? JSON.parse(data) : {
+               renderPage: "ShowApplicant",
+            });
+    }
 
     render() {
         if(this.state.renderPage === "ShowApplicant") {
