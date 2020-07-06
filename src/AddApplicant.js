@@ -14,7 +14,7 @@ export class AddApplicant extends Component {
         </ul>
 
     showLabel = (label) =>
-        <div className="row form-inline">
+        <div className="row form-inline pb-1">
             <label className="col-4 col-form-label pr-5">{label}</label>
             <input className="col-7 form-control pl-4" type="text"/>
         </div>
@@ -31,7 +31,7 @@ export class AddApplicant extends Component {
                         {this.showLabel("Name:")}
                         {this.showLabel("Age:")}
 
-                        <div className="row form-inline">
+                        <div className="row form-inline pb-1">
                             <label className="col-4 col-form-label pr-5">Profession:</label>
                             <select className="col-7 custom-select pl-4">
                                 <option value="None">None</option>
