@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import logo from "./logo.svg";
 
-export class ShowApplicant extends Component {
+export class AddApplicant extends Component {
+
     showLabel = (label, value) =>
         <div className="row form-inline border-bottom">
             <label className="col-4 col-form-label pr-5 border-right">{label}</label>
@@ -10,21 +10,8 @@ export class ShowApplicant extends Component {
 
     render = () =>
         <div className="container-fluid pt-5">
-            <ul className="col-lg-4 nav nav-tabs mx-auto">
-                <li className="nav-item">
-                    <a className="bg-light nav-link active">Show</a>
-                </li>
-
-                <li className="nav-item">
-                    <a className="nav-link" onClick={() => this.props.callback("AddApplicant")}>Add</a>
-                </li>
-            </ul>
-            <main className="col-12 col-lg-4 bg-light mx-auto p-3 border border-top-0">
-                <section className="row row-cols-2">
-                    <div className="col">
-                        <img src={logo} className="img-thumbnail" alt="Photo"/>
-                    </div>
-
+            <main className="col-12 col-lg-4 bg-light mx-auto p-3">
+                <section className="row row-cols-1">
                     <div className="col">
 
                         {this.showLabel("Name:", "Joan")}

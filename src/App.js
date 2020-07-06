@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {ShowApplicant} from './ShowApplicant';
+import {AddApplicant} from "./AddApplicant";
 
 export default class App extends Component {
 
@@ -9,9 +10,15 @@ export default class App extends Component {
     this.renderPage = "ShowApplicant";
   }
 
+  switchRenderPage(toRender){
+    this.renderPage = toRender;
+  }
+
   render() {
     if(this.renderPage === "ShowApplicant") {
-      return <ShowApplicant/>
+      return <ShowApplicant callback={this.switchRenderPage}/>
+    } else if (this.renderPage === "AddApplicant") {
+      return <AddApplicant/>
     }
   }
 
