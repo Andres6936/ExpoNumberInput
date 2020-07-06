@@ -14,9 +14,9 @@ export class AddApplicant extends Component {
         </ul>
 
     showLabel = (label) =>
-        <div className="row form-inline border-bottom">
-            <label className="col-4 col-form-label pr-5 border-right">{label}</label>
-            <input className="col-8 form-control pl-4" type="text"/>
+        <div className="row form-inline">
+            <label className="col-4 col-form-label pr-5">{label}</label>
+            <input className="col-7 form-control pl-4" type="text"/>
         </div>
 
     render = () =>
