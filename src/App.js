@@ -26,6 +26,13 @@ import logo from './logo.svg';
 // export default App;
 
 export default class App extends Component {
+
+    showLabel = (label, value) =>
+        <div className="row form-inline border-bottom">
+            <label className="col-4 col-form-label pr-5 border-right">{label}</label>
+            <input className="col-8 form-control-plaintext pl-4" type="text" readOnly value={value}/>
+        </div>
+
   render = () =>
     <div className="container-fluid pt-5">
         <main className="col-12 col-lg-4 bg-light mx-auto p-3">
@@ -35,39 +42,14 @@ export default class App extends Component {
                 </div>
 
                 <div className="col">
-                    <div className="row form-inline border-bottom">
-                        <label className="col-4 col-form-label pr-5 border-right">Name:</label>
-                        <input className="col-8 form-control-plaintext pl-4" type="text" readOnly value="Joan"/>
-                    </div>
 
-                    <div className="row form-inline border-bottom">
-                        <label className="col-4 col-form-label pr-5 border-right">Age:</label>
-                        <input className="col-8 form-control-plaintext pl-4" type="text" readOnly value="23"/>
-                    </div>
+                    {this.showLabel("Name:", "Joan")}
+                    {this.showLabel("Age:", "23")}
+                    {this.showLabel("Profession:", "Engineer System")}
+                    {this.showLabel("Experience:", "2 years 4 months")}
+                    {this.showLabel("Telephone:", "319 656 9458")}
 
-                    <div className="row form-inline border-bottom">
-                        <label className="col-4 col-form-label pr-5 border-right">Profession:</label>
-                        <input className="col-8 form-control-plaintext pl-4" type="text" readOnly value="Engineer System"/>
-                    </div>
-
-                    <div className="row form-inline border-bottom">
-                        <label className="col-4 col-form-label pr-5 border-right">Experience:</label>
-                        <input className="col-8 form-control-plaintext pl-4" type="text" readOnly value="2 years 4 months"/>
-                    </div>
-
-                    <div className="row form-inline border-bottom">
-                        <label className="col-4 col-form-label pr-5 border-right">Telephone:</label>
-                        <input className="col-8 form-control-plaintext pl-4" type="text" readOnly value="319 656 9458"/>
-                    </div>
                 </div>
-            </section>
-
-            <section>
-
-            </section>
-
-            <section>
-
             </section>
         </main>
     </div>
