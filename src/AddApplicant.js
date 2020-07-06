@@ -30,7 +30,17 @@ export class AddApplicant extends Component {
 
                         {this.showLabel("Name:")}
                         {this.showLabel("Age:")}
-                        {this.showLabel("Profession:")}
+
+                        <div className="row form-inline">
+                            <label className="col-4 col-form-label pr-5">Profession:</label>
+                            <select className="col-7 custom-select pl-4">
+                                <option value="None">None</option>
+                                <option value="Engineer System">Engineer System</option>
+                                <option value="Engineer Industrial">Engineer Industrial</option>
+                                <option value="Scientific">Scientific</option>
+                            </select>
+                        </div>
+
                         {this.showLabel("Experience:")}
                         {this.showLabel("Telephone:")}
 
