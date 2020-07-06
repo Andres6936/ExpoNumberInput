@@ -4,22 +4,22 @@ import {AddApplicant} from "./AddApplicant";
 
 export default class App extends Component {
 
-  constructor() {
-    super();
-    this.state = {
-      // Determine the actual page to render
-      renderPage: "ShowApplicant"
+    constructor() {
+        super();
+        this.state = {
+            // Determine the actual page to render
+            renderPage: "ShowApplicant"
+        }
     }
-  }
 
-  setRenderPage = (toRender) => this.setState({renderPage: toRender});
+    setRenderPage = (toRender) => this.setState({renderPage: toRender});
 
-  render() {
-    if(this.state.renderPage === "ShowApplicant") {
-      return <ShowApplicant callback={this.setRenderPage}/>
-    } else if (this.state.renderPage === "AddApplicant") {
-      return <AddApplicant/>
+    render() {
+        if(this.state.renderPage === "ShowApplicant") {
+            return <ShowApplicant callback={this.setRenderPage}/>
+        } else if (this.state.renderPage === "AddApplicant") {
+            return <AddApplicant/>
+        }
     }
-  }
 
 }
