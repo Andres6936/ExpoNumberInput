@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {ConsultApplicant} from './ConsultApplicant';
 import logo from "./logo.svg";
 
 export class ShowApplicant extends Component {
@@ -26,7 +27,7 @@ export class ShowApplicant extends Component {
             {this.showNavigation()}
 
             <main className="col-12 col-lg-4 bg-light mx-auto p-3 border border-top-0">
-                <section className="row row-cols-2">
+                <section className="row row-cols-2 mb-4">
                     <div className="col">
                         <img src={logo} className="img-thumbnail" alt="Photo"/>
                     </div>
@@ -41,6 +42,8 @@ export class ShowApplicant extends Component {
 
                     </div>
                 </section>
+
+                <ConsultApplicant/>
             </main>
         </div>
 }
