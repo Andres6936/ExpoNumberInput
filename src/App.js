@@ -18,7 +18,7 @@ export default class App extends Component {
         if(this.state.renderPage === "ShowApplicant") {
             return <ShowApplicant callback={this.setRenderPage}/>
         } else if (this.state.renderPage === "AddApplicant") {
-            return <AddApplicant/>
+            return <AddApplicant callback={this.setRenderPage}/>
         }
     }
 
