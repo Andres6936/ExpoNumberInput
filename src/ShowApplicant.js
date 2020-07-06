@@ -10,7 +10,16 @@ export class ShowApplicant extends Component {
 
     render = () =>
         <div className="container-fluid pt-5">
-            <main className="col-12 col-lg-4 bg-light mx-auto p-3">
+            <ul className="col-lg-4 nav nav-tabs mx-auto">
+                <li className="nav-item">
+                    <a className="bg-light nav-link active">Show</a>
+                </li>
+
+                <li className="nav-item">
+                    <a className="nav-link">Add</a>
+                </li>
+            </ul>
+            <main className="col-12 col-lg-4 bg-light mx-auto p-3 border border-top-0">
                 <section className="row row-cols-2">
                     <div className="col">
                         <img src={logo} className="img-thumbnail" alt="Photo"/>
