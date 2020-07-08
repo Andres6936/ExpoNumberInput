@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {ConsultApplicant} from './ConsultApplicant';
-import logo from "./logo.svg";
 
 export class ShowApplicant extends Component {
 
