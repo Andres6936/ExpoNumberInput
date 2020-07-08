@@ -23,7 +23,8 @@ export default class App extends Component {
     componentDidMount = () => {
         let data = localStorage.getItem("todos");
         this.setState(data != null ? JSON.parse(data) : {
-               renderPage: "ShowApplicant",
+                applicants: getApplicants(),
+                renderPage: "ShowApplicant",
             });
     }
 
