@@ -20,14 +20,6 @@ export default class App extends Component {
         localStorage.setItem("todos", JSON.stringify(this.state));
     };
 
-    componentDidMount = () => {
-        let data = localStorage.getItem("todos");
-        this.setState(data != null ? JSON.parse(data) : {
-                applicants: getApplicants(),
-                renderPage: "ShowApplicant",
-            });
-    }
-
     render() {
         if(this.state.renderPage === "ShowApplicant") {
             return <ShowApplicant callback={this.setRenderPage} applicant={this.state.applicants[0]}/>
