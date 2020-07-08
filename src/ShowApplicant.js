@@ -41,7 +41,7 @@ export class ShowApplicant extends Component {
 
                         <div className="col-12 mt-5 btn-group">
                             <button className="btn btn-secondary">Prev</button>
-                            <button className="btn btn-secondary">Next</button>
+                            <button className="btn btn-secondary" onClick={this.props.next}>Next</button>
                         </div>
 
                     </div>
