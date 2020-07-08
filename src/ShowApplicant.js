@@ -40,6 +40,11 @@ export class ShowApplicant extends Component {
                         {this.showLabel("Experience:", this.props.applicant.experience)}
                         {this.showLabel("Telephone:", this.props.applicant.telephone)}
 
+                        <div className="col-12 mt-5 btn-group">
+                            <button className="btn btn-secondary">Prev</button>
+                            <button className="btn btn-secondary">Next</button>
+                        </div>
+
                     </div>
                 </section>
 
