@@ -29,7 +29,7 @@ export default class App extends Component {
 
     render() {
         if(this.state.renderPage === "ShowApplicant") {
-            return <ShowApplicant callback={this.setRenderPage}/>
+            return <ShowApplicant callback={this.setRenderPage} applicant={this.state.applicants[0]}/>
         } else if (this.state.renderPage === "AddApplicant") {
             return <AddApplicant callback={this.setRenderPage}/>
         }

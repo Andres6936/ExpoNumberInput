@@ -2,32 +2,44 @@ module.exports = function () {
     return [
         {
             name: 'Kevin Space',
-            profession: 'actor',
+            profession: 'Actor',
+            experience: '5 years 7 months',
+            telephone: '88 312 122 45 65',
             age: 33,
         },
         {
             name: 'Bill Clinton',
-            profession: 'political',
+            profession: 'Political',
+            experience: '12 years 10 months',
+            telephone: '98 432 122 45 65',
             age: 45,
         },
         {
             name: 'Christopher Nolan',
-            profession: 'director',
+            profession: 'Director',
+            experience: '3 years 9 months',
+            telephone: '23 656 122 45 65',
             age: 38,
         },
         {
             name: 'Gordon Ramsay',
-            profession: 'chef',
+            profession: 'Chef',
+            experience: '22 years 9 months',
+            telephone: '12 768 122 45 65',
             age: 43,
         },
         {
             name: 'Jennifer Lawrence',
-            profession: 'actor',
+            profession: 'Actor',
+            experience: '6 years 2 months',
+            telephone: '34 878 122 45 65',
             age: 22,
         },
         {
             name: 'Tom Cruise',
-            profession: 'actor',
+            profession: 'Actor',
+            experience: '17 years 4 months',
+            telephone: '18 121 122 45 65',
             age: 55,
         }
     ]

@@ -34,11 +34,11 @@ export class ShowApplicant extends Component {
 
                     <div className="col">
 
-                        {this.showLabel("Name:", "Joan")}
-                        {this.showLabel("Age:", "23")}
-                        {this.showLabel("Profession:", "Engineer System")}
-                        {this.showLabel("Experience:", "2 years 4 months")}
-                        {this.showLabel("Telephone:", "319 656 9458")}
+                        {this.showLabel("Name:", this.props.applicant.name)}
+                        {this.showLabel("Age:", this.props.applicant.age)}
+                        {this.showLabel("Profession:", this.props.applicant.profession)}
+                        {this.showLabel("Experience:", this.props.applicant.experience)}
+                        {this.showLabel("Telephone:", this.props.applicant.telephone)}
 
                     </div>
                 </section>
