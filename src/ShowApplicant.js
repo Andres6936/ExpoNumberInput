@@ -29,7 +29,7 @@ export class ShowApplicant extends Component {
             <main className="col-12 col-lg-4 bg-light mx-auto p-3 border border-top-0">
                 <section className="row row-cols-2 mb-4">
                     <div className="col">
-                        <img src={logo} className="img-thumbnail" alt="Photo"/>
+                        <img src={this.props.applicant.img} className="img-thumbnail" alt="Photo"/>
                     </div>
 
                     <div className="col">
