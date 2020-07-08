@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import getApplicants from './DataApplicants';
 import {ShowApplicant} from './ShowApplicant';
 import {AddApplicant} from "./AddApplicant";
 
@@ -7,8 +8,10 @@ export default class App extends Component {
     constructor() {
         super();
         this.state = {
+            // List of applicants
+            applicants: getApplicants(),
             // Determine the actual page to render
-            renderPage: "ShowApplicant"
+            renderPage: "ShowApplicant",
         }
     }
 
