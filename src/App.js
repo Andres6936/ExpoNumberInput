@@ -17,16 +17,24 @@ export default class App extends Component {
         }
         // Reference to actual applicant
         this.actualApplicant = this.state.applicants[this.state.index];
+
         // For avoid lose the context {this} of React
         this.nextApplicant = this.nextApplicant.bind(this);
+        this.prevApplicant = this.prevApplicant.bind(this);
     }
 
-    prevApplicant() {
+    prevApplicant = () => {
+        if (this.state.index > 0) {
+            this.setState({index: this.state.index - 1});
+        } else {
+            this.setState({index: 0});
+        }
 
+        this.actualApplicant = this.state.applicants[this.state.index];
     }
 
     nextApplicant = () => {
-        if (this.state.index <= this.state.applicants.length) {
+        if (this.state.index < this.state.applicants.length) {
             this.setState({index: this.state.index + 1});
         } else {
             this.setState({index: 0});
@@ -42,7 +50,8 @@ export default class App extends Component {
 
     render() {
         if(this.state.renderPage === "ShowApplicant") {
-            return <ShowApplicant callback={this.setRenderPage} applicant={this.actualApplicant} next={this.nextApplicant}/>
+            return <ShowApplicant callback={this.setRenderPage} applicant={this.actualApplicant}
+                                  prev={this.prevApplicant} next={this.nextApplicant}/>
         } else if (this.state.renderPage === "AddApplicant") {
             return <AddApplicant callback={this.setRenderPage}/>
         }
