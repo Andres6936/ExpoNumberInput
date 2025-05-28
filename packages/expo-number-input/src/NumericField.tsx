@@ -39,7 +39,40 @@ type Props = {
     extraTextInputProps?: object
 }
 
-export function NumericField({initValue, value: propValue, ...props}: Props) {
+export function NumericField(
+    {
+        initValue,
+        value: propValue,
+        iconSize = calcSize(30),
+        borderColor = '#d4d4d4',
+        iconStyle = {},
+        totalWidth = calcSize(220),
+        sepratorWidth = 1,
+        type = 'plus-minus',
+        rounded = false,
+        textColor = 'black',
+        containerStyle = {},
+        inputStyle = {},
+        initValue = null,
+        valueType = 'integer',
+        value = null,
+        minValue = null,
+        maxValue = null,
+        step = 1,
+        upDownButtonsBackgroundColor = 'white',
+        rightButtonBackgroundColor = 'white',
+        leftButtonBackgroundColor = 'white',
+        editable = true,
+        validateOnBlur = true,
+        reachMaxIncIconStyle = {},
+        reachMaxDecIconStyle = {},
+        reachMinIncIconStyle = {},
+        reachMinDecIconStyle = {},
+        onLimitReached = (isMax, msg) => { },
+        extraTextInputProps = {},
+        ...props,
+    }: Props)
+{
     const noInitSent = initValue !== 0 && !initValue;
     const [value, setValue] = useState(
         noInitSent ? (propValue ?? 0) : initValue
@@ -242,7 +275,7 @@ export function NumericField({initValue, value: propValue, ...props}: Props) {
             parsedValue = isNaN(parsedValue) ? 0 : parsedValue
             if (parsedValue !== propValue)
                 props.onChange && props.onChange(parsedValue)
-            this.setState({ legal})
+            this.setState({legal})
             setValue(parsedValue)
             setStringValue(parsedValue.toString())
 
