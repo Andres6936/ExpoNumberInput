@@ -7,7 +7,7 @@ import {
     Text
 } from 'react-native';
 
-function _handlePress(callback){
+function _handlePress(callback: (time: number) => void){
     requestAnimationFrame(callback)
 }
 
