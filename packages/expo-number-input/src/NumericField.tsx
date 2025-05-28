@@ -80,7 +80,7 @@ export function NumericField(
     const [stringValue, setStringValue] = useState(
         (noInitSent ? (propValue ?? 0) : initValue).toString()
     );
-    const ref = useRef(null);
+    const ref = useRef<TextInput | null>(null);
 
     // This replaces componentDidUpdate
     useEffect(() => {
