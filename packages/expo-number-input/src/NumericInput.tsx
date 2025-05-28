@@ -7,7 +7,7 @@ import { create, PREDEF_RES } from 'react-native-pixel-perfect'
 
 let calcSize = create(PREDEF_RES.iphone7.px)
 
-export default class NumericInput extends Component {
+export class NumericInput extends Component {
     constructor(props) {
         super(props)
         const noInitSent = props.initValue !== 0 && !props.initValue
