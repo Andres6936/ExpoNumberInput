@@ -2,6 +2,7 @@ import React, {useEffect, useRef, useState} from "react";
 import {Pressable, StyleSheet, TextInput, View, ViewStyle} from "react-native";
 import Icon from 'react-native-vector-icons/Ionicons'
 import {create, PREDEF_RES} from 'react-native-pixel-perfect'
+import {ChevronDown, ChevronUp, Minus, Plus} from "lucide-react-native";
 
 let calcSize = create(PREDEF_RES.iphone7.px)
 
@@ -323,11 +324,11 @@ export function NumericField(
                            onBlur={onBlur} onFocus={onFocus}/>
                 <View style={upDownStyle}>
                     <Pressable onPress={inc} style={{flex: 1, width: '100%', alignItems: 'center'}}>
-                        <Icon name='ios-arrow-up' size={fontSize}
+                        <ChevronUp size={fontSize}
                               style={[...iconStyle, maxReached ? reachMaxIncIconStyle : {}, minReached ? reachMinIncIconStyle : {}]}/>
                     </Pressable>
                     <Pressable onPress={dec} style={{flex: 1, width: '100%', alignItems: 'center'}}>
-                        <Icon name='ios-arrow-down' size={fontSize}
+                        <ChevronDown size={fontSize}
                               style={[...iconStyle, maxReached ? reachMaxDecIconStyle : {}, minReached ? reachMinDecIconStyle : {}]}/>
                     </Pressable>
                 </View>
@@ -335,7 +336,7 @@ export function NumericField(
     else return (
         <View style={inputContainerStyle}>
             <Pressable onPress={dec} style={leftButtonStyle}>
-                <Icon name='md-remove' size={fontSize}
+                <Minus size={fontSize}
                       style={[...iconStyle, maxReached ? reachMaxDecIconStyle : {}, minReached ? reachMinDecIconStyle : {}]}/>
             </Pressable>
             <View style={[inputWraperStyle]}>
@@ -345,8 +346,9 @@ export function NumericField(
                            onBlur={onBlur} onFocus={onFocus}/>
             </View>
             <Pressable onPress={inc} style={rightButtonStyle}>
-                <Icon name='md-add' size={fontSize}
-                      style={[...iconStyle, maxReached ? reachMaxIncIconStyle : {}, minReached ? reachMinIncIconStyle : {}]}/>
+                <Plus size={fontSize}
+                      style={[...iconStyle, maxReached ? reachMaxIncIconStyle : {}, minReached ? reachMinIncIconStyle : {}]}
+                />
             </Pressable>
         </View>
     )
