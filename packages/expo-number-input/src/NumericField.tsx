@@ -3,7 +3,7 @@ import {StyleSheet, TextInput, View, ViewStyle} from "react-native";
 import {Color} from "csstype";
 import Button from "./Button";
 import Icon from 'react-native-vector-icons/Ionicons'
-import { create, PREDEF_RES } from 'react-native-pixel-perfect'
+import {create, PREDEF_RES} from 'react-native-pixel-perfect'
 
 let calcSize = create(PREDEF_RES.iphone7.px)
 
@@ -153,6 +153,134 @@ export function NumericField({initValue, value: propValue, ...props}: Props) {
         borderLeftWidth: sepratorWidth,
         borderRightWidth: sepratorWidth,
         borderRightColor: borderColor
+    }
+
+    const inc = () => {
+        let value = propValue && (typeof propValue === 'number') ? propValue : this.state.value
+        if (props.maxValue === null || (value + props.step < props.maxValue)) {
+            value = (value + props.step).toFixed(12)
+            value = props.valueType === 'real' ? parseFloat(value) : parseInt(value)
+            setValue(value)
+            setStringValue(value.toString())
+        } else if (props.maxValue !== null) {
+            props.onLimitReached(true, 'Reached Maximum Value!')
+            value = props.maxValue
+            setValue(value)
+            setStringValue(value.toString())
+        }
+        if (value !== propValue)
+            props.onChange && props.onChange(Number(value))
+    }
+
+    const dec = () => {
+        let value = propValue && (typeof propValue === 'number') ? propValue : this.state.value
+        if (props.minValue === null || (value - props.step > props.minValue)) {
+            value = (value - props.step).toFixed(12)
+            value = props.valueType === 'real' ? parseFloat(value) : parseInt(value)
+        } else if (props.minValue !== null) {
+            props.onLimitReached(false, 'Reached Minimum Value!')
+            value = props.minValue
+        }
+        if (value !== propValue)
+            props.onChange && props.onChange(Number(value))
+        setValue(value)
+        setStringValue(value.toString())
+    }
+
+    const isLegalValue = (value, mReal, mInt) => value === '' || (((props.valueType === 'real' && mReal(value)) || (props.valueType !== 'real' && mInt(value))) && (props.maxValue === null || (parseFloat(value) <= props.maxValue)) && (props.minValue === null || (parseFloat(value) >= props.minValue)))
+
+    const realMatch = (value) => value && value.match(/-?\d+(\.(\d+)?)?/) && value.match(/-?\d+(\.(\d+)?)?/)[0] === value.match(/-?\d+(\.(\d+)?)?/).input
+
+    const intMatch = (value) => value && value.match(/-?\d+/) && value.match(/-?\d+/)[0] === value.match(/-?\d+/).input
+
+    const onChange = (value) => {
+        let currValue = typeof propValue === 'number' ? propValue : this.state.value
+        if ((value.length === 1 && value === '-') || (value.length === 2 && value === '0-')) {
+            setStringValue('-')
+            return
+        }
+        if ((value.length === 1 && value === '.') || (value.length === 2 && value === '0.')) {
+            setStringValue('0.')
+            return
+        }
+        if ((value.charAt(value.length - 1) === '.')) {
+            setStringValue(value)
+            return
+        }
+        let legal = isLegalValue(value, this.realMatch, this.intMatch)
+        if (legal) {
+            setLastValid(value)
+        }
+        if (!legal && !props.validateOnBlur) {
+            if (ref.current) {
+                ref.current.blur()
+                setTimeout(() => {
+                    ref.current.clear()
+                    setTimeout(() => {
+                        props.onChange && props.onChange(currValue - 1)
+                        this.setState({value: currValue - 1}, () => {
+                            this.setState({value: currValue, legal})
+                            props.onChange && props.onChange(currValue)
+                        })
+                    }, 10)
+                }, 15)
+                setTimeout(() => ref.current.focus(), 20)
+            }
+
+        } else if (!legal && props.validateOnBlur) {
+            setStringValue(value)
+            let parsedValue = props.valueType === 'real' ? parseFloat(value) : parseInt(value)
+            parsedValue = isNaN(parsedValue) ? 0 : parsedValue
+            if (parsedValue !== propValue)
+                props.onChange && props.onChange(parsedValue)
+            this.setState({legal})
+            setValue(parsedValue)
+            setStringValue(parsedValue.toString())
+        } else {
+            setStringValue(value)
+            let parsedValue = props.valueType === 'real' ? parseFloat(value) : parseInt(value)
+            parsedValue = isNaN(parsedValue) ? 0 : parsedValue
+            if (parsedValue !== propValue)
+                props.onChange && props.onChange(parsedValue)
+            this.setState({ legal})
+            setValue(parsedValue)
+            setStringValue(parsedValue.toString())
+
+        }
+    }
+
+    const onBlur = () => {
+
+        let match = stringValue.match(/-?[0-9]\d*(\.\d+)?/)
+        let legal = match && match[0] === match.input && ((props.maxValue === null || (parseFloat(stringValue) <= props.maxValue)) && (props.minValue === null || (parseFloat(this.state.stringValue) >= props.minValue)))
+        if (!legal) {
+            if (props.minValue !== null && (parseFloat(stringValue) <= props.minValue)) {
+                props.onLimitReached(true, 'Reached Minimum Value!')
+            }
+            if (props.maxValue !== null && (parseFloat(stringValue) >= props.maxValue)) {
+                props.onLimitReached(false, 'Reached Maximum Value!')
+            }
+            if (ref.current) {
+                ref.current.blur()
+                setTimeout(() => {
+                    ref.current.clear()
+                    setTimeout(() => {
+                        props.onChange && props.onChange(lastValid)
+                        this.setState({value: lastValid}, () => {
+                            this.setState({value: lastValid, stringValue: lastValid.toString()})
+                            props.onChange && props.onChange(lastValid)
+                        })
+                    }, 10)
+                }, 15)
+                setTimeout(() => ref.current.focus(), 50)
+            }
+        }
+        props.onBlur && props.onBlur()
+    }
+
+    const onFocus = () => {
+        setLastValid(value)
+        props.onFocus && props.onFocus()
     }
 
     if (props.type === 'up-down')
