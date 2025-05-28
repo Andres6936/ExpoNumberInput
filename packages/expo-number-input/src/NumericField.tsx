@@ -159,7 +159,7 @@ export function NumericField({initValue, value: propValue, ...props}: Props) {
         return (
             <View style={inputContainerStyle}>
                 <TextInput {...props.extraTextInputProps} editable={editable} returnKeyType='done'
-                           underlineColorAndroid='rgba(0,0,0,0)' keyboardType='numeric' value={this.state.stringValue}
+                           underlineColorAndroid='rgba(0,0,0,0)' keyboardType='numeric' value={stringValue}
                            onChangeText={this.onChange} style={inputStyle} ref={ref => this.ref = ref}
                            onBlur={this.onBlur} onFocus={this.onFocus}/>
                 <View style={upDownStyle}>
@@ -181,7 +181,7 @@ export function NumericField({initValue, value: propValue, ...props}: Props) {
             </Button>
             <View style={[inputWraperStyle]}>
                 <TextInput {...props.extraTextInputProps} editable={editable} returnKeyType='done'
-                           underlineColorAndroid='rgba(0,0,0,0)' keyboardType='numeric' value={this.state.stringValue}
+                           underlineColorAndroid='rgba(0,0,0,0)' keyboardType='numeric' value={stringValue}
                            onChangeText={this.onChange} style={inputStyle} ref={ref => this.ref = ref}
                            onBlur={this.onBlur} onFocus={this.onFocus}/>
             </View>
