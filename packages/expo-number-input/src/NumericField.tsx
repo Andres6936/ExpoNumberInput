@@ -94,7 +94,7 @@ export function NumericField(
         }
     }, [initValue, value]);
 
-    const sepratorWidth = (typeof props.separatorWidth === 'undefined') ? props.sepratorWidth : props.separatorWidth;//supporting old property name sepratorWidth
+    const sepratorWidth = (typeof props.separatorWidth === 'undefined') ? sepratorWidth : props.separatorWidth;//supporting old property name sepratorWidth
     const iconStyle = [style.icon, props.iconStyle]
     const totalHeight = props.totalHeight ? props.totalHeight : (totalWidth * 0.4)
     const inputWidth = type === 'up-down' ? (totalWidth * 0.6) : (totalWidth * 0.4)
@@ -107,12 +107,13 @@ export function NumericField(
             width: totalWidth,
             height: totalHeight,
             borderColor: borderColor
-        }, props.rounded ? {borderRadius: borderRadiusTotal} : {}, containerStyle] :
+        }, rounded ? {borderRadius: borderRadiusTotal} : {}, containerStyle] :
         [style.inputContainerPlusMinus, {
             width: totalWidth,
             height: totalHeight,
             borderColor: borderColor
-        }, props.rounded ? {borderRadius: borderRadiusTotal} : {}, containerStyle]
+        }, rounded ? {borderRadius: borderRadiusTotal} : {}, containerStyle]
+
     const inputStyle = type === 'up-down' ?
         [style.inputUpDown, {
             width: inputWidth,
@@ -132,13 +133,14 @@ export function NumericField(
             borderLeftColor: borderColor,
             borderRightColor: borderColor
         }, props.inputStyle]
+
     const upDownStyle = [{
         alignItems: 'center',
         width: totalWidth - inputWidth,
-        backgroundColor: props.upDownButtonsBackgroundColor,
+        backgroundColor: upDownButtonsBackgroundColor,
         borderRightWidth: 1,
         borderRightColor: borderColor
-    }, props.rounded ? {borderTopRightRadius: borderRadiusTotal, borderBottomRightRadius: borderRadiusTotal} : {}]
+    }, rounded ? {borderTopRightRadius: borderRadiusTotal, borderBottomRightRadius: borderRadiusTotal} : {}]
     const rightButtonStyle = [
         {
             position: 'absolute',
@@ -148,10 +150,10 @@ export function NumericField(
             justifyContent: 'center',
             alignItems: 'center',
             borderWidth: 0,
-            backgroundColor: props.rightButtonBackgroundColor,
+            backgroundColor: rightButtonBackgroundColor,
             width: (totalWidth - inputWidth) / 2
         },
-        props.rounded ?
+        rounded ?
             {
                 borderTopRightRadius: borderRadiusTotal,
                 borderBottomRightRadius: borderRadiusTotal
@@ -165,12 +167,12 @@ export function NumericField(
             height: totalHeight - 2,
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: props.leftButtonBackgroundColor,
+            backgroundColor: leftButtonBackgroundColor,
             width: (totalWidth - inputWidth) / 2,
             borderWidth: 0
         },
 
-        props.rounded ?
+        rounded ?
             {borderTopLeftRadius: borderRadiusTotal, borderBottomLeftRadius: borderRadiusTotal}
             : {}]
 
