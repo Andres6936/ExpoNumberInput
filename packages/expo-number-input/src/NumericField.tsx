@@ -14,7 +14,7 @@ type Props = {
     valueType?: 'integer' | 'real'
     initValue?: number
     iconSize?: number
-    borderColor?: Color
+    borderColor?: string
     iconStyle?: ViewStyle
     totalWidth?: number
     separatorWidth?: number
@@ -44,14 +44,14 @@ export function NumericField(
         value: propValue = null,
         iconSize = calcSize(30),
         borderColor = '#d4d4d4',
-        iconStyle = {},
+        iconStyle: propIconStyle = {},
         totalWidth = calcSize(220),
         sepratorWidth = 1,
         type = 'plus-minus',
         rounded = false,
         textColor = 'black',
         containerStyle = {},
-        inputStyle = {},
+        inputStyle: propInputStyle = {},
         valueType = 'integer',
         minValue = null,
         maxValue = null,
@@ -94,7 +94,7 @@ export function NumericField(
     }, [initValue, value]);
 
     const sepratorWidth = (typeof props.separatorWidth === 'undefined') ? sepratorWidth : props.separatorWidth;//supporting old property name sepratorWidth
-    const iconStyle = [style.icon, props.iconStyle]
+    const iconStyle = [style.icon, propIconStyle]
     const totalHeight = props.totalHeight ? props.totalHeight : (totalWidth * 0.4)
     const inputWidth = type === 'up-down' ? (totalWidth * 0.6) : (totalWidth * 0.4)
     const borderRadiusTotal = totalHeight * 0.18
@@ -121,7 +121,7 @@ export function NumericField(
             color: textColor,
             borderRightWidth: 2,
             borderRightColor: borderColor
-        }, props.inputStyle] :
+        }, propInputStyle] :
         [style.inputPlusMinus, {
             width: inputWidth,
             height: totalHeight,
@@ -131,7 +131,7 @@ export function NumericField(
             borderLeftWidth: sepratorWidth,
             borderLeftColor: borderColor,
             borderRightColor: borderColor
-        }, props.inputStyle]
+        }, propInputStyle]
 
     const upDownStyle = [{
         alignItems: 'center',
