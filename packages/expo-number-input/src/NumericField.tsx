@@ -41,8 +41,8 @@ type Props = {
 
 export function NumericField(
     {
-        initValue,
-        value: propValue,
+        initValue = null,
+        value: propValue = null,
         iconSize = calcSize(30),
         borderColor = '#d4d4d4',
         iconStyle = {},
@@ -53,9 +53,7 @@ export function NumericField(
         textColor = 'black',
         containerStyle = {},
         inputStyle = {},
-        initValue = null,
         valueType = 'integer',
-        value = null,
         minValue = null,
         maxValue = null,
         step = 1,
