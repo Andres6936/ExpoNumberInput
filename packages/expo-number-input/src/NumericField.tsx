@@ -296,11 +296,13 @@ export function NumericField(
                 setTimeout(() => {
                     ref.current.clear()
                     setTimeout(() => {
-                        props.onChange && props.onChange(lastValid)
-                        this.setState({value: lastValid}, () => {
-                            this.setState({value: lastValid, stringValue: lastValid.toString()})
-                            props.onChange && props.onChange(lastValid)
-                        })
+                        props.onChange?.(lastValid);
+                        setValue(lastValid);
+                        setTimeout(() => {
+                            setValue(lastValid)
+                            setStringValue(lastValid?.toString())
+                            props.onChange?.(lastValid)
+                        }, 0)
                     }, 10)
                 }, 15)
                 setTimeout(() => ref.current.focus(), 50)
