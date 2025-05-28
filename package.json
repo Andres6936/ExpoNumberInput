@@ -1,7 +1,7 @@
 {
   "name": "monorepo-expo-numeric-input",
   "version": "1.9.1",
-  "workspaces": ["packages/*"],
+  "workspaces": ["packages/*", "showcase"],
   "description": "a stylish numeric input for react native",
   "keywords": [
     "react-native",

@@ -6,7 +6,7 @@ import {
   ScrollView,
   View
 } from 'react-native';
-import NumericInput from 'react-native-numeric-input'
+import {NumericInput} from 'expo-number-input'
 import { create, PREDEF_RES } from 'react-native-pixel-perfect'
 const calcSize = create(PREDEF_RES.iphone7.px)
 

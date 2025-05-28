@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, TextInput, StyleSheet, Text } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
-import Button from '../../Button'
+import Button from './Button'
 import PropTypes from 'prop-types'
 import { create, PREDEF_RES } from 'react-native-pixel-perfect'
 
