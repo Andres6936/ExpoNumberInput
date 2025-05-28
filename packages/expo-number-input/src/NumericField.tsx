@@ -46,7 +46,7 @@ export function NumericField(
         borderColor = '#d4d4d4',
         iconStyle: propIconStyle = {},
         totalWidth = calcSize(220),
-        sepratorWidth = 1,
+        separatorWidth = 1,
         type = 'plus-minus',
         rounded = false,
         textColor = 'black',
@@ -67,7 +67,7 @@ export function NumericField(
         reachMinDecIconStyle = {},
         onLimitReached = (isMax, msg) => { },
         extraTextInputProps = {},
-        ...props,
+        ...props
     }: Props)
 {
     const noInitSent = initValue !== 0 && !initValue;
@@ -94,7 +94,6 @@ export function NumericField(
         }
     }, [initValue, value]);
 
-    const sepratorWidth = (typeof props.separatorWidth === 'undefined') ? sepratorWidth : props.separatorWidth;//supporting old property name sepratorWidth
     const iconStyle = [style.icon, propIconStyle]
     const totalHeight = props.totalHeight ? props.totalHeight : (totalWidth * 0.4)
     const inputWidth = type === 'up-down' ? (totalWidth * 0.6) : (totalWidth * 0.4)
@@ -128,8 +127,8 @@ export function NumericField(
             height: totalHeight,
             fontSize: fontSize,
             color: textColor,
-            borderRightWidth: sepratorWidth,
-            borderLeftWidth: sepratorWidth,
+            borderRightWidth: separatorWidth,
+            borderLeftWidth: separatorWidth,
             borderLeftColor: borderColor,
             borderRightColor: borderColor
         }, propInputStyle]
@@ -179,8 +178,8 @@ export function NumericField(
     const inputWraperStyle = {
         alignSelf: 'center',
         borderLeftColor: borderColor,
-        borderLeftWidth: sepratorWidth,
-        borderRightWidth: sepratorWidth,
+        borderLeftWidth: separatorWidth,
+        borderRightWidth: separatorWidth,
         borderRightColor: borderColor
     }
 
