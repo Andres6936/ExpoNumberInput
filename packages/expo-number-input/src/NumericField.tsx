@@ -1,6 +1,5 @@
 import React, {useEffect, useRef, useState} from "react";
-import {StyleSheet, TextInput, View, ViewStyle} from "react-native";
-import Button from "./Button";
+import {Pressable, StyleSheet, TextInput, View, ViewStyle} from "react-native";
 import Icon from 'react-native-vector-icons/Ionicons'
 import {create, PREDEF_RES} from 'react-native-pixel-perfect'
 
@@ -323,32 +322,32 @@ export function NumericField(
                            onChangeText={onChange} style={inputStyle} ref={ref}
                            onBlur={onBlur} onFocus={onFocus}/>
                 <View style={upDownStyle}>
-                    <Button onPress={inc} style={{flex: 1, width: '100%', alignItems: 'center'}}>
+                    <Pressable onPress={inc} style={{flex: 1, width: '100%', alignItems: 'center'}}>
                         <Icon name='ios-arrow-up' size={fontSize}
                               style={[...iconStyle, maxReached ? reachMaxIncIconStyle : {}, minReached ? reachMinIncIconStyle : {}]}/>
-                    </Button>
-                    <Button onPress={dec} style={{flex: 1, width: '100%', alignItems: 'center'}}>
+                    </Pressable>
+                    <Pressable onPress={dec} style={{flex: 1, width: '100%', alignItems: 'center'}}>
                         <Icon name='ios-arrow-down' size={fontSize}
                               style={[...iconStyle, maxReached ? reachMaxDecIconStyle : {}, minReached ? reachMinDecIconStyle : {}]}/>
-                    </Button>
+                    </Pressable>
                 </View>
             </View>)
     else return (
         <View style={inputContainerStyle}>
-            <Button onPress={dec} style={leftButtonStyle}>
+            <Pressable onPress={dec} style={leftButtonStyle}>
                 <Icon name='md-remove' size={fontSize}
                       style={[...iconStyle, maxReached ? reachMaxDecIconStyle : {}, minReached ? reachMinDecIconStyle : {}]}/>
-            </Button>
+            </Pressable>
             <View style={[inputWraperStyle]}>
                 <TextInput {...extraTextInputProps} editable={editable} returnKeyType='done'
                            underlineColorAndroid='rgba(0,0,0,0)' keyboardType='numeric' value={stringValue}
                            onChangeText={onChange} style={inputStyle} ref={ref}
                            onBlur={onBlur} onFocus={onFocus}/>
             </View>
-            <Button onPress={inc} style={rightButtonStyle}>
+            <Pressable onPress={inc} style={rightButtonStyle}>
                 <Icon name='md-add' size={fontSize}
                       style={[...iconStyle, maxReached ? reachMaxIncIconStyle : {}, minReached ? reachMinIncIconStyle : {}]}/>
-            </Button>
+            </Pressable>
         </View>
     )
 }
