@@ -1,1 +1,1 @@
-export {NumericInput} from './NumericInput'
+export {NumericField} from './NumericField'
