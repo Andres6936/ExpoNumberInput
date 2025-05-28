@@ -71,6 +71,7 @@ export function NumericField(
     }: Props)
 {
     const noInitSent = initValue !== 0 && !initValue;
+    const [legal, setLegal] = useState(false);
     const [value, setValue] = useState(
         noInitSent ? (propValue ?? 0) : initValue
     );
@@ -245,11 +246,13 @@ export function NumericField(
                 setTimeout(() => {
                     ref.current.clear()
                     setTimeout(() => {
-                        props.onChange && props.onChange(currValue - 1)
-                        this.setState({value: currValue - 1}, () => {
-                            this.setState({value: currValue, legal})
-                            props.onChange && props.onChange(currValue)
-                        })
+                        props.onChange?.(currValue - 1);
+                        setValue(currValue - 1);
+                        setTimeout(() => {
+                            setValue(currValue);
+                            setLegal(legal);
+                            props.onChange?.(currValue);
+                        }, 0);
                     }, 10)
                 }, 15)
                 setTimeout(() => ref.current.focus(), 20)
@@ -261,7 +264,7 @@ export function NumericField(
             parsedValue = isNaN(parsedValue) ? 0 : parsedValue
             if (parsedValue !== propValue)
                 props.onChange && props.onChange(parsedValue)
-            this.setState({legal})
+            setLegal(legal)
             setValue(parsedValue)
             setStringValue(parsedValue.toString())
         } else {
@@ -270,7 +273,7 @@ export function NumericField(
             parsedValue = isNaN(parsedValue) ? 0 : parsedValue
             if (parsedValue !== propValue)
                 props.onChange && props.onChange(parsedValue)
-            this.setState({legal})
+            setLegal(legal)
             setValue(parsedValue)
             setStringValue(parsedValue.toString())
 
