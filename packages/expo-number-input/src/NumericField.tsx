@@ -191,7 +191,7 @@ export function NumericField(
             setValue(newValue)
             setStringValue(newValue.toString())
         } else if (maxValue !== null) {
-            props.onLimitReached(true, 'Reached Maximum Value!')
+            onLimitReached(true, 'Reached Maximum Value!')
             newValue = maxValue
             setValue(newValue)
             setStringValue(newValue.toString())
@@ -206,7 +206,7 @@ export function NumericField(
             newValue = (newValue - step).toFixed(12)
             newValue = valueType === 'real' ? parseFloat(newValue) : parseInt(newValue)
         } else if (minValue !== null) {
-            props.onLimitReached(false, 'Reached Minimum Value!')
+            onLimitReached(false, 'Reached Minimum Value!')
             newValue = minValue
         }
         if (newValue !== propValue)
@@ -285,10 +285,10 @@ export function NumericField(
         let legal = match && match[0] === match.input && ((maxValue === null || (parseFloat(stringValue) <= maxValue)) && (minValue === null || (parseFloat(stringValue) >= minValue)))
         if (!legal) {
             if (minValue !== null && (parseFloat(stringValue) <= minValue)) {
-                props.onLimitReached(true, 'Reached Minimum Value!')
+                onLimitReached(true, 'Reached Minimum Value!')
             }
             if (maxValue !== null && (parseFloat(stringValue) >= maxValue)) {
-                props.onLimitReached(false, 'Reached Maximum Value!')
+                onLimitReached(false, 'Reached Maximum Value!')
             }
             if (ref.current) {
                 ref.current.blur()
