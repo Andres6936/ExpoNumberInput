@@ -186,14 +186,14 @@ export function NumericField(
 
     const inc = () => {
         let value = propValue && (typeof propValue === 'number') ? propValue : this.state.value
-        if (props.maxValue === null || (value + props.step < props.maxValue)) {
-            value = (value + props.step).toFixed(12)
+        if (maxValue === null || (value + step < maxValue)) {
+            value = (value + step).toFixed(12)
             value = valueType === 'real' ? parseFloat(value) : parseInt(value)
             setValue(value)
             setStringValue(value.toString())
-        } else if (props.maxValue !== null) {
+        } else if (maxValue !== null) {
             props.onLimitReached(true, 'Reached Maximum Value!')
-            value = props.maxValue
+            value = maxValue
             setValue(value)
             setStringValue(value.toString())
         }
@@ -203,12 +203,12 @@ export function NumericField(
 
     const dec = () => {
         let value = propValue && (typeof propValue === 'number') ? propValue : this.state.value
-        if (props.minValue === null || (value - props.step > props.minValue)) {
-            value = (value - props.step).toFixed(12)
-            value = props.valueType === 'real' ? parseFloat(value) : parseInt(value)
-        } else if (props.minValue !== null) {
+        if (minValue === null || (value - step > minValue)) {
+            value = (value - step).toFixed(12)
+            value = valueType === 'real' ? parseFloat(value) : parseInt(value)
+        } else if (minValue !== null) {
             props.onLimitReached(false, 'Reached Minimum Value!')
-            value = props.minValue
+            value = minValue
         }
         if (value !== propValue)
             props.onChange && props.onChange(Number(value))
@@ -216,14 +216,14 @@ export function NumericField(
         setStringValue(value.toString())
     }
 
-    const isLegalValue = (value, mReal, mInt) => value === '' || (((props.valueType === 'real' && mReal(value)) || (props.valueType !== 'real' && mInt(value))) && (props.maxValue === null || (parseFloat(value) <= props.maxValue)) && (props.minValue === null || (parseFloat(value) >= props.minValue)))
+    const isLegalValue = (value, mReal, mInt) => value === '' || (((valueType === 'real' && mReal(value)) || (valueType !== 'real' && mInt(value))) && (maxValue === null || (parseFloat(value) <= maxValue)) && (minValue === null || (parseFloat(value) >= minValue)))
 
     const realMatch = (value) => value && value.match(/-?\d+(\.(\d+)?)?/) && value.match(/-?\d+(\.(\d+)?)?/)[0] === value.match(/-?\d+(\.(\d+)?)?/).input
 
     const intMatch = (value) => value && value.match(/-?\d+/) && value.match(/-?\d+/)[0] === value.match(/-?\d+/).input
 
     const onChange = (value) => {
-        let currValue = typeof propValue === 'number' ? propValue : this.state.value
+        let currValue = typeof propValue === 'number' ? propValue : value
         if ((value.length === 1 && value === '-') || (value.length === 2 && value === '0-')) {
             setStringValue('-')
             return
@@ -236,11 +236,11 @@ export function NumericField(
             setStringValue(value)
             return
         }
-        let legal = isLegalValue(value, this.realMatch, this.intMatch)
+        let legal = isLegalValue(value, realMatch, intMatch)
         if (legal) {
             setLastValid(value)
         }
-        if (!legal && !props.validateOnBlur) {
+        if (!legal && !validateOnBlur) {
             if (ref.current) {
                 ref.current.blur()
                 setTimeout(() => {
@@ -256,9 +256,9 @@ export function NumericField(
                 setTimeout(() => ref.current.focus(), 20)
             }
 
-        } else if (!legal && props.validateOnBlur) {
+        } else if (!legal && validateOnBlur) {
             setStringValue(value)
-            let parsedValue = props.valueType === 'real' ? parseFloat(value) : parseInt(value)
+            let parsedValue = valueType === 'real' ? parseFloat(value) : parseInt(value)
             parsedValue = isNaN(parsedValue) ? 0 : parsedValue
             if (parsedValue !== propValue)
                 props.onChange && props.onChange(parsedValue)
@@ -267,7 +267,7 @@ export function NumericField(
             setStringValue(parsedValue.toString())
         } else {
             setStringValue(value)
-            let parsedValue = props.valueType === 'real' ? parseFloat(value) : parseInt(value)
+            let parsedValue = valueType === 'real' ? parseFloat(value) : parseInt(value)
             parsedValue = isNaN(parsedValue) ? 0 : parsedValue
             if (parsedValue !== propValue)
                 props.onChange && props.onChange(parsedValue)
@@ -281,12 +281,12 @@ export function NumericField(
     const onBlur = () => {
 
         let match = stringValue.match(/-?[0-9]\d*(\.\d+)?/)
-        let legal = match && match[0] === match.input && ((props.maxValue === null || (parseFloat(stringValue) <= props.maxValue)) && (props.minValue === null || (parseFloat(this.state.stringValue) >= props.minValue)))
+        let legal = match && match[0] === match.input && ((maxValue === null || (parseFloat(stringValue) <= maxValue)) && (minValue === null || (parseFloat(stringValue) >= minValue)))
         if (!legal) {
-            if (props.minValue !== null && (parseFloat(stringValue) <= props.minValue)) {
+            if (minValue !== null && (parseFloat(stringValue) <= minValue)) {
                 props.onLimitReached(true, 'Reached Minimum Value!')
             }
-            if (props.maxValue !== null && (parseFloat(stringValue) >= props.maxValue)) {
+            if (maxValue !== null && (parseFloat(stringValue) >= maxValue)) {
                 props.onLimitReached(false, 'Reached Maximum Value!')
             }
             if (ref.current) {
@@ -312,7 +312,7 @@ export function NumericField(
         props.onFocus && props.onFocus()
     }
 
-    if (props.type === 'up-down')
+    if (type === 'up-down')
         return (
             <View style={inputContainerStyle}>
                 <TextInput {...extraTextInputProps} editable={editable} returnKeyType='done'
