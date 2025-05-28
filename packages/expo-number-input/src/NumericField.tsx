@@ -184,35 +184,35 @@ export function NumericField(
     }
 
     const inc = () => {
-        let value = propValue && (typeof propValue === 'number') ? propValue : this.state.value
-        if (maxValue === null || (value + step < maxValue)) {
-            value = (value + step).toFixed(12)
-            value = valueType === 'real' ? parseFloat(value) : parseInt(value)
-            setValue(value)
-            setStringValue(value.toString())
+        let newValue = propValue && (typeof propValue === 'number') ? propValue : value
+        if (maxValue === null || (newValue + step < maxValue)) {
+            newValue = (newValue + step).toFixed(12)
+            newValue = valueType === 'real' ? parseFloat(newValue) : parseInt(newValue)
+            setValue(newValue)
+            setStringValue(newValue.toString())
         } else if (maxValue !== null) {
             props.onLimitReached(true, 'Reached Maximum Value!')
-            value = maxValue
-            setValue(value)
-            setStringValue(value.toString())
+            newValue = maxValue
+            setValue(newValue)
+            setStringValue(newValue.toString())
         }
-        if (value !== propValue)
-            props.onChange && props.onChange(Number(value))
+        if (newValue !== propValue)
+            props.onChange && props.onChange(Number(newValue))
     }
 
     const dec = () => {
-        let value = propValue && (typeof propValue === 'number') ? propValue : this.state.value
-        if (minValue === null || (value - step > minValue)) {
-            value = (value - step).toFixed(12)
-            value = valueType === 'real' ? parseFloat(value) : parseInt(value)
+        let newValue = propValue && (typeof propValue === 'number') ? propValue : value
+        if (minValue === null || (newValue - step > minValue)) {
+            newValue = (newValue - step).toFixed(12)
+            newValue = valueType === 'real' ? parseFloat(newValue) : parseInt(newValue)
         } else if (minValue !== null) {
             props.onLimitReached(false, 'Reached Minimum Value!')
-            value = minValue
+            newValue = minValue
         }
-        if (value !== propValue)
-            props.onChange && props.onChange(Number(value))
-        setValue(value)
-        setStringValue(value.toString())
+        if (newValue !== propValue)
+            props.onChange && props.onChange(Number(newValue))
+        setValue(newValue)
+        setStringValue(newValue.toString())
     }
 
     const isLegalValue = (value, mReal, mInt) => value === '' || (((valueType === 'real' && mReal(value)) || (valueType !== 'real' && mInt(value))) && (maxValue === null || (parseFloat(value) <= maxValue)) && (minValue === null || (parseFloat(value) >= minValue)))
