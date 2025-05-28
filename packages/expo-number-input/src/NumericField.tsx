@@ -1,6 +1,5 @@
 import React, {useEffect, useRef, useState} from "react";
 import {StyleSheet, TextInput, View, ViewStyle} from "react-native";
-import {Color} from "csstype";
 import Button from "./Button";
 import Icon from 'react-native-vector-icons/Ionicons'
 import {create, PREDEF_RES} from 'react-native-pixel-perfect'
@@ -21,12 +20,12 @@ type Props = {
     separatorWidth?: number
     type?: 'plus-minus' | 'up-down'
     rounded?: boolean
-    textColor?: Color
+    textColor?: string
     containerStyle?: ViewStyle
     inputStyle?: ViewStyle
-    upDownButtonsBackgroundColor?: Color
-    rightButtonBackgroundColor?: Color
-    leftButtonBackgroundColor?: Color
+    upDownButtonsBackgroundColor?: string
+    rightButtonBackgroundColor?: string
+    leftButtonBackgroundColor?: string
     totalHeight?: number
     onChange: (value: number) => void
     onLimitReached?: (isMax: boolean, msg: string) => void
