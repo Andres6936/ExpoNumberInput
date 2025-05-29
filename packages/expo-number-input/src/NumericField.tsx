@@ -7,11 +7,11 @@ let calcSize = create(PREDEF_RES.iphone7.px)
 
 type Props = {
     value?: number
-    minValue?: number
-    maxValue?: number
+    minValue?: number | null
+    maxValue?: number | null
     step?: number
     valueType?: 'integer' | 'real'
-    initValue?: number
+    initValue?: number | null
     iconSize?: number
     borderColor?: string
     iconStyle?: ViewStyle
@@ -34,7 +34,9 @@ type Props = {
     reachMaxDecIconStyle?: ViewStyle
     reachMinIncIconStyle?: ViewStyle
     reachMinDecIconStyle?: ViewStyle
-    extraTextInputProps?: object
+    extraTextInputProps?: object,
+    onBlur?: () => void,
+    onFocus?: () => void,
 }
 
 export function NumericField(
@@ -182,6 +184,7 @@ export function NumericField(
     }
 
     const inc = () => {
+        console.log("INC")
         let newValue = propValue && (typeof propValue === 'number') ? propValue : value
         if (maxValue === null || (newValue + step < maxValue)) {
             newValue = (newValue + step).toFixed(12)
@@ -219,7 +222,7 @@ export function NumericField(
 
     const intMatch = (value) => value && value.match(/-?\d+/) && value.match(/-?\d+/)[0] === value.match(/-?\d+/).input
 
-    const onChange = (value) => {
+    const onChange = (value: string) => {
         let currValue = typeof propValue === 'number' ? propValue : value
         if ((value.length === 1 && value === '-') || (value.length === 2 && value === '0-')) {
             setStringValue('-')
