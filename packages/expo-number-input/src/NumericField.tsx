@@ -6,7 +6,7 @@ import {ChevronDown, ChevronUp, Minus, Plus} from "lucide-react-native";
 let calcSize = create(PREDEF_RES.iphone7.px)
 
 type Props = {
-    value?: number
+    value?: number | null
     minValue?: number | null
     maxValue?: number | null
     step?: number
