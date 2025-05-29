@@ -1,6 +1,5 @@
 import React, {useEffect, useRef, useState} from "react";
 import {Pressable, StyleSheet, TextInput, View, ViewStyle} from "react-native";
-import Icon from 'react-native-vector-icons/Ionicons'
 import {create, PREDEF_RES} from 'react-native-pixel-perfect'
 import {ChevronDown, ChevronUp, Minus, Plus} from "lucide-react-native";
 
@@ -65,13 +64,12 @@ export function NumericField(
         reachMaxDecIconStyle = {},
         reachMinIncIconStyle = {},
         reachMinDecIconStyle = {},
-        onLimitReached = (isMax, msg) => { },
+        onLimitReached = (isMax, msg) => {
+        },
         extraTextInputProps = {},
         ...props
-    }: Props)
-{
+    }: Props) {
     const noInitSent = initValue !== 0 && !initValue;
-    const [legal, setLegal] = useState(false);
     const [value, setValue] = useState(
         noInitSent ? (propValue ?? 0) : initValue
     );
@@ -249,7 +247,6 @@ export function NumericField(
                         setValue(currValue - 1);
                         setTimeout(() => {
                             setValue(currValue);
-                            setLegal(legal);
                             props.onChange?.(currValue);
                         }, 0);
                     }, 10)
@@ -263,7 +260,6 @@ export function NumericField(
             parsedValue = isNaN(parsedValue) ? 0 : parsedValue
             if (parsedValue !== propValue)
                 props.onChange && props.onChange(parsedValue)
-            setLegal(legal)
             setValue(parsedValue)
             setStringValue(parsedValue.toString())
         } else {
@@ -272,7 +268,6 @@ export function NumericField(
             parsedValue = isNaN(parsedValue) ? 0 : parsedValue
             if (parsedValue !== propValue)
                 props.onChange && props.onChange(parsedValue)
-            setLegal(legal)
             setValue(parsedValue)
             setStringValue(parsedValue.toString())
 
@@ -318,36 +313,69 @@ export function NumericField(
     if (type === 'up-down')
         return (
             <View style={inputContainerStyle}>
-                <TextInput {...extraTextInputProps} editable={editable} returnKeyType='done'
-                           underlineColorAndroid='rgba(0,0,0,0)' keyboardType='numeric' value={stringValue}
-                           onChangeText={onChange} style={inputStyle} ref={ref}
-                           onBlur={onBlur} onFocus={onFocus}/>
+                <TextInput
+                    {...extraTextInputProps}
+                    editable={editable}
+                    returnKeyType='done'
+                    underlineColorAndroid='rgba(0,0,0,0)'
+                    keyboardType='numeric'
+                    value={stringValue}
+                    onChangeText={onChange}
+                    style={inputStyle} ref={ref}
+                    onBlur={onBlur}
+                    onFocus={onFocus}
+                />
                 <View style={upDownStyle}>
-                    <Pressable onPress={inc} style={{flex: 1, width: '100%', alignItems: 'center'}}>
-                        <ChevronUp size={fontSize}
-                              style={[...iconStyle, maxReached ? reachMaxIncIconStyle : {}, minReached ? reachMinIncIconStyle : {}]}/>
+                    <Pressable
+                        onPress={inc}
+                        style={{flex: 1, width: '100%', alignItems: 'center'}}
+                    >
+                        <ChevronUp
+                            size={fontSize}
+                            style={[...iconStyle, maxReached ? reachMaxIncIconStyle : {}, minReached ? reachMinIncIconStyle : {}]}
+                        />
                     </Pressable>
                     <Pressable onPress={dec} style={{flex: 1, width: '100%', alignItems: 'center'}}>
-                        <ChevronDown size={fontSize}
-                              style={[...iconStyle, maxReached ? reachMaxDecIconStyle : {}, minReached ? reachMinDecIconStyle : {}]}/>
+                        <ChevronDown
+                            size={fontSize}
+                            style={[...iconStyle, maxReached ? reachMaxDecIconStyle : {}, minReached ? reachMinDecIconStyle : {}]}
+                        />
                     </Pressable>
                 </View>
             </View>)
     else return (
         <View style={inputContainerStyle}>
-            <Pressable onPress={dec} style={leftButtonStyle}>
-                <Minus size={fontSize}
-                      style={[...iconStyle, maxReached ? reachMaxDecIconStyle : {}, minReached ? reachMinDecIconStyle : {}]}/>
+            <Pressable
+                onPress={dec}
+                style={leftButtonStyle}
+            >
+                <Minus
+                    size={fontSize}
+                    style={[...iconStyle, maxReached ? reachMaxDecIconStyle : {}, minReached ? reachMinDecIconStyle : {}]}
+                />
             </Pressable>
             <View style={[inputWraperStyle]}>
-                <TextInput {...extraTextInputProps} editable={editable} returnKeyType='done'
-                           underlineColorAndroid='rgba(0,0,0,0)' keyboardType='numeric' value={stringValue}
-                           onChangeText={onChange} style={inputStyle} ref={ref}
-                           onBlur={onBlur} onFocus={onFocus}/>
+                <TextInput
+                    {...extraTextInputProps}
+                    editable={editable}
+                    returnKeyType='done'
+                    underlineColorAndroid='rgba(0,0,0,0)'
+                    keyboardType='numeric'
+                    value={stringValue}
+                    onChangeText={onChange}
+                    style={inputStyle}
+                    ref={ref}
+                    onBlur={onBlur}
+                    onFocus={onFocus}
+                />
             </View>
-            <Pressable onPress={inc} style={rightButtonStyle}>
-                <Plus size={fontSize}
-                      style={[...iconStyle, maxReached ? reachMaxIncIconStyle : {}, minReached ? reachMinIncIconStyle : {}]}
+            <Pressable
+                onPress={inc}
+                style={rightButtonStyle}
+            >
+                <Plus
+                    size={fontSize}
+                    style={[...iconStyle, maxReached ? reachMaxIncIconStyle : {}, minReached ? reachMinIncIconStyle : {}]}
                 />
             </Pressable>
         </View>
