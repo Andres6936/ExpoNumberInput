@@ -249,7 +249,7 @@ export function NumericField(
             if (ref.current) {
                 ref.current.blur()
                 setTimeout(() => {
-                    ref.current.clear()
+                    ref.current?.clear()
                     setTimeout(() => {
                         props.onChange?.(currValue - 1);
                         setValue(currValue - 1);
@@ -259,7 +259,7 @@ export function NumericField(
                         }, 0);
                     }, 10)
                 }, 15)
-                setTimeout(() => ref.current.focus(), 20)
+                setTimeout(() => ref.current?.focus(), 20)
             }
 
         } else if (!legal && validateOnBlur) {
@@ -296,7 +296,7 @@ export function NumericField(
             if (ref.current) {
                 ref.current.blur()
                 setTimeout(() => {
-                    ref.current.clear()
+                    ref.current?.clear()
                     setTimeout(() => {
                         props.onChange?.(lastValid);
                         setValue(lastValid);
@@ -307,7 +307,7 @@ export function NumericField(
                         }, 0)
                     }, 10)
                 }, 15)
-                setTimeout(() => ref.current.focus(), 50)
+                setTimeout(() => ref.current?.focus(), 50)
             }
         }
         props.onBlur && props.onBlur()
