@@ -139,7 +139,9 @@ export function NumericField(
         backgroundColor: upDownButtonsBackgroundColor,
         borderRightWidth: 1,
         borderRightColor: borderColor
-    }, rounded ? {borderTopRightRadius: borderRadiusTotal, borderBottomRightRadius: borderRadiusTotal} : {}]
+    }, rounded ? {borderTopRightRadius: borderRadiusTotal, borderBottomRightRadius: borderRadiusTotal} : {}
+    ] as ViewStyle[]
+
     const rightButtonStyle = [
         {
             position: 'absolute',
@@ -157,7 +159,9 @@ export function NumericField(
                 borderTopRightRadius: borderRadiusTotal,
                 borderBottomRightRadius: borderRadiusTotal
             }
-            : {}]
+            : {}
+    ] as ViewStyle[]
+
     const leftButtonStyle = [
         {
             position: 'absolute',
@@ -173,7 +177,8 @@ export function NumericField(
 
         rounded ?
             {borderTopLeftRadius: borderRadiusTotal, borderBottomLeftRadius: borderRadiusTotal}
-            : {}]
+            : {}
+    ] as ViewStyle[]
 
     const inputWraperStyle = {
         alignSelf: 'center',
@@ -181,7 +186,7 @@ export function NumericField(
         borderLeftWidth: separatorWidth,
         borderRightWidth: separatorWidth,
         borderRightColor: borderColor
-    }
+    } as ViewStyle
 
     const inc = () => {
         console.log("INC")
@@ -218,9 +223,9 @@ export function NumericField(
 
     const isLegalValue = (value, mReal, mInt) => value === '' || (((valueType === 'real' && mReal(value)) || (valueType !== 'real' && mInt(value))) && (maxValue === null || (parseFloat(value) <= maxValue)) && (minValue === null || (parseFloat(value) >= minValue)))
 
-    const realMatch = (value) => value && value.match(/-?\d+(\.(\d+)?)?/) && value.match(/-?\d+(\.(\d+)?)?/)[0] === value.match(/-?\d+(\.(\d+)?)?/).input
+    const realMatch = (value: string) => value && value.match(/-?\d+(\.(\d+)?)?/) && value.match(/-?\d+(\.(\d+)?)?/)[0] === value.match(/-?\d+(\.(\d+)?)?/).input
 
-    const intMatch = (value) => value && value.match(/-?\d+/) && value.match(/-?\d+/)[0] === value.match(/-?\d+/).input
+    const intMatch = (value: string) => value && value.match(/-?\d+/) && value.match(/-?\d+/)[0] === value.match(/-?\d+/).input
 
     const onChange = (value: string) => {
         let currValue = typeof propValue === 'number' ? propValue : value
