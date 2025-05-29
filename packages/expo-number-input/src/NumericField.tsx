@@ -243,7 +243,7 @@ export function NumericField(
         }
         let legal = isLegalValue(value, realMatch, intMatch)
         if (legal) {
-            setLastValid(value)
+            setLastValid(+value)
         }
         if (!legal && !validateOnBlur) {
             if (ref.current) {
