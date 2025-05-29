@@ -1,9 +1,7 @@
 import React, {useEffect, useRef, useState} from "react";
 import {Pressable, StyleSheet, TextInput, View, ViewStyle} from "react-native";
-import {create, PREDEF_RES} from 'react-native-pixel-perfect'
 import {ChevronDown, ChevronUp, Minus, Plus} from "lucide-react-native";
 
-let calcSize = create(PREDEF_RES.iphone7.px)
 
 type Props = {
     value?: number | null
@@ -43,10 +41,10 @@ export function NumericField(
     {
         initValue = null,
         value: propValue = null,
-        iconSize = calcSize(30),
+        iconSize = 30,
         borderColor = '#d4d4d4',
         iconStyle: propIconStyle = {},
-        totalWidth = calcSize(220),
+        totalWidth = 220,
         separatorWidth = 1,
         type = 'plus-minus',
         rounded = false,
@@ -394,7 +392,7 @@ export function NumericField(
 const style = StyleSheet.create({
     seprator: {
         backgroundColor: 'grey',
-        height: calcSize(80),
+        height: 80,
     },
     inputContainerUpDown: {
         flexDirection: 'row',
@@ -425,6 +423,6 @@ const style = StyleSheet.create({
     },
     upDown: {
         alignItems: 'center',
-        paddingRight: calcSize(15)
+        paddingRight: 15
     }
 })
