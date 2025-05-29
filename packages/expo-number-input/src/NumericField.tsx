@@ -251,11 +251,11 @@ export function NumericField(
                 setTimeout(() => {
                     ref.current?.clear()
                     setTimeout(() => {
-                        props.onChange?.(currValue - 1);
-                        setValue(currValue - 1);
+                        props.onChange?.(+currValue - 1);
+                        setValue(+currValue - 1);
                         setTimeout(() => {
-                            setValue(currValue);
-                            props.onChange?.(currValue);
+                            setValue(+currValue);
+                            props.onChange?.(+currValue);
                         }, 0);
                     }, 10)
                 }, 15)
