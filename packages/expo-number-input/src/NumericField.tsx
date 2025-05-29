@@ -221,9 +221,21 @@ export function NumericField(
 
     const isLegalValue = (value: string, mReal: (value: string) => boolean, mInt: (value: string) => boolean) => value === '' || (((valueType === 'real' && mReal(value)) || (valueType !== 'real' && mInt(value))) && (maxValue === null || (parseFloat(value) <= maxValue)) && (minValue === null || (parseFloat(value) >= minValue)))
 
-    const realMatch = (value: string): boolean => value && value.match(/-?\d+(\.(\d+)?)?/) && value.match(/-?\d+(\.(\d+)?)?/)[0] === value.match(/-?\d+(\.(\d+)?)?/).input
+    const realMatch = (value: string): boolean => {
+        if (!value) return false;
+        const isReal = value.match(/-?\d+(\.(\d+)?)?/)!
+        const isPart = value.match(/-?\d+(\.(\d+)?)?/)![0]
+        const isExact = value.match(/-?\d+(\.(\d+)?)?/)!
+        return isReal && isPart === isExact.input
+    }
 
-    const intMatch = (value: string): boolean => value && value.match(/-?\d+/) && value.match(/-?\d+/)[0] === value.match(/-?\d+/).input
+    const intMatch = (value: string): boolean => {
+        if (!value) return false;
+        const isInt = value.match(/-?\d+/)!
+        const isPart = value.match(/-?\d+/)![0]
+        const isExact = value.match(/-?\d+/)!
+        return isInt && isPart === isExact.input
+    }
 
     const onChange = (value: string) => {
         let currValue = typeof propValue === 'number' ? propValue : value
