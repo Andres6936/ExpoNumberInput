@@ -192,8 +192,8 @@ export function NumericField(
         console.log("INC")
         let newValue = propValue && (typeof propValue === 'number') ? propValue : value
         if (maxValue === null || (newValue + step < maxValue)) {
-            newValue = (newValue + step).toFixed(12)
-            newValue = valueType === 'real' ? parseFloat(newValue) : parseInt(newValue)
+            const numericAs = (newValue + step).toFixed(12)
+            newValue = valueType === 'real' ? parseFloat(numericAs) : parseInt(numericAs)
             setValue(newValue)
             setStringValue(newValue.toString())
         } else if (maxValue !== null) {
@@ -209,8 +209,8 @@ export function NumericField(
     const dec = () => {
         let newValue = propValue && (typeof propValue === 'number') ? propValue : value
         if (minValue === null || (newValue - step > minValue)) {
-            newValue = (newValue - step).toFixed(12)
-            newValue = valueType === 'real' ? parseFloat(newValue) : parseInt(newValue)
+            const numericAs = (newValue - step).toFixed(12)
+            newValue = valueType === 'real' ? parseFloat(numericAs) : parseInt(numericAs)
         } else if (minValue !== null) {
             onLimitReached(false, 'Reached Minimum Value!')
             newValue = minValue
