@@ -1,4 +1,5 @@
-import {useState} from "react";
+import {useRef, useState} from "react";
+import {TextInput} from "react-native";
 
 type Args = {
     step: number,
@@ -15,6 +16,8 @@ type Args = {
 }
 
 export function useNumericInput(args: Args) {
+    const ref = useRef<TextInput | null>(null);
+
     const [lastValid, setLastValid] = useState(args.value)
     const [valueAsText, setValueAsText] = useState(args.value.toString())
     const [valueAsNumber, setValueAsNumber] = useState(args.value)
@@ -165,6 +168,7 @@ export function useNumericInput(args: Args) {
     }
 
     return {
+        ref,
         valueAsText,
         valueAsNumber,
         increment,

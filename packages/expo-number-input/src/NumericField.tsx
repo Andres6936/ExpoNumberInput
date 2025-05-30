@@ -71,6 +71,7 @@ export function NumericField(
     }: Props) {
 
     const {
+        ref,
         valueAsText,
         valueAsNumber,
         increment,
@@ -87,7 +88,7 @@ export function NumericField(
         validateOnBlur,
     })
 
-    const ref = useRef<TextInput | null>(null);
+
 
     const iconStyle = [style.icon, propIconStyle]
     const totalHeight = props.totalHeight ? props.totalHeight : (totalWidth * 0.4)
