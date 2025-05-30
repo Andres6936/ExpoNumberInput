@@ -204,6 +204,26 @@ function NumericInputCustom() {
     )
 }
 
+function NumericInputCustomStyle() {
+    const [value1, setValue1] = React.useState(0);
+
+    return (
+        <Fragment>
+            <Text style={styles.instructions}>
+                Rounded Numeric Input with custom width and height
+            </Text>
+
+            <NumericField
+                value={value1}
+                onChange={(v8) => setValue1(v8)}
+                textColor='#B0228C'
+                iconStyle={{color: 'white'}}
+                rightButtonBackgroundColor='#EA3788'
+                leftButtonBackgroundColor='#E56B70'/>
+        </Fragment>
+    )
+}
+
 export default class App extends Component {
     constructor(props) {
         super(props)
@@ -233,19 +253,7 @@ export default class App extends Component {
                 <NumericInputBasicStyle/>
                 <NumericInputRoundedStyle/>
                 <NumericInputCustom/>
-
-
-                <Text style={styles.instructions}>
-                    Rounded Numeric Input with custom width and height
-                </Text>
-
-                <NumericField
-                    value={this.state.v8}
-                    onChange={(v8) => this.setState({v8})}
-                    textColor='#B0228C'
-                    iconStyle={{color: 'white'}}
-                    rightButtonBackgroundColor='#EA3788'
-                    leftButtonBackgroundColor='#E56B70'/>
+                <NumericInputCustomStyle/>
             </ScrollView>
         );
     }
