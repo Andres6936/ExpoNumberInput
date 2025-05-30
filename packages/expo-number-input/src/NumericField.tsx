@@ -70,15 +70,11 @@ export function NumericField(
         ...props
     }: Props) {
     const noInitSent = defaultValue !== 0 && !defaultValue;
-    const [valueAsNumber, setValueAsNumber] = useState(
-        noInitSent ? (propValue ?? 0) : defaultValue
-    );
-    const [lastValid, setLastValid] = useState(
-        noInitSent ? (propValue ?? 0) : defaultValue
-    );
-    const [valueAsText, setValueAsText] = useState(
-        (noInitSent ? (propValue ?? 0) : defaultValue).toString()
-    );
+
+    const [lastValid, setLastValid] = useState(noInitSent ? propValue : defaultValue)
+    const [valueAsText, setValueAsText] = useState((noInitSent ? propValue : defaultValue).toString())
+    const [valueAsNumber, setValueAsNumber] = useState(noInitSent ? propValue : defaultValue)
+
     const ref = useRef<TextInput | null>(null);
 
     // This replaces componentDidUpdate
