@@ -8,6 +8,8 @@ type Args = {
     valueType: 'integer' | 'real',
     validateOnBlur: boolean,
 
+    onBlur?: () => void,
+    onFocus?: () => void,
     onChange?: (value: number) => void
     onLimitReached?: (isMax: boolean, msg: string) => void
 }
@@ -126,11 +128,49 @@ export function useNumericInput(args: Args) {
         return isInt && isPart === isExact.input
     }
 
+    const onBlur = () => {
+
+        let match = valueAsText.match(/-?[0-9]\d*(\.\d+)?/)
+        let legal = match && match[0] === match.input && ((args.maxValue === null || (parseFloat(valueAsText) <= args.maxValue)) && (args.minValue === null || (parseFloat(valueAsText) >= args.minValue)))
+        if (!legal) {
+            if (args.minValue !== null && (parseFloat(valueAsText) <= args.minValue)) {
+                args.onLimitReached?.(true, 'Reached Minimum Value!')
+            }
+            if (args.maxValue !== null && (parseFloat(valueAsText) >= args.maxValue)) {
+                args.onLimitReached?.(false, 'Reached Maximum Value!')
+            }
+            if (ref.current) {
+                ref.current.blur()
+                setTimeout(() => {
+                    ref.current?.clear()
+                    setTimeout(() => {
+                        args.onChange?.(lastValid);
+                        setValueAsNumber(lastValid);
+                        setTimeout(() => {
+                            setValueAsNumber(lastValid)
+                            setValueAsText(lastValid?.toString())
+                            args.onChange?.(lastValid)
+                        }, 0)
+                    }, 10)
+                }, 15)
+                setTimeout(() => ref.current?.focus(), 50)
+            }
+        }
+        args.onBlur?.()
+    }
+
+    const onFocus = () => {
+        setLastValid(valueAsNumber)
+        args.onFocus?.()
+    }
+
     return {
         valueAsText,
         valueAsNumber,
         increment,
         decrement,
         onChange,
+        onFocus,
+        onBlur,
     }
 }

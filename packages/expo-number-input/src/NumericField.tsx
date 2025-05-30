@@ -76,6 +76,8 @@ export function NumericField(
         increment,
         decrement,
         onChange,
+        onFocus,
+        onBlur,
     } = useNumericInput({
         step,
         value: propValue,
@@ -182,41 +184,7 @@ export function NumericField(
     } as ViewStyle
 
 
-    const onBlur = () => {
 
-        let match = valueAsText.match(/-?[0-9]\d*(\.\d+)?/)
-        let legal = match && match[0] === match.input && ((maxValue === null || (parseFloat(valueAsText) <= maxValue)) && (minValue === null || (parseFloat(valueAsText) >= minValue)))
-        if (!legal) {
-            if (minValue !== null && (parseFloat(valueAsText) <= minValue)) {
-                onLimitReached(true, 'Reached Minimum Value!')
-            }
-            if (maxValue !== null && (parseFloat(valueAsText) >= maxValue)) {
-                onLimitReached(false, 'Reached Maximum Value!')
-            }
-            if (ref.current) {
-                ref.current.blur()
-                setTimeout(() => {
-                    ref.current?.clear()
-                    setTimeout(() => {
-                        props.onChange?.(lastValid);
-                        setValueAsNumber(lastValid);
-                        setTimeout(() => {
-                            setValueAsNumber(lastValid)
-                            setValueAsText(lastValid?.toString())
-                            props.onChange?.(lastValid)
-                        }, 0)
-                    }, 10)
-                }, 15)
-                setTimeout(() => ref.current?.focus(), 50)
-            }
-        }
-        props.onBlur && props.onBlur()
-    }
-
-    const onFocus = () => {
-        setLastValid(valueAsNumber)
-        props.onFocus && props.onFocus()
-    }
 
     if (type === 'up-down')
         return (
