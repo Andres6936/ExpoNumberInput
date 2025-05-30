@@ -61,6 +61,23 @@ function NumericInputExample() {
     )
 }
 
+function NumericInputBasic() {
+    const [value1, setValue1] = React.useState(0);
+
+    return (
+        <Fragment>
+            <Text style={styles.instructions}>
+                Basic Numeric Input - no limits
+            </Text>
+
+            <NumericField
+                value={value1}
+                onChange={(v2) => setValue1(v2)}/>
+            <View style={styles.seprator}/>
+        </Fragment>
+    )
+}
+
 export default class App extends Component {
     constructor(props) {
         super(props)
@@ -83,15 +100,7 @@ export default class App extends Component {
         return (
             <ScrollView style={{paddingBottom: 200}} contentContainerStyle={styles.container}>
                 <NumericInputExample/>
-
-                <Text style={styles.instructions}>
-                    Basic Numeric Input - no limits
-                </Text>
-
-                <NumericField
-                    value={this.state.v2}
-                    onChange={(v2) => this.setState({v2})}/>
-                <View style={styles.seprator}/>
+                <NumericInputBasic/>
 
                 <Text style={styles.instructions}>
                     Rounded Numeric Input - with minValue of 0
