@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState} from "react";
 import {Pressable, StyleSheet, TextInput, View, ViewStyle} from "react-native";
 import {ChevronDown, ChevronUp, Minus, Plus} from "lucide-react-native";
+import {useNumericInput} from "./useNumericInput";
 
 
 type Props = {
@@ -69,9 +70,20 @@ export function NumericField(
         ...props
     }: Props) {
 
-    const [lastValid, setLastValid] = useState(propValue)
-    const [valueAsText, setValueAsText] = useState((propValue).toString())
-    const [valueAsNumber, setValueAsNumber] = useState(propValue)
+    const {
+        valueAsText,
+        valueAsNumber,
+        increment,
+        decrement,
+        onChange,
+    } = useNumericInput({
+        step,
+        value: propValue,
+        minValue,
+        maxValue,
+        valueType,
+        validateOnBlur,
+    })
 
     const ref = useRef<TextInput | null>(null);
 
@@ -169,111 +181,6 @@ export function NumericField(
         borderRightColor: borderColor
     } as ViewStyle
 
-    const inc = () => {
-        console.log("INC")
-        let newValue = propValue && (typeof propValue === 'number') ? propValue : valueAsNumber
-        if (maxValue === null || (newValue + step < maxValue)) {
-            const numericAs = (newValue + step).toFixed(12)
-            newValue = valueType === 'real' ? parseFloat(numericAs) : parseInt(numericAs)
-            setValueAsNumber(newValue)
-            setValueAsText(newValue.toString())
-        } else if (maxValue !== null) {
-            onLimitReached(true, 'Reached Maximum Value!')
-            newValue = maxValue
-            setValueAsNumber(newValue)
-            setValueAsText(newValue.toString())
-        }
-        if (newValue !== propValue)
-            props.onChange && props.onChange(Number(newValue))
-    }
-
-    const dec = () => {
-        let newValue = propValue && (typeof propValue === 'number') ? propValue : valueAsNumber
-        if (minValue === null || (newValue - step > minValue)) {
-            const numericAs = (newValue - step).toFixed(12)
-            newValue = valueType === 'real' ? parseFloat(numericAs) : parseInt(numericAs)
-        } else if (minValue !== null) {
-            onLimitReached(false, 'Reached Minimum Value!')
-            newValue = minValue
-        }
-        if (newValue !== propValue)
-            props.onChange && props.onChange(Number(newValue))
-        setValueAsNumber(newValue)
-        setValueAsText(newValue.toString())
-    }
-
-    const isLegalValue = (value: string, mReal: (value: string) => boolean, mInt: (value: string) => boolean) => value === '' || (((valueType === 'real' && mReal(value)) || (valueType !== 'real' && mInt(value))) && (maxValue === null || (parseFloat(value) <= maxValue)) && (minValue === null || (parseFloat(value) >= minValue)))
-
-    const realMatch = (value: string): boolean => {
-        if (!value) return false;
-        const isReal = value.match(/-?\d+(\.(\d+)?)?/)!
-        const isPart = value.match(/-?\d+(\.(\d+)?)?/)![0]
-        const isExact = value.match(/-?\d+(\.(\d+)?)?/)!
-        return isReal && isPart === isExact.input
-    }
-
-    const intMatch = (value: string): boolean => {
-        if (!value) return false;
-        const isInt = value.match(/-?\d+/)!
-        const isPart = value.match(/-?\d+/)![0]
-        const isExact = value.match(/-?\d+/)!
-        return isInt && isPart === isExact.input
-    }
-
-    const onChange = (value: string) => {
-        let currValue = typeof propValue === 'number' ? propValue : value
-        if ((value.length === 1 && value === '-') || (value.length === 2 && value === '0-')) {
-            setValueAsText('-')
-            return
-        }
-        if ((value.length === 1 && value === '.') || (value.length === 2 && value === '0.')) {
-            setValueAsText('0.')
-            return
-        }
-        if ((value.charAt(value.length - 1) === '.')) {
-            setValueAsText(value)
-            return
-        }
-        let legal = isLegalValue(value, realMatch, intMatch)
-        if (legal) {
-            setLastValid(+value)
-        }
-        if (!legal && !validateOnBlur) {
-            if (ref.current) {
-                ref.current.blur()
-                setTimeout(() => {
-                    ref.current?.clear()
-                    setTimeout(() => {
-                        props.onChange?.(+currValue - 1);
-                        setValueAsNumber(+currValue - 1);
-                        setTimeout(() => {
-                            setValueAsNumber(+currValue);
-                            props.onChange?.(+currValue);
-                        }, 0);
-                    }, 10)
-                }, 15)
-                setTimeout(() => ref.current?.focus(), 20)
-            }
-
-        } else if (!legal && validateOnBlur) {
-            setValueAsText(value)
-            let parsedValue = valueType === 'real' ? parseFloat(value) : parseInt(value)
-            parsedValue = isNaN(parsedValue) ? 0 : parsedValue
-            if (parsedValue !== propValue)
-                props.onChange && props.onChange(parsedValue)
-            setValueAsNumber(parsedValue)
-            setValueAsText(parsedValue.toString())
-        } else {
-            setValueAsText(value)
-            let parsedValue = valueType === 'real' ? parseFloat(value) : parseInt(value)
-            parsedValue = isNaN(parsedValue) ? 0 : parsedValue
-            if (parsedValue !== propValue)
-                props.onChange && props.onChange(parsedValue)
-            setValueAsNumber(parsedValue)
-            setValueAsText(parsedValue.toString())
-
-        }
-    }
 
     const onBlur = () => {
 
@@ -328,7 +235,7 @@ export function NumericField(
                 />
                 <View style={upDownStyle}>
                     <Pressable
-                        onPress={inc}
+                        onPress={increment}
                         style={{flex: 1, width: '100%', alignItems: 'center'}}
                     >
                         <ChevronUp
@@ -336,7 +243,7 @@ export function NumericField(
                             style={[...iconStyle, maxReached ? reachMaxIncIconStyle : {}, minReached ? reachMinIncIconStyle : {}]}
                         />
                     </Pressable>
-                    <Pressable onPress={dec} style={{flex: 1, width: '100%', alignItems: 'center'}}>
+                    <Pressable onPress={decrement} style={{flex: 1, width: '100%', alignItems: 'center'}}>
                         <ChevronDown
                             size={fontSize}
                             style={[...iconStyle, maxReached ? reachMaxDecIconStyle : {}, minReached ? reachMinDecIconStyle : {}]}
@@ -347,7 +254,7 @@ export function NumericField(
     else return (
         <View style={inputContainerStyle}>
             <Pressable
-                onPress={dec}
+                onPress={decrement}
                 style={leftButtonStyle}
             >
                 <Minus
@@ -371,7 +278,7 @@ export function NumericField(
                 />
             </View>
             <Pressable
-                onPress={inc}
+                onPress={increment}
                 style={rightButtonStyle}
             >
                 <Plus
