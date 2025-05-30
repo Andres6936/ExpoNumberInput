@@ -4,12 +4,12 @@ import {ChevronDown, ChevronUp, Minus, Plus} from "lucide-react-native";
 
 
 type Props = {
-    value?: number | null
+    value: number
+    defaultValue?: number | null
     minValue?: number | null
     maxValue?: number | null
     step?: number
     valueType?: 'integer' | 'real'
-    initValue?: number | null
     iconSize?: number
     borderColor?: string
     iconStyle?: ViewStyle
@@ -39,8 +39,8 @@ type Props = {
 
 export function NumericField(
     {
-        initValue = null,
-        value: propValue = null,
+        defaultValue = null,
+        value: propValue = 0,
         iconSize = 30,
         borderColor = '#d4d4d4',
         iconStyle: propIconStyle = {},
@@ -69,28 +69,28 @@ export function NumericField(
         extraTextInputProps = {},
         ...props
     }: Props) {
-    const noInitSent = initValue !== 0 && !initValue;
+    const noInitSent = defaultValue !== 0 && !defaultValue;
     const [valueAsNumber, setValueAsNumber] = useState(
-        noInitSent ? (propValue ?? 0) : initValue
+        noInitSent ? (propValue ?? 0) : defaultValue
     );
     const [lastValid, setLastValid] = useState(
-        noInitSent ? (propValue ?? 0) : initValue
+        noInitSent ? (propValue ?? 0) : defaultValue
     );
     const [valueAsText, setValueAsText] = useState(
-        (noInitSent ? (propValue ?? 0) : initValue).toString()
+        (noInitSent ? (propValue ?? 0) : defaultValue).toString()
     );
     const ref = useRef<TextInput | null>(null);
 
     // This replaces componentDidUpdate
     useEffect(() => {
-        const initSent = !(initValue !== 0 && !initValue);
+        const initSent = !(defaultValue !== 0 && !defaultValue);
 
-        if (initValue !== valueAsNumber && initSent) {
-            setValueAsNumber(initValue);
-            setLastValid(initValue);
-            setValueAsText(initValue.toString());
+        if (defaultValue !== valueAsNumber && initSent) {
+            setValueAsNumber(defaultValue);
+            setLastValid(defaultValue);
+            setValueAsText(defaultValue.toString());
         }
-    }, [initValue, valueAsNumber]);
+    }, [defaultValue, valueAsNumber]);
 
     const iconStyle = [style.icon, propIconStyle]
     const totalHeight = props.totalHeight ? props.totalHeight : (totalWidth * 0.4)
