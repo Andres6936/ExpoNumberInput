@@ -115,6 +115,28 @@ function NumericInputReal() {
     )
 }
 
+function NumericInputMax() {
+    const [value1, setValue1] = React.useState(0);
+
+    return (
+        <Fragment>
+            <Text style={styles.instructions}>
+                Rounded Numeric Input - with minValue of 0 and maxValue of 5
+            </Text>
+
+            <NumericField
+                value={value1}
+                onChange={value => setValue1(value)}
+                rounded type='up-down'
+                minValue={0}
+                validateOnBlur
+                maxValue={5}
+                onLimitReached={(isMax, msg) => console.log(isMax, msg)}/>
+            <View style={styles.seprator}/>
+        </Fragment>
+    )
+}
+
 export default class App extends Component {
     constructor(props) {
         super(props)
@@ -140,20 +162,7 @@ export default class App extends Component {
                 <NumericInputBasic/>
                 <NumericInputRounded/>
                 <NumericInputReal/>
-
-                <Text style={styles.instructions}>
-                    Rounded Numeric Input - with minValue of 0 and maxValue of 5
-                </Text>
-
-                <NumericField
-                    value={this.state.value}
-                    onChange={value => this.setState({value})}
-                    rounded type='up-down'
-                    minValue={0}
-                    validateOnBlur
-                    maxValue={5}
-                    onLimitReached={(isMax, msg) => console.log(isMax, msg)}/>
-                <View style={styles.seprator}/>
+                <NumericInputMax/>
 
                 <Text style={styles.instructions}>
                     Rounded Numeric Input - with styling and initial value of 6
