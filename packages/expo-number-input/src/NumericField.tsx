@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from "react";
-import {Pressable, StyleSheet, TextInput, View, ViewStyle} from "react-native";
+import {Pressable, StyleProp, StyleSheet, TextInput, View, ViewStyle} from "react-native";
 import {ChevronDown, ChevronUp, Minus, Plus} from "lucide-react-native";
 import {useNumericInput} from "./useNumericInput";
 
@@ -13,14 +13,14 @@ type Props = {
     valueType?: 'integer' | 'real'
     iconSize?: number
     borderColor?: string
-    iconStyle?: ViewStyle
+    iconStyle?: StyleProp<ViewStyle>,
     totalWidth?: number
     separatorWidth?: number
     type?: 'plus-minus' | 'up-down'
     rounded?: boolean
     textColor?: string
-    containerStyle?: ViewStyle
-    inputStyle?: ViewStyle
+    containerStyle?: StyleProp<ViewStyle>,
+    inputStyle?: StyleProp<ViewStyle>,
     upDownButtonsBackgroundColor?: string
     rightButtonBackgroundColor?: string
     leftButtonBackgroundColor?: string
@@ -29,10 +29,10 @@ type Props = {
     onLimitReached?: (isMax: boolean, msg: string) => void
     editable?: boolean
     validateOnBlur?: boolean
-    reachMaxIncIconStyle?: ViewStyle
-    reachMaxDecIconStyle?: ViewStyle
-    reachMinIncIconStyle?: ViewStyle
-    reachMinDecIconStyle?: ViewStyle
+    reachMaxIncIconStyle?: StyleProp<ViewStyle>,
+    reachMaxDecIconStyle?: StyleProp<ViewStyle>,
+    reachMinIncIconStyle?: StyleProp<ViewStyle>,
+    reachMinDecIconStyle?: StyleProp<ViewStyle>,
     extraTextInputProps?: object,
     onBlur?: () => void,
     onFocus?: () => void,
