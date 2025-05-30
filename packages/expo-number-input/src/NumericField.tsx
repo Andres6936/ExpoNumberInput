@@ -70,13 +70,13 @@ export function NumericField(
         ...props
     }: Props) {
     const noInitSent = initValue !== 0 && !initValue;
-    const [value, setValue] = useState(
+    const [valueAsNumber, setValueAsNumber] = useState(
         noInitSent ? (propValue ?? 0) : initValue
     );
     const [lastValid, setLastValid] = useState(
         noInitSent ? (propValue ?? 0) : initValue
     );
-    const [stringValue, setStringValue] = useState(
+    const [valueAsText, setValueAsText] = useState(
         (noInitSent ? (propValue ?? 0) : initValue).toString()
     );
     const ref = useRef<TextInput | null>(null);
@@ -85,20 +85,20 @@ export function NumericField(
     useEffect(() => {
         const initSent = !(initValue !== 0 && !initValue);
 
-        if (initValue !== value && initSent) {
-            setValue(initValue);
+        if (initValue !== valueAsNumber && initSent) {
+            setValueAsNumber(initValue);
             setLastValid(initValue);
-            setStringValue(initValue.toString());
+            setValueAsText(initValue.toString());
         }
-    }, [initValue, value]);
+    }, [initValue, valueAsNumber]);
 
     const iconStyle = [style.icon, propIconStyle]
     const totalHeight = props.totalHeight ? props.totalHeight : (totalWidth * 0.4)
     const inputWidth = type === 'up-down' ? (totalWidth * 0.6) : (totalWidth * 0.4)
     const borderRadiusTotal = totalHeight * 0.18
     const fontSize = totalHeight * 0.38
-    const maxReached = value === maxValue
-    const minReached = value === minValue
+    const maxReached = valueAsNumber === maxValue
+    const minReached = valueAsNumber === minValue
     const inputContainerStyle = type === 'up-down' ?
         [style.inputContainerUpDown, {
             width: totalWidth,
@@ -188,24 +188,24 @@ export function NumericField(
 
     const inc = () => {
         console.log("INC")
-        let newValue = propValue && (typeof propValue === 'number') ? propValue : value
+        let newValue = propValue && (typeof propValue === 'number') ? propValue : valueAsNumber
         if (maxValue === null || (newValue + step < maxValue)) {
             const numericAs = (newValue + step).toFixed(12)
             newValue = valueType === 'real' ? parseFloat(numericAs) : parseInt(numericAs)
-            setValue(newValue)
-            setStringValue(newValue.toString())
+            setValueAsNumber(newValue)
+            setValueAsText(newValue.toString())
         } else if (maxValue !== null) {
             onLimitReached(true, 'Reached Maximum Value!')
             newValue = maxValue
-            setValue(newValue)
-            setStringValue(newValue.toString())
+            setValueAsNumber(newValue)
+            setValueAsText(newValue.toString())
         }
         if (newValue !== propValue)
             props.onChange && props.onChange(Number(newValue))
     }
 
     const dec = () => {
-        let newValue = propValue && (typeof propValue === 'number') ? propValue : value
+        let newValue = propValue && (typeof propValue === 'number') ? propValue : valueAsNumber
         if (minValue === null || (newValue - step > minValue)) {
             const numericAs = (newValue - step).toFixed(12)
             newValue = valueType === 'real' ? parseFloat(numericAs) : parseInt(numericAs)
@@ -215,8 +215,8 @@ export function NumericField(
         }
         if (newValue !== propValue)
             props.onChange && props.onChange(Number(newValue))
-        setValue(newValue)
-        setStringValue(newValue.toString())
+        setValueAsNumber(newValue)
+        setValueAsText(newValue.toString())
     }
 
     const isLegalValue = (value: string, mReal: (value: string) => boolean, mInt: (value: string) => boolean) => value === '' || (((valueType === 'real' && mReal(value)) || (valueType !== 'real' && mInt(value))) && (maxValue === null || (parseFloat(value) <= maxValue)) && (minValue === null || (parseFloat(value) >= minValue)))
@@ -240,15 +240,15 @@ export function NumericField(
     const onChange = (value: string) => {
         let currValue = typeof propValue === 'number' ? propValue : value
         if ((value.length === 1 && value === '-') || (value.length === 2 && value === '0-')) {
-            setStringValue('-')
+            setValueAsText('-')
             return
         }
         if ((value.length === 1 && value === '.') || (value.length === 2 && value === '0.')) {
-            setStringValue('0.')
+            setValueAsText('0.')
             return
         }
         if ((value.charAt(value.length - 1) === '.')) {
-            setStringValue(value)
+            setValueAsText(value)
             return
         }
         let legal = isLegalValue(value, realMatch, intMatch)
@@ -262,9 +262,9 @@ export function NumericField(
                     ref.current?.clear()
                     setTimeout(() => {
                         props.onChange?.(+currValue - 1);
-                        setValue(+currValue - 1);
+                        setValueAsNumber(+currValue - 1);
                         setTimeout(() => {
-                            setValue(+currValue);
+                            setValueAsNumber(+currValue);
                             props.onChange?.(+currValue);
                         }, 0);
                     }, 10)
@@ -273,34 +273,34 @@ export function NumericField(
             }
 
         } else if (!legal && validateOnBlur) {
-            setStringValue(value)
+            setValueAsText(value)
             let parsedValue = valueType === 'real' ? parseFloat(value) : parseInt(value)
             parsedValue = isNaN(parsedValue) ? 0 : parsedValue
             if (parsedValue !== propValue)
                 props.onChange && props.onChange(parsedValue)
-            setValue(parsedValue)
-            setStringValue(parsedValue.toString())
+            setValueAsNumber(parsedValue)
+            setValueAsText(parsedValue.toString())
         } else {
-            setStringValue(value)
+            setValueAsText(value)
             let parsedValue = valueType === 'real' ? parseFloat(value) : parseInt(value)
             parsedValue = isNaN(parsedValue) ? 0 : parsedValue
             if (parsedValue !== propValue)
                 props.onChange && props.onChange(parsedValue)
-            setValue(parsedValue)
-            setStringValue(parsedValue.toString())
+            setValueAsNumber(parsedValue)
+            setValueAsText(parsedValue.toString())
 
         }
     }
 
     const onBlur = () => {
 
-        let match = stringValue.match(/-?[0-9]\d*(\.\d+)?/)
-        let legal = match && match[0] === match.input && ((maxValue === null || (parseFloat(stringValue) <= maxValue)) && (minValue === null || (parseFloat(stringValue) >= minValue)))
+        let match = valueAsText.match(/-?[0-9]\d*(\.\d+)?/)
+        let legal = match && match[0] === match.input && ((maxValue === null || (parseFloat(valueAsText) <= maxValue)) && (minValue === null || (parseFloat(valueAsText) >= minValue)))
         if (!legal) {
-            if (minValue !== null && (parseFloat(stringValue) <= minValue)) {
+            if (minValue !== null && (parseFloat(valueAsText) <= minValue)) {
                 onLimitReached(true, 'Reached Minimum Value!')
             }
-            if (maxValue !== null && (parseFloat(stringValue) >= maxValue)) {
+            if (maxValue !== null && (parseFloat(valueAsText) >= maxValue)) {
                 onLimitReached(false, 'Reached Maximum Value!')
             }
             if (ref.current) {
@@ -309,10 +309,10 @@ export function NumericField(
                     ref.current?.clear()
                     setTimeout(() => {
                         props.onChange?.(lastValid);
-                        setValue(lastValid);
+                        setValueAsNumber(lastValid);
                         setTimeout(() => {
-                            setValue(lastValid)
-                            setStringValue(lastValid?.toString())
+                            setValueAsNumber(lastValid)
+                            setValueAsText(lastValid?.toString())
                             props.onChange?.(lastValid)
                         }, 0)
                     }, 10)
@@ -324,7 +324,7 @@ export function NumericField(
     }
 
     const onFocus = () => {
-        setLastValid(value)
+        setLastValid(valueAsNumber)
         props.onFocus && props.onFocus()
     }
 
@@ -337,7 +337,7 @@ export function NumericField(
                     returnKeyType='done'
                     underlineColorAndroid='rgba(0,0,0,0)'
                     keyboardType='numeric'
-                    value={stringValue}
+                    value={valueAsText}
                     onChangeText={onChange}
                     style={inputStyle} ref={ref}
                     onBlur={onBlur}
@@ -379,7 +379,7 @@ export function NumericField(
                     returnKeyType='done'
                     underlineColorAndroid='rgba(0,0,0,0)'
                     keyboardType='numeric'
-                    value={stringValue}
+                    value={valueAsText}
                     onChangeText={onChange}
                     style={inputStyle}
                     ref={ref}
