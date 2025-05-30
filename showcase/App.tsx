@@ -224,39 +224,20 @@ function NumericInputCustomStyle() {
     )
 }
 
-export default class App extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            value: 0,
-            amount: 0,
-            v1: 0,
-            v2: 0,
-            v3: 0,
-            v4: 0,
-            v5: 6,
-            v6: 0,
-            v7: 0,
-            v8: 0,
-            value1: 1
-        }
-    }
-
-    render() {
-        return (
-            <ScrollView style={{paddingBottom: 200}} contentContainerStyle={styles.container}>
-                <NumericInputExample/>
-                <NumericInputBasic/>
-                <NumericInputRounded/>
-                <NumericInputReal/>
-                <NumericInputMax/>
-                <NumericInputBasicStyle/>
-                <NumericInputRoundedStyle/>
-                <NumericInputCustom/>
-                <NumericInputCustomStyle/>
-            </ScrollView>
-        );
-    }
+export default function App() {
+    return (
+        <ScrollView style={{paddingBottom: 200}} contentContainerStyle={styles.container}>
+            <NumericInputExample/>
+            <NumericInputBasic/>
+            <NumericInputRounded/>
+            <NumericInputReal/>
+            <NumericInputMax/>
+            <NumericInputBasicStyle/>
+            <NumericInputRoundedStyle/>
+            <NumericInputCustom/>
+            <NumericInputCustomStyle/>
+        </ScrollView>
+    );
 }
 
 const styles = StyleSheet.create({
