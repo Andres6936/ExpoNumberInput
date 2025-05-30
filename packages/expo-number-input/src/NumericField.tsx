@@ -1,5 +1,5 @@
-import React, {useEffect, useRef, useState} from "react";
-import {Pressable, StyleProp, StyleSheet, TextInput, View, ViewStyle} from "react-native";
+import React from "react";
+import {Pressable, StyleProp, StyleSheet, TextInput, TextStyle, View, ViewStyle} from "react-native";
 import {ChevronDown, ChevronUp, Minus, Plus} from "lucide-react-native";
 import {useNumericInput} from "./useNumericInput";
 
@@ -13,14 +13,14 @@ type Props = {
     valueType?: 'integer' | 'real'
     iconSize?: number
     borderColor?: string
-    iconStyle?: StyleProp<ViewStyle>,
+    iconStyle?: StyleProp<TextStyle>,
     totalWidth?: number
     separatorWidth?: number
     type?: 'plus-minus' | 'up-down'
     rounded?: boolean
     textColor?: string
     containerStyle?: StyleProp<ViewStyle>,
-    inputStyle?: StyleProp<ViewStyle>,
+    inputStyle?: StyleProp<TextStyle>,
     upDownButtonsBackgroundColor?: string
     rightButtonBackgroundColor?: string
     leftButtonBackgroundColor?: string
