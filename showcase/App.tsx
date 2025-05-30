@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import {
     StyleSheet,
     Text,
@@ -11,9 +11,58 @@ import {create, PREDEF_RES} from 'react-native-pixel-perfect'
 const calcSize = create(PREDEF_RES.iphone7.px)
 
 
+function NumericInputExample() {
+    const [value1, setValue1] = React.useState(0);
+    const [value2, setValue2] = React.useState(0);
+
+    return (
+        <Fragment>
+            <Text style={styles.welcome}>
+                Numeric Input Examples
+            </Text>
+
+            <NumericField
+                value={value1}
+                onChange={value1 => {
+                    setValue1(value1);
+                }}
+                onLimitReached={(isMin, msg) => console.log(isMin, msg)}
+                totalWidth={80}
+                totalHeight={30}
+                iconSize={10}
+                step={1}
+                minValue={0}
+                valueType="real"
+                rounded editable={false}
+                textColor="#B0228C"
+                iconStyle={{color: "white"}}
+                rightButtonBackgroundColor="#18c2ef"
+                leftButtonBackgroundColor="#ff8080"
+            />
+            <NumericField
+                value={value2}
+                onChange={(v1) => {
+                    setValue2(v1);
+                }}
+                totalWidth={150}
+                totalHeight={35}
+                minValue={0}
+                maxValue={9999}
+                onLimitReached={(isMAx, msg) => console.log(msg)}
+                step={5}
+                iconStyle={{fontSize: 15, color: '#434A5E'}}
+                inputStyle={{fontSize: 18, color: '#434A5E'}}
+                valueType='real'
+                borderColor='#C7CBD6'
+                rightButtonBackgroundColor='#C7CBD6'
+                leftButtonBackgroundColor='#C7CBD6'
+            />
+        </Fragment>
+    )
+}
+
 export default class App extends Component {
     constructor(props) {
-        console.log('fgfgf ')
         super(props)
         this.state = {
             value: 0,
@@ -38,49 +87,7 @@ export default class App extends Component {
     render() {
         return (
             <ScrollView style={{paddingBottom: 200}} contentContainerStyle={styles.container}>
-                <Text style={styles.welcome}>
-                    Numeric Input Examples
-                </Text>
-
-                <NumericField
-                    value={this.state.value1}
-                    onChange={value1 => {
-                        this.setState({value1});
-                        console.log(this.state.value1);
-                    }}
-                    onLimitReached={(isMin, msg) => console.log(isMin, msg)}
-                    totalWidth={80}
-                    totalHeight={30}
-                    iconSize={10}
-                    step={1}
-                    minValue={0}
-                    valueType="real"
-                    rounded editable={false}
-                    textColor="#B0228C"
-                    iconStyle={{color: "white"}}
-                    rightButtonBackgroundColor="#18c2ef"
-                    leftButtonBackgroundColor="#ff8080"
-                />
-                <NumericField
-                    // initValue={this.state.v1}
-                    value={this.state.v1}
-                    onChange={(v1) => {
-                        this.setState({v1});
-                        console.log(v1)
-                    }}
-                    totalWidth={150}
-                    totalHeight={35}
-                    minValue={0}
-                    maxValue={9999}
-                    onLimitReached={(isMAx, msg) => console.log(msg)}
-                    step={5}
-                    iconStyle={{fontSize: 15, color: '#434A5E'}}
-                    inputStyle={{fontSize: 18, color: '#434A5E'}}
-                    valueType='real'
-                    borderColor='#C7CBD6'
-                    rightButtonBackgroundColor='#C7CBD6'
-                    leftButtonBackgroundColor='#C7CBD6'
-                />
+                <NumericInputExample/>
 
                 <Text style={styles.instructions}>
                     Basic Numeric Input - no limits
