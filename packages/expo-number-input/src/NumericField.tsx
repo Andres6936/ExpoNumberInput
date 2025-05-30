@@ -39,7 +39,6 @@ type Props = {
 
 export function NumericField(
     {
-        defaultValue = null,
         value: propValue = 0,
         iconSize = 30,
         borderColor = '#d4d4d4',
@@ -69,24 +68,12 @@ export function NumericField(
         extraTextInputProps = {},
         ...props
     }: Props) {
-    const noInitSent = defaultValue !== 0 && !defaultValue;
 
-    const [lastValid, setLastValid] = useState(noInitSent ? propValue : defaultValue)
-    const [valueAsText, setValueAsText] = useState((noInitSent ? propValue : defaultValue).toString())
-    const [valueAsNumber, setValueAsNumber] = useState(noInitSent ? propValue : defaultValue)
+    const [lastValid, setLastValid] = useState(propValue)
+    const [valueAsText, setValueAsText] = useState((propValue).toString())
+    const [valueAsNumber, setValueAsNumber] = useState(propValue)
 
     const ref = useRef<TextInput | null>(null);
-
-    // This replaces componentDidUpdate
-    useEffect(() => {
-        const initSent = !(defaultValue !== 0 && !defaultValue);
-
-        if (defaultValue !== valueAsNumber && initSent) {
-            setValueAsNumber(defaultValue);
-            setLastValid(defaultValue);
-            setValueAsText(defaultValue.toString());
-        }
-    }, [defaultValue, valueAsNumber]);
 
     const iconStyle = [style.icon, propIconStyle]
     const totalHeight = props.totalHeight ? props.totalHeight : (totalWidth * 0.4)
