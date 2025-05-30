@@ -87,7 +87,7 @@ export default class App extends Component {
                 </Text>
 
                 <NumericField
-                    initValue={this.state.v2}
+                    defaultValue={this.state.v2}
                     value={this.state.v2}
                     onChange={(v2) => this.setState({v2})}/>
                 <View style={styles.seprator}/>
@@ -109,7 +109,7 @@ export default class App extends Component {
                 </Text>
 
                 <NumericField
-                    initValue={this.state.v4}
+                    defaultValue={this.state.v4}
                     value={this.state.v4}
                     onChange={(v4) => this.setState({v4})}
                     type='up-down'
@@ -122,7 +122,7 @@ export default class App extends Component {
                 </Text>
 
                 <NumericField
-                    initValue={this.state.value}
+                    defaultValue={this.state.value}
                     value={this.state.value}
                     onChange={value => this.setState({value})}
                     rounded type='up-down'
@@ -151,7 +151,7 @@ export default class App extends Component {
                 </Text>
 
                 <NumericField
-                    initValue={this.state.v6}
+                    defaultValue={this.state.v6}
                     value={this.state.v6}
                     onChange={(v6) => this.setState({v6})}
                     rounded
@@ -167,7 +167,7 @@ export default class App extends Component {
                 </Text>
 
                 <NumericField
-                    initValue={this.state.v7}
+                    defaultValue={this.state.v7}
                     value={this.state.v7}
                     onChange={(v7) => this.setState({v7})}
                     totalWidth={200}
@@ -184,7 +184,7 @@ export default class App extends Component {
                 </Text>
 
                 <NumericField
-                    initValue={this.state.v8}
+                    defaultValue={this.state.v8}
                     value={this.state.v8}
                     onChange={(v8) => this.setState({v8})}
                     totalWidth={calcSize(500)}
