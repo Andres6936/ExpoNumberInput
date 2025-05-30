@@ -77,11 +77,6 @@ export default class App extends Component {
             v8: 0,
             value1: 1
         }
-        this.amount = 0
-    }
-
-    changeAmount(text) {
-        this.amount = text
     }
 
     render() {
