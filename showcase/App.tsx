@@ -6,9 +6,6 @@ import {
     View
 } from 'react-native';
 import {NumericField} from 'expo-number-input'
-import {create, PREDEF_RES} from 'react-native-pixel-perfect'
-
-const calcSize = create(PREDEF_RES.iphone7.px)
 
 
 function NumericInputExample() {
@@ -192,8 +189,6 @@ export default class App extends Component {
                 <NumericField
                     value={this.state.v8}
                     onChange={(v8) => this.setState({v8})}
-                    totalWidth={calcSize(500)}
-                    totalHeight={calcSize(100)}
                     textColor='#B0228C'
                     iconStyle={{color: 'white'}}
                     rightButtonBackgroundColor='#EA3788'
