@@ -75,6 +75,26 @@ function NumericInputBasic() {
     )
 }
 
+function NumericInputRounded() {
+    const [value1, setValue1] = React.useState(0);
+
+    return (
+        <Fragment>
+            <Text style={styles.instructions}>
+                Rounded Numeric Input - with minValue of 0
+            </Text>
+
+            <NumericField
+                value={value1}
+                onChange={(v3) => setValue1(v3)}
+                rounded
+                minValue={0}
+                onLimitReached={(isMax, msg) => console.log(isMax, msg)}/>
+            <View style={styles.seprator}/>
+        </Fragment>
+    )
+}
+
 export default class App extends Component {
     constructor(props) {
         super(props)
@@ -98,18 +118,7 @@ export default class App extends Component {
             <ScrollView style={{paddingBottom: 200}} contentContainerStyle={styles.container}>
                 <NumericInputExample/>
                 <NumericInputBasic/>
-
-                <Text style={styles.instructions}>
-                    Rounded Numeric Input - with minValue of 0
-                </Text>
-
-                <NumericField
-                    value={this.state.v3}
-                    onChange={(v3) => this.setState({v3})}
-                    rounded
-                    minValue={0}
-                    onLimitReached={(isMax, msg) => console.log(isMax, msg)}/>
-                <View style={styles.seprator}/>
+                <NumericInputRounded/>
 
                 <Text style={styles.instructions}>
                     Basic Numeric Input - with step of 0.5 and valueType real
