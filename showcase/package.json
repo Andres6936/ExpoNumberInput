@@ -10,12 +10,10 @@
   },
   "dependencies": {
     "expo": "~53.0.9",
+    "expo-number-input": "workspace:*",
     "expo-status-bar": "~2.2.3",
     "react": "19.0.0",
-    "react-native": "0.79.2",
-    "react-native-numeric-input": "^1.9.1",
-    "react-native-vector-icons": "^10.2.0",
-    "expo-number-input": "workspace:*"
+    "react-native": "0.79.2"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
