@@ -137,6 +137,28 @@ function NumericInputMax() {
     )
 }
 
+function NumericInputBasicStyle() {
+    const [value1, setValue1] = React.useState(0);
+
+    return (
+        <Fragment>
+            <Text style={styles.instructions}>
+                Rounded Numeric Input - with styling and initial value of 6
+            </Text>
+
+            <NumericField
+                value={value1}
+                onChange={(v5) => setValue1(v5)}
+                rounded
+                type='up-down'
+                textColor='#26547C'
+                iconStyle={{color: 'green'}}
+                upDownButtonsBackgroundColor='#06D6A0'/>
+            <View style={styles.seprator}/>
+        </Fragment>
+    )
+}
+
 export default class App extends Component {
     constructor(props) {
         super(props)
@@ -163,20 +185,7 @@ export default class App extends Component {
                 <NumericInputRounded/>
                 <NumericInputReal/>
                 <NumericInputMax/>
-
-                <Text style={styles.instructions}>
-                    Rounded Numeric Input - with styling and initial value of 6
-                </Text>
-
-                <NumericField
-                    value={this.state.v5}
-                    onChange={(v5) => this.setState({v5})}
-                    rounded
-                    type='up-down'
-                    textColor='#26547C'
-                    iconStyle={{color: 'green'}}
-                    upDownButtonsBackgroundColor='#06D6A0'/>
-                <View style={styles.seprator}/>
+                <NumericInputBasicStyle/>
 
                 <Text style={styles.instructions}>
                     Rounded Numeric Input with styling
