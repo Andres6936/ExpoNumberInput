@@ -23,7 +23,7 @@ export function useNumericInput(args: Args) {
     const [valueAsNumber, setValueAsNumber] = useState(args.value)
 
     const increment = () => {
-        let newValue =  args.value
+        let newValue = args.value && (typeof args.value === 'number') ? args.value : valueAsNumber
         if (args.maxValue === null || (newValue + args.step < args.maxValue)) {
             const numericAs = (newValue + args.step).toFixed(12)
             newValue = args.valueType === 'real' ? parseFloat(numericAs) : parseInt(numericAs)
@@ -41,7 +41,7 @@ export function useNumericInput(args: Args) {
     }
 
     const decrement = () => {
-        let newValue =  args.value
+        let newValue = args.value && (typeof args.value === 'number') ? args.value : valueAsNumber
         if (args.minValue === null || (newValue - args.step > args.minValue)) {
             const numericAs = (newValue - args.step).toFixed(12)
             newValue = args.valueType === 'real' ? parseFloat(numericAs) : parseInt(numericAs)
@@ -57,7 +57,7 @@ export function useNumericInput(args: Args) {
     }
 
     const onChange = (value: string) => {
-        let currValue =  args.value
+        let currValue = typeof args.value === 'number' ? args.value : value
         if ((value.length === 1 && value === '-') || (value.length === 2 && value === '0-')) {
             setValueAsText('-')
             return
