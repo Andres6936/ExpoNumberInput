@@ -1,10 +1,5 @@
-import React, {Component, Fragment} from 'react';
-import {
-    StyleSheet,
-    Text,
-    ScrollView,
-    View
-} from 'react-native';
+import React, {Fragment} from 'react';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {NumericField} from 'expo-number-input'
 
 
