@@ -1,6 +1,6 @@
 {
   "name": "expo-number-input",
-  "version": "205.05.28",
+  "version": "205.05.31",
   "type": "module",
   "exports": {
     ".": {
