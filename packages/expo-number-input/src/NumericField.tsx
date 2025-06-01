@@ -85,8 +85,6 @@ export function NumericField(
     const totalHeight = props.totalHeight ? props.totalHeight : (totalWidth * 0.4)
     const inputWidth = type === 'up-down' ? (totalWidth * 0.6) : (totalWidth * 0.4)
     const fontSize = totalHeight * 0.38
-    const maxReached = valueAsNumber === maxValue
-    const minReached = valueAsNumber === minValue
 
     const inputStyle = type === 'up-down' ?
         [style.inputUpDown, {
@@ -156,6 +154,8 @@ export function NumericField(
 
 type IRootContext = {
     ref: React.RefObject<TextInput | null>,
+    maxValue: number | null,
+    minValue: number | null,
     valueAsText: string,
     valueAsNumber: number,
     increment: () => void,
@@ -208,7 +208,18 @@ export function Root(
 
     const Component = asChild ? Slot.View : View;
     return (
-        <RootContext value={{ref, valueAsText, valueAsNumber, increment, decrement, onChange, onFocus, onBlur}}>
+        <RootContext value={{
+            ref,
+            maxValue,
+            minValue,
+            valueAsText,
+            valueAsNumber,
+            increment,
+            decrement,
+            onChange,
+            onFocus,
+            onBlur
+        }}>
             <Component {...viewProps} />
         </RootContext>
     )
@@ -222,7 +233,7 @@ function useRootContext() {
     return context;
 }
 
-export function Container ({asChild, ...props}: ComponentPropsWithAsChild<typeof View>) {
+export function Container({asChild, ...props}: ComponentPropsWithAsChild<typeof View>) {
     const Component = asChild ? Slot.View : View;
     return (
         <Component {...props} />
@@ -243,18 +254,18 @@ type ActionProps<T extends AnyComponent> = ComponentPropsWithRef<typeof Pressabl
 }
 
 export function IncrementAction<T extends AnyComponent>({Icon, ...props}: ActionProps<T>) {
-    const {increment} = useRootContext()
+    const {valueAsNumber, maxValue, minValue, increment} = useRootContext()
 
     const withIconProps = useMemo(() => {
         if (typeof props.iconProps === 'function') {
             return (props.iconProps as Function)({
-                isMaxReached: false,
-                isMinReached: false
+                isMaxReached: valueAsNumber === maxValue,
+                isMinReached: valueAsNumber === minValue,
             })
         }
 
         return props.iconProps
-    }, [props.iconProps]);
+    }, [props.iconProps, valueAsNumber, maxValue, minValue]);
 
     return (
         <Pressable onPress={increment} {...props}>
@@ -266,18 +277,18 @@ export function IncrementAction<T extends AnyComponent>({Icon, ...props}: Action
 }
 
 export function DecrementAction<T extends AnyComponent>({Icon, ...props}: ActionProps<T>) {
-    const {decrement} = useRootContext()
+    const {valueAsNumber, maxValue, minValue, decrement} = useRootContext()
 
     const withIconProps = useMemo(() => {
         if (typeof props.iconProps === 'function') {
             return (props.iconProps as Function)({
-                isMaxReached: false,
-                isMinReached: false
+                isMaxReached: valueAsNumber === maxValue,
+                isMinReached: valueAsNumber === minValue,
             })
         }
 
         return props.iconProps
-    }, [props.iconProps]);
+    }, [props.iconProps, valueAsNumber, maxValue, minValue]);
 
     return (
         <Pressable onPress={decrement} {...props}>
