@@ -1,4 +1,4 @@
-import React, {Fragment} from "react";
+import React, {ComponentPropsWithRef, Fragment} from "react";
 import {
     Pressable,
     PressableProps,
@@ -102,7 +102,6 @@ export function NumericField(
     })
 
 
-
     const iconStyle = [style.icon, propIconStyle]
     const totalHeight = props.totalHeight ? props.totalHeight : (totalWidth * 0.4)
     const inputWidth = type === 'up-down' ? (totalWidth * 0.6) : (totalWidth * 0.4)
@@ -187,8 +186,6 @@ export function NumericField(
     } as ViewStyle
 
 
-
-
     if (type === 'up-down')
         return (
             <Fragment>
@@ -224,18 +221,18 @@ export function NumericField(
             </Fragment>)
     else return (
         <Fragment>
-            <Pressable
+            <MinusAction
                 onPress={() => {
                     decrement()
                     console.log("DECREMENT")
-                } }
+                }}
                 style={leftButtonStyle}
             >
                 <Minus
                     size={fontSize}
                     style={[...iconStyle, maxReached ? reachMaxDecIconStyle : {}, minReached ? reachMinDecIconStyle : {}]}
                 />
-            </Pressable>
+            </MinusAction>
             <View style={[inputWraperStyle]}>
                 <TextInput
                     {...extraTextInputProps}
@@ -251,7 +248,7 @@ export function NumericField(
                     onFocus={onFocus}
                 />
             </View>
-            <Pressable
+            <PlusAction
                 onPress={() => {
                     increment()
                     console.log("INCREMENT")
@@ -262,7 +259,7 @@ export function NumericField(
                     size={fontSize}
                     style={[...iconStyle, maxReached ? reachMaxIncIconStyle : {}, minReached ? reachMinIncIconStyle : {}]}
                 />
-            </Pressable>
+            </PlusAction>
         </Fragment>
     )
 }
@@ -280,43 +277,31 @@ export function Input() {
     return (null)
 }
 
-type ActionProps =  ComponentPropsWithAsChild<typeof Pressable> & {
-    iconProps: TextProps,
+type ActionProps = ComponentPropsWithRef<typeof Pressable> & {
+    children: ComponentPropsWithRef<typeof Text>
 }
 
-export function UpAction({asChild, ref, iconProps, ...props}: ActionProps) {
-    const Component = asChild ? Slot.Text : Text;
+export function UpAction({ref, ...props}: ActionProps) {
     return (
-        <Pressable ref={ref} {...props}>
-            <Component {...iconProps} />
-        </Pressable>
+        <Pressable ref={ref} {...props}/>
     )
 }
 
-export function DownAction({asChild, ref, iconProps, ...props}: ActionProps) {
-    const Component = asChild ? Slot.Text : Text;
+export function DownAction({ref, ...props}: ActionProps) {
     return (
-        <Pressable ref={ref} {...props}>
-            <Component {...iconProps} />
-        </Pressable>
+        <Pressable ref={ref} {...props}/>
     )
 }
 
-export function PlusAction({asChild, ref, iconProps, ...props}: ActionProps) {
-    const Component = asChild ? Slot.Text : Text;
+export function PlusAction({ref, ...props}: ActionProps) {
     return (
-        <Pressable ref={ref} {...props}>
-            <Component {...iconProps} />
-        </Pressable>
+        <Pressable ref={ref} {...props}/>
     )
 }
 
-export function MinusAction({asChild, ref, iconProps, ...props}: ActionProps) {
-    const Component = asChild ? Slot.Text : Text;
+export function MinusAction({ref, ...props}: ActionProps) {
     return (
-        <Pressable ref={ref} {...props}>
-            <Component {...iconProps} />
-        </Pressable>
+        <Pressable ref={ref} {...props}/>
     )
 }
 
