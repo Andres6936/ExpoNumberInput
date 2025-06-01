@@ -1,4 +1,4 @@
-import React, {ComponentPropsWithRef, Fragment} from "react";
+import React, {ComponentPropsWithRef, Fragment, useCallback, useMemo} from "react";
 import {Pressable, StyleProp, StyleSheet, TextInput, TextStyle, View, ViewStyle} from "react-native";
 import {ChevronDown, ChevronUp, Minus, Plus} from "lucide-react-native";
 
@@ -161,13 +161,13 @@ export function NumericField(
                     <IncrementAction
                         Icon={ChevronDown}
                         iconProps={{
-                            size:fontSize,
+                            size: fontSize,
                             style: [...iconStyle, maxReached ? reachMaxDecIconStyle : {}, minReached ? reachMinDecIconStyle : {}]
                         }}
                         viewProps={{
                             style: {flex: 1, width: '100%', alignItems: 'center'}
                         }}
-                       />
+                    />
                 </View>
             </Fragment>)
     else return (
@@ -287,31 +287,58 @@ function useRootContext() {
 
 type AnyComponent = React.ComponentType<any>
 
+type ComponentStatus = {
+    isMaxReached: boolean,
+    isMinReached: boolean,
+}
+
 type ActionProps<T extends AnyComponent> = ComponentPropsWithRef<typeof Pressable> & {
     Icon: T,
-    iconProps: React.ComponentProps<T>,
+    iconProps: React.ComponentProps<T> | ((status: ComponentStatus) => React.ComponentProps<T>),
     viewProps: React.ComponentProps<typeof View>,
 }
 
-export function IncrementAction<T extends AnyComponent>({Icon, iconProps, ...props}: ActionProps<T>) {
+export function IncrementAction<T extends AnyComponent>({Icon, ...props}: ActionProps<T>) {
     const {increment} = useRootContext()
+
+    const withIconProps = useMemo(() => {
+        if (typeof props.iconProps === 'function') {
+            return (props.iconProps as Function)({
+                isMaxReached: false,
+                isMinReached: false
+            })
+        }
+
+        return props.iconProps
+    }, [props.iconProps]);
 
     return (
         <Pressable onPress={increment} {...props}>
             <View {...props.viewProps}>
-                <Icon {...iconProps} />
+                <Icon {...withIconProps} />
             </View>
         </Pressable>
     )
 }
 
-export function DecrementAction<T extends AnyComponent>({Icon, iconProps, ...props}: ActionProps<T>) {
+export function DecrementAction<T extends AnyComponent>({Icon, ...props}: ActionProps<T>) {
     const {decrement} = useRootContext()
+
+    const withIconProps = useMemo(() => {
+        if (typeof props.iconProps === 'function') {
+            return (props.iconProps as Function)({
+                isMaxReached: false,
+                isMinReached: false
+            })
+        }
+
+        return props.iconProps
+    }, [props.iconProps]);
 
     return (
         <Pressable onPress={decrement} {...props}>
             <View {...props.viewProps}>
-                <Icon {...iconProps} />
+                <Icon {...withIconProps} />
             </View>
         </Pressable>
     )
