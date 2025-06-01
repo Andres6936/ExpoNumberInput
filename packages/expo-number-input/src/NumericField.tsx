@@ -247,9 +247,11 @@ type ComponentStatus = {
     isMinReached: boolean,
 }
 
+type CallbackComponentStatus<T extends AnyComponent> = (status: ComponentStatus) => React.ComponentProps<T>
+
 type ActionProps<T extends AnyComponent> = ComponentPropsWithRef<typeof Pressable> & {
     Icon: T,
-    iconProps: React.ComponentProps<T> | ((status: ComponentStatus) => React.ComponentProps<T>),
+    iconProps: React.ComponentProps<T> | CallbackComponentStatus<T>,
     viewProps: React.ComponentProps<typeof View>,
 }
 
@@ -258,7 +260,7 @@ function useActionProps<T extends AnyComponent>(args: Pick<ActionProps<T>, 'icon
 
     const withIconProps = useMemo(() => {
         if (typeof args.iconProps === 'function') {
-            return (args.iconProps as Function)({
+            return (args.iconProps as CallbackComponentStatus<T>)({
                 isMaxReached: valueAsNumber === maxValue,
                 isMinReached: valueAsNumber === minValue,
             })
