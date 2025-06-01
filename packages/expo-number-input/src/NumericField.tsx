@@ -295,14 +295,6 @@ function useRootContext() {
     return context;
 }
 
-export function Container() {
-    return (null)
-}
-
-export function Input() {
-    return (null)
-}
-
 type AnyComponent = React.ComponentType<any>
 
 type ActionProps<T extends AnyComponent> = ComponentPropsWithRef<typeof Pressable> & {
