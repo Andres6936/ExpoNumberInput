@@ -1,7 +1,10 @@
 import React from "react";
 import {Pressable, StyleProp, StyleSheet, TextInput, TextStyle, View, ViewStyle} from "react-native";
 import {ChevronDown, ChevronUp, Minus, Plus} from "lucide-react-native";
+
+import * as Slot from './Slot'
 import {useNumericInput} from "./useNumericInput";
+import {ComponentPropsWithAsChild} from "./types";
 
 
 type Props = {
@@ -265,8 +268,9 @@ export function NumericField(
     )
 }
 
-export function Root() {
-    return (null)
+export function Root({asChild, ref, ...viewProps}: ComponentPropsWithAsChild<typeof View>) {
+    const Component = asChild ? Slot.View : View;
+    return <Component ref={ref} {...viewProps} />
 }
 
 export function Input() {
