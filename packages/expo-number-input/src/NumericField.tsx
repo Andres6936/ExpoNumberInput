@@ -139,44 +139,6 @@ export function NumericField(
     }, rounded ? {borderTopRightRadius: borderRadiusTotal, borderBottomRightRadius: borderRadiusTotal} : {}
     ] as ViewStyle[]
 
-    const rightButtonStyle = [
-        {
-            position: 'absolute',
-            zIndex: -1,
-            right: 0,
-            height: totalHeight - 2,
-            justifyContent: 'center',
-            alignItems: 'center',
-            borderWidth: 0,
-            backgroundColor: rightButtonBackgroundColor,
-            width: (totalWidth - inputWidth) / 2
-        },
-        rounded ?
-            {
-                borderTopRightRadius: borderRadiusTotal,
-                borderBottomRightRadius: borderRadiusTotal
-            }
-            : {}
-    ] as ViewStyle[]
-
-    const leftButtonStyle = [
-        {
-            position: 'absolute',
-            zIndex: -1,
-            left: 0,
-            height: totalHeight - 2,
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: leftButtonBackgroundColor,
-            width: (totalWidth - inputWidth) / 2,
-            borderWidth: 0
-        },
-
-        rounded ?
-            {borderTopLeftRadius: borderRadiusTotal, borderBottomLeftRadius: borderRadiusTotal}
-            : {}
-    ] as ViewStyle[]
-
     const inputWraperStyle = {
         alignSelf: 'center',
         borderLeftColor: borderColor,
