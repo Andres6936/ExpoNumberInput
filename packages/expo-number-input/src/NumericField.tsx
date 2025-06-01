@@ -96,31 +96,21 @@ export function NumericField(
             borderRightColor: borderColor
         }, propInputStyle]
 
-    const inputWraperStyle = {
-        alignSelf: 'center',
-        borderLeftColor: borderColor,
-        borderLeftWidth: separatorWidth,
-        borderRightWidth: separatorWidth,
-        borderRightColor: borderColor
-    } as ViewStyle
-
 
     return (
-        <View style={[inputWraperStyle]}>
-            <TextInput
-                {...extraTextInputProps}
-                editable={editable}
-                returnKeyType='done'
-                underlineColorAndroid='rgba(0,0,0,0)'
-                keyboardType='numeric'
-                value={valueAsText}
-                onChangeText={onChange}
-                style={inputStyle}
-                ref={ref}
-                onBlur={onBlur}
-                onFocus={onFocus}
-            />
-        </View>
+        <TextInput
+            {...extraTextInputProps}
+            editable={editable}
+            returnKeyType='done'
+            underlineColorAndroid='rgba(0,0,0,0)'
+            keyboardType='numeric'
+            value={valueAsText}
+            onChangeText={onChange}
+            style={inputStyle}
+            ref={ref}
+            onBlur={onBlur}
+            onFocus={onFocus}
+        />
     )
 }
 
