@@ -182,10 +182,6 @@ export function NumericField(
                     size: fontSize,
                     style: [...iconStyle, maxReached ? reachMaxDecIconStyle : {}, minReached ? reachMinDecIconStyle : {}]
                 }}
-                onPress={() => {
-                    decrement()
-                    console.log("DECREMENT")
-                }}
                 viewProps={{
                     style: [
                         {backgroundColor: rightButtonBackgroundColor},
@@ -213,10 +209,6 @@ export function NumericField(
                 iconProps={{
                     size: fontSize,
                     style: [...iconStyle, maxReached ? reachMaxIncIconStyle : {}, minReached ? reachMinIncIconStyle : {}]
-                }}
-                onPress={() => {
-                    increment()
-                    console.log("INCREMENT")
                 }}
                 viewProps={{
                     style: [
@@ -326,8 +318,10 @@ export function DownAction<T extends AnyComponent>({ref, ...props}: ActionProps<
 }
 
 export function PlusAction<T extends AnyComponent>({Icon, iconProps, ...props}: ActionProps<T>) {
+    const {increment} = useRootContext()
+
     return (
-        <Pressable {...props}>
+        <Pressable onPress={increment} {...props}>
             <View {...props.viewProps}>
                 <Icon {...iconProps} />
             </View>
@@ -336,8 +330,10 @@ export function PlusAction<T extends AnyComponent>({Icon, iconProps, ...props}: 
 }
 
 export function MinusAction<T extends AnyComponent>({Icon, iconProps, ...props}: ActionProps<T>) {
+    const {decrement} = useRootContext()
+
     return (
-        <Pressable {...props}>
+        <Pressable onPress={decrement} {...props}>
             <View {...props.viewProps}>
                 <Icon {...iconProps} />
             </View>
