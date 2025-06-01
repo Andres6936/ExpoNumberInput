@@ -1,6 +1,7 @@
 import React, {Fragment} from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {NumericField} from 'expo-number-input'
+import {NumericInputMoreLess, NumericInputUpDown} from "./Input";
 
 
 function NumericInputExample() {
@@ -13,7 +14,7 @@ function NumericInputExample() {
                 Numeric Input Examples
             </Text>
 
-            <NumericField
+            <NumericInputMoreLess
                 value={value1}
                 onChange={value1 => {
                     setValue1(value1);
@@ -31,7 +32,7 @@ function NumericInputExample() {
                 rightButtonBackgroundColor="#18c2ef"
                 leftButtonBackgroundColor="#ff8080"
             />
-            <NumericField
+            <NumericInputMoreLess
                 value={value2}
                 onChange={(v1) => {
                     setValue2(v1);
@@ -62,7 +63,7 @@ function NumericInputBasic() {
                 Basic Numeric Input - no limits
             </Text>
 
-            <NumericField
+            <NumericInputMoreLess
                 value={value1}
                 onChange={(v2) => setValue1(v2)}/>
             <View style={styles.seprator}/>
@@ -79,7 +80,7 @@ function NumericInputRounded() {
                 Rounded Numeric Input - with minValue of 0
             </Text>
 
-            <NumericField
+            <NumericInputMoreLess
                 value={value1}
                 onChange={(v3) => setValue1(v3)}
                 rounded
@@ -99,7 +100,7 @@ function NumericInputReal() {
                 Basic Numeric Input - with step of 0.5 and valueType real
             </Text>
 
-            <NumericField
+            <NumericInputUpDown
                 value={value1}
                 onChange={(v4) => setValue1(v4)}
                 type='up-down'
@@ -119,7 +120,7 @@ function NumericInputMax() {
                 Rounded Numeric Input - with minValue of 0 and maxValue of 5
             </Text>
 
-            <NumericField
+            <NumericInputUpDown
                 value={value1}
                 onChange={value => setValue1(value)}
                 rounded type='up-down'
@@ -141,7 +142,7 @@ function NumericInputBasicStyle() {
                 Rounded Numeric Input - with styling and initial value of 6
             </Text>
 
-            <NumericField
+            <NumericInputUpDown
                 value={value1}
                 onChange={(v5) => setValue1(v5)}
                 rounded
@@ -163,7 +164,7 @@ function NumericInputRoundedStyle() {
                 Rounded Numeric Input with styling
             </Text>
 
-            <NumericField
+            <NumericInputMoreLess
                 value={value1}
                 onChange={(v6) => setValue1(v6)}
                 rounded
@@ -185,7 +186,7 @@ function NumericInputCustom() {
                 Rounded Numeric Input with custom width
             </Text>
 
-            <NumericField
+            <NumericInputMoreLess
                 value={value1}
                 onChange={(v7) => setValue1(v7)}
                 totalWidth={200}
@@ -208,7 +209,7 @@ function NumericInputCustomStyle() {
                 Rounded Numeric Input with custom width and height
             </Text>
 
-            <NumericField
+            <NumericInputMoreLess
                 value={value1}
                 onChange={(v8) => setValue1(v8)}
                 textColor='#B0228C'
