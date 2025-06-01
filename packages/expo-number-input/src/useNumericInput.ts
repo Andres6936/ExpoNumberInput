@@ -86,11 +86,11 @@ export function useNumericInput(args: Args) {
             setValueAsText(value)
             return
         }
-        let legal = isLegalValue(value)
-        if (legal) {
+        let isLegal = isLegalValue(value)
+        if (isLegal) {
             setLastValid(+value)
         }
-        if (!legal && !args.validateOnBlur) {
+        if (!isLegal && !args.validateOnBlur) {
             if (ref.current) {
                 ref.current.blur()
                 setTimeout(() => {
@@ -107,7 +107,7 @@ export function useNumericInput(args: Args) {
                 setTimeout(() => ref.current?.focus(), 20)
             }
 
-        } else if (!legal && args.validateOnBlur) {
+        } else if (!isLegal && args.validateOnBlur) {
             setValueAsText(value)
             let parsedValue = args.valueType === 'real' ? parseFloat(value) : parseInt(value)
             parsedValue = isNaN(parsedValue) ? 0 : parsedValue
