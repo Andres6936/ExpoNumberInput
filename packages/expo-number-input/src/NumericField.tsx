@@ -262,6 +262,10 @@ export function Root({asChild, ref, ...viewProps}: ComponentPropsWithAsChild<typ
     return <Component ref={ref} {...viewProps} />
 }
 
+export function Container() {
+    return (null)
+}
+
 export function Input() {
     return (null)
 }
