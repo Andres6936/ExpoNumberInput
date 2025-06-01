@@ -157,21 +157,27 @@ export function NumericField(
                     onFocus={onFocus}
                 />
                 <View style={upDownStyle}>
-                    <Pressable
-                        onPress={increment}
-                        style={{flex: 1, width: '100%', alignItems: 'center'}}
-                    >
-                        <ChevronUp
-                            size={fontSize}
-                            style={[...iconStyle, maxReached ? reachMaxIncIconStyle : {}, minReached ? reachMinIncIconStyle : {}]}
-                        />
-                    </Pressable>
-                    <Pressable onPress={decrement} style={{flex: 1, width: '100%', alignItems: 'center'}}>
-                        <ChevronDown
-                            size={fontSize}
-                            style={[...iconStyle, maxReached ? reachMaxDecIconStyle : {}, minReached ? reachMinDecIconStyle : {}]}
-                        />
-                    </Pressable>
+                    <PlusAction
+                        Icon={ChevronUp}
+                        iconProps={{
+                            size: fontSize,
+                            style: [...iconStyle, maxReached ? reachMaxIncIconStyle : {}, minReached ? reachMinIncIconStyle : {}]
+                        }}
+                        viewProps={{
+                            style: {flex: 1, width: '100%', alignItems: 'center'}
+                        }}
+
+                    />
+                    <MinusAction
+                        Icon={ChevronDown}
+                        iconProps={{
+                            size:fontSize,
+                            style: [...iconStyle, maxReached ? reachMaxDecIconStyle : {}, minReached ? reachMinDecIconStyle : {}]
+                        }}
+                        viewProps={{
+                            style: {flex: 1, width: '100%', alignItems: 'center'}
+                        }}
+                       />
                 </View>
             </Fragment>)
     else return (
@@ -305,15 +311,27 @@ type ActionProps<T extends AnyComponent> = ComponentPropsWithRef<typeof Pressabl
     viewProps: React.ComponentProps<typeof View>,
 }
 
-export function UpAction<T extends AnyComponent>({ref, ...props}: ActionProps<T>) {
+export function UpAction<T extends AnyComponent>({Icon, iconProps, ...props}: ActionProps<T>) {
+    const {increment} = useRootContext()
+
     return (
-        <Pressable ref={ref} {...props}/>
+        <Pressable onPress={increment} {...props}>
+            <View {...props.viewProps}>
+                <Icon {...iconProps} />
+            </View>
+        </Pressable>
     )
 }
 
-export function DownAction<T extends AnyComponent>({ref, ...props}: ActionProps<T>) {
+export function DownAction<T extends AnyComponent>({Icon, iconProps, ...props}: ActionProps<T>) {
+    const {decrement} = useRootContext()
+
     return (
-        <Pressable ref={ref} {...props}/>
+        <Pressable onPress={decrement} {...props}>
+            <View {...props.viewProps}>
+                <Icon {...iconProps} />
+            </View>
+        </Pressable>
     )
 }
 
