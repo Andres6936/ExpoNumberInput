@@ -223,7 +223,10 @@ export function NumericField(
     else return (
         <View style={inputContainerStyle}>
             <Pressable
-                onPress={decrement}
+                onPress={() => {
+                    decrement()
+                    console.log("DECREMENT")
+                } }
                 style={leftButtonStyle}
             >
                 <Minus
@@ -247,7 +250,10 @@ export function NumericField(
                 />
             </View>
             <Pressable
-                onPress={increment}
+                onPress={() => {
+                    increment()
+                    console.log("INCREMENT")
+                }}
                 style={rightButtonStyle}
             >
                 <Plus
@@ -257,6 +263,30 @@ export function NumericField(
             </Pressable>
         </View>
     )
+}
+
+export function Root() {
+    return (null)
+}
+
+export function Input() {
+    return (null)
+}
+
+export function UpButton() {
+    return (null)
+}
+
+export function DownButton() {
+    return (null)
+}
+
+export function PlusButton() {
+    return (null)
+}
+
+export function MinusButton() {
+    return (null)
 }
 
 
