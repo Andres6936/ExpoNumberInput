@@ -33,7 +33,25 @@ const View = function (props: React.ComponentPropsWithRef<typeof RNView> ) {
 
 View.displayName = 'Slot.View';
 
-export {View};
+const Text = function (props: React.ComponentPropsWithRef<typeof RNText> ) {
+    const {children, ref, ...textSlotProps} = props;
+
+    if (!React.isValidElement(children)) {
+        console.error('Slot.Text - Invalid asChild element', children);
+        return null;
+    }
+
+    return React.cloneElement<React.ComponentPropsWithRef<typeof RNText>>(
+        isTextChildren(children) ? <Fragment/> : children, {
+            ...mergeProps(textSlotProps, children.props as AnyProps),
+            ref: ref ? composeRefs(ref, (children as any).ref) : (children as any).ref,
+        }
+    )
+}
+
+Text.displayName = 'Slot.Text';
+
+export {View, Text};
 
 // This project uses code from WorkOS/Radix Primitives.
 // The code is licensed under the MIT License.
