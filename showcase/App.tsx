@@ -20,8 +20,6 @@ function NumericInputExample() {
                     setValue1(value1);
                 }}
                 onLimitReached={(isMin, msg) => console.log(isMin, msg)}
-                totalWidth={80}
-                totalHeight={30}
                 iconSize={10}
                 step={1}
                 minValue={0}
@@ -37,8 +35,6 @@ function NumericInputExample() {
                 onChange={(v1) => {
                     setValue2(v1);
                 }}
-                totalWidth={150}
-                totalHeight={35}
                 minValue={0}
                 maxValue={9999}
                 onLimitReached={(isMAx, msg) => console.log(msg)}

@@ -3,23 +3,17 @@ import {StyleSheet} from "react-native";
 
 export const NumericInputMoreLess = (
     {
-        totalWidth = 220,
         borderColor = '#d4d4d4',
         rounded = false,
         ...props
     }: NumericInput.Props
 ) => {
-    const totalHeight = props.totalHeight ? props.totalHeight : (totalWidth * 0.4)
-    const borderRadiusTotal = totalHeight * 0.18
-
     const inputContainerStyle =  [style.inputContainerPlusMinus, {
-        width: totalWidth,
-        height: totalHeight,
         borderColor: borderColor,
         justifyContent: "space-between",
         alignItems: "center",
         flexDirection: "row",
-    }, rounded ? {borderRadius: borderRadiusTotal} : {}, props.containerStyle]
+    }, props.containerStyle]
 
 
     return (
