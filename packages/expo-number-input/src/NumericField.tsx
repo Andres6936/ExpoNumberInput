@@ -222,16 +222,16 @@ export function NumericField(
     else return (
         <Fragment>
             <MinusAction
+                Icon={Minus}
+                iconProps={{
+                    size: fontSize,
+                    style: [...iconStyle, maxReached ? reachMaxDecIconStyle : {}, minReached ? reachMinDecIconStyle : {}]
+                }}
                 onPress={() => {
                     decrement()
                     console.log("DECREMENT")
                 }}
-            >
-                <Minus
-                    size={fontSize}
-                    style={[...iconStyle, maxReached ? reachMaxDecIconStyle : {}, minReached ? reachMinDecIconStyle : {}]}
-                />
-            </MinusAction>
+            />
             <View style={[inputWraperStyle]}>
                 <TextInput
                     {...extraTextInputProps}
@@ -248,16 +248,16 @@ export function NumericField(
                 />
             </View>
             <PlusAction
+                Icon={Plus}
+                iconProps={{
+                    size: fontSize,
+                    style: [...iconStyle, maxReached ? reachMaxIncIconStyle : {}, minReached ? reachMinIncIconStyle : {}]
+                }}
                 onPress={() => {
                     increment()
                     console.log("INCREMENT")
                 }}
-            >
-                <Plus
-                    size={fontSize}
-                    style={[...iconStyle, maxReached ? reachMaxIncIconStyle : {}, minReached ? reachMinIncIconStyle : {}]}
-                />
-            </PlusAction>
+            />
         </Fragment>
     )
 }
@@ -276,7 +276,8 @@ export function Input() {
 }
 
 type ActionProps = ComponentPropsWithRef<typeof Pressable> & {
-    children: ComponentPropsWithRef<typeof Text>
+    Icon: React.ComponentType<any>,
+    iconProps: TextProps,
 }
 
 export function UpAction({ref, ...props}: ActionProps) {
@@ -291,15 +292,19 @@ export function DownAction({ref, ...props}: ActionProps) {
     )
 }
 
-export function PlusAction({ref, ...props}: ActionProps) {
+export function PlusAction({Icon, iconProps, ref, ...props}: ActionProps) {
     return (
-        <Pressable ref={ref} {...props}/>
+        <Pressable ref={ref} {...props}>
+            <Icon {...iconProps} />
+        </Pressable>
     )
 }
 
-export function MinusAction({ref, ...props}: ActionProps) {
+export function MinusAction({Icon, iconProps, ref, ...props}: ActionProps) {
     return (
-        <Pressable ref={ref} {...props}/>
+        <Pressable ref={ref} {...props}>
+            <Icon {...iconProps} />
+        </Pressable>
     )
 }
 
