@@ -15,6 +15,22 @@ type Args = {
     onLimitReached?: (isMax: boolean, msg: string) => void
 }
 
+const isReal = (value: string): boolean => {
+    if (!value) return false;
+    const isReal = value.match(/-?\d+(\.(\d+)?)?/)!
+    const isPart = value.match(/-?\d+(\.(\d+)?)?/)![0]
+    const isExact = value.match(/-?\d+(\.(\d+)?)?/)!
+    return isReal && isPart === isExact.input
+}
+
+const isInt = (value: string): boolean => {
+    if (!value) return false;
+    const isInt = value.match(/-?\d+/)!
+    const isPart = value.match(/-?\d+/)![0]
+    const isExact = value.match(/-?\d+/)!
+    return isInt && isPart === isExact.input
+}
+
 export function useNumericInput(args: Args) {
     const ref = useRef<TextInput | null>(null);
 
@@ -57,7 +73,7 @@ export function useNumericInput(args: Args) {
     }
 
     const onChange = (value: string) => {
-        let currValue = typeof args.value === 'number' ? args.value : value
+        let currValue = value
         if ((value.length === 1 && value === '-') || (value.length === 2 && value === '0-')) {
             setValueAsText('-')
             return
@@ -70,7 +86,7 @@ export function useNumericInput(args: Args) {
             setValueAsText(value)
             return
         }
-        let legal = isLegalValue(value, realMatch, intMatch)
+        let legal = isLegalValue(value)
         if (legal) {
             setLastValid(+value)
         }
@@ -113,23 +129,13 @@ export function useNumericInput(args: Args) {
         }
     }
 
-    const isLegalValue = (value: string, mReal: (value: string) => boolean, mInt: (value: string) => boolean) => value === '' || (((args.valueType === 'real' && mReal(value)) || (args.valueType !== 'real' && mInt(value))) && (args.maxValue === null || (parseFloat(value) <= args.maxValue)) && (args.minValue === null || (parseFloat(value) >= args.minValue)))
+    const isLegalValue = (value: string) =>
+        value === '' ||
+        (args.valueType === 'real' && isReal(value) || args.valueType !== 'real' && isInt(value)) &&
+        (args.maxValue === null || parseFloat(value) <= args.maxValue) &&
+        (args.minValue === null || parseFloat(value) >= args.minValue)
 
-    const realMatch = (value: string): boolean => {
-        if (!value) return false;
-        const isReal = value.match(/-?\d+(\.(\d+)?)?/)!
-        const isPart = value.match(/-?\d+(\.(\d+)?)?/)![0]
-        const isExact = value.match(/-?\d+(\.(\d+)?)?/)!
-        return isReal && isPart === isExact.input
-    }
 
-    const intMatch = (value: string): boolean => {
-        if (!value) return false;
-        const isInt = value.match(/-?\d+/)!
-        const isPart = value.match(/-?\d+/)![0]
-        const isExact = value.match(/-?\d+/)!
-        return isInt && isPart === isExact.input
-    }
 
     const onBlur = () => {
 
