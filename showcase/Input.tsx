@@ -1,5 +1,5 @@
 import * as NumericInput from 'expo-number-input'
-import {StyleSheet} from "react-native";
+import {StyleProp, StyleSheet, ViewStyle} from "react-native";
 
 export const NumericInputMoreLess = (
     {
@@ -13,7 +13,7 @@ export const NumericInputMoreLess = (
         justifyContent: "space-between",
         alignItems: "center",
         flexDirection: "row",
-    }, props.containerStyle]
+    }, props.containerStyle] satisfies StyleProp<ViewStyle>
 
 
     return (
