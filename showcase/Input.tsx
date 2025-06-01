@@ -12,7 +12,7 @@ export const NumericInputMoreLess = (
         ...props
     }: NumericInput.Props
 ) => {
-    const inputContainerStyle =  [style.inputContainerPlusMinus, {
+    const inputContainerStyle = [style.inputContainerPlusMinus, {
         borderColor: borderColor,
         justifyContent: "space-between",
         alignItems: "center",
@@ -25,9 +25,9 @@ export const NumericInputMoreLess = (
         <NumericInput.Root {...props} style={inputContainerStyle}>
             <NumericInput.DecrementAction
                 Icon={Minus}
-                iconProps={{
-                    style: [...iconStyle, maxReached ? props.reachMaxDecIconStyle : {}, minReached ? props.reachMinDecIconStyle : {}]
-                }}
+                iconProps={({isMaxReached, isMinReached}) => ({
+                    style: [...iconStyle, isMaxReached ? props.reachMaxDecIconStyle : {}, isMinReached ? props.reachMinDecIconStyle : {}]
+                })}
                 viewProps={{
                     style: {backgroundColor: rightButtonBackgroundColor},
                 }}
@@ -35,9 +35,9 @@ export const NumericInputMoreLess = (
             <NumericInput.NumericField {...props}/>
             <NumericInput.IncrementAction
                 Icon={Plus}
-                iconProps={{
-                    style: [...iconStyle, maxReached ? props.reachMaxIncIconStyle : {}, minReached ? props.reachMinIncIconStyle : {}]
-                }}
+                iconProps={({isMaxReached, isMinReached}) => ({
+                    style: [...iconStyle, isMaxReached ? props.reachMaxIncIconStyle : {}, isMinReached ? props.reachMinIncIconStyle : {}]
+                })}
                 viewProps={{
                     style: {backgroundColor: leftButtonBackgroundColor},
                 }}

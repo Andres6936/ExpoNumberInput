@@ -172,19 +172,6 @@ export function NumericField(
             </Fragment>)
     else return (
         <Fragment>
-            <DecrementAction
-                Icon={Minus}
-                iconProps={{
-                    size: fontSize,
-                    style: [...iconStyle, maxReached ? reachMaxDecIconStyle : {}, minReached ? reachMinDecIconStyle : {}]
-                }}
-                viewProps={{
-                    style: [
-                        {backgroundColor: rightButtonBackgroundColor},
-                        rounded && {borderTopRightRadius: borderRadiusTotal, borderBottomRightRadius: borderRadiusTotal}
-                    ]
-                }}
-            />
             <View style={[inputWraperStyle]}>
                 <TextInput
                     {...extraTextInputProps}
@@ -200,19 +187,6 @@ export function NumericField(
                     onFocus={onFocus}
                 />
             </View>
-            <IncrementAction
-                Icon={Plus}
-                iconProps={{
-                    size: fontSize,
-                    style: [...iconStyle, maxReached ? reachMaxIncIconStyle : {}, minReached ? reachMinIncIconStyle : {}]
-                }}
-                viewProps={{
-                    style: [
-                        {backgroundColor: leftButtonBackgroundColor},
-                        rounded && {borderTopLeftRadius: borderRadiusTotal, borderBottomLeftRadius: borderRadiusTotal}
-                    ]
-                }}
-            />
         </Fragment>
     )
 }
