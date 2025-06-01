@@ -275,24 +275,26 @@ export function Input() {
     return (null)
 }
 
-type ActionProps<T extends  React.ComponentType<any>> = ComponentPropsWithRef<typeof Pressable> & {
+type AnyComponent = React.ComponentType<any>
+
+type ActionProps<T extends AnyComponent> = ComponentPropsWithRef<typeof Pressable> & {
     Icon: T,
     iconProps: React.ComponentProps<T>,
 }
 
-export function UpAction<T extends React.ComponentType<any>>({ref, ...props}: ActionProps<T>) {
+export function UpAction<T extends AnyComponent>({ref, ...props}: ActionProps<T>) {
     return (
         <Pressable ref={ref} {...props}/>
     )
 }
 
-export function DownAction<T extends React.ComponentType<any>>({ref, ...props}: ActionProps<T>) {
+export function DownAction<T extends AnyComponent>({ref, ...props}: ActionProps<T>) {
     return (
         <Pressable ref={ref} {...props}/>
     )
 }
 
-export function PlusAction<T extends React.ComponentType<any>>({Icon, iconProps, ref, ...props}: ActionProps<T>) {
+export function PlusAction<T extends AnyComponent>({Icon, iconProps, ref, ...props}: ActionProps<T>) {
     return (
         <Pressable ref={ref} {...props}>
             <Icon {...iconProps} />
@@ -300,7 +302,7 @@ export function PlusAction<T extends React.ComponentType<any>>({Icon, iconProps,
     )
 }
 
-export function MinusAction<T extends React.ComponentType<any>>({Icon, iconProps, ref, ...props}: ActionProps<T>) {
+export function MinusAction<T extends AnyComponent>({Icon, iconProps, ref, ...props}: ActionProps<T>) {
     return (
         <Pressable ref={ref} {...props}>
             <Icon {...iconProps} />
