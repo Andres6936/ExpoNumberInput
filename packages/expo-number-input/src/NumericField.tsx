@@ -92,14 +92,7 @@ export function NumericField(
         onChange,
         onFocus,
         onBlur,
-    } = useNumericInput({
-        step,
-        value: propValue,
-        minValue,
-        maxValue,
-        valueType,
-        validateOnBlur,
-    })
+    } = useRootContext()
 
 
     const iconStyle = [style.icon, propIconStyle]
