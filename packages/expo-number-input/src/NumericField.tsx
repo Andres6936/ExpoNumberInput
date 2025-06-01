@@ -280,23 +280,38 @@ export function Input() {
     return (null)
 }
 
-export function UpButton() {
-    return (null)
-}
-
-export function DownButton() {
-    return (null)
-}
-
-export function PlusButton() {
-    return (null)
-}
-
-type MinusButtonProps =  ComponentPropsWithAsChild<typeof Pressable> & {
+type ActionProps =  ComponentPropsWithAsChild<typeof Pressable> & {
     iconProps: TextProps,
 }
 
-export function MinusButton({asChild, ref, iconProps, ...props}: MinusButtonProps) {
+export function UpAction({asChild, ref, iconProps, ...props}: ActionProps) {
+    const Component = asChild ? Slot.Text : Text;
+    return (
+        <Pressable ref={ref} {...props}>
+            <Component {...iconProps} />
+        </Pressable>
+    )
+}
+
+export function DownAction({asChild, ref, iconProps, ...props}: ActionProps) {
+    const Component = asChild ? Slot.Text : Text;
+    return (
+        <Pressable ref={ref} {...props}>
+            <Component {...iconProps} />
+        </Pressable>
+    )
+}
+
+export function PlusAction({asChild, ref, iconProps, ...props}: ActionProps) {
+    const Component = asChild ? Slot.Text : Text;
+    return (
+        <Pressable ref={ref} {...props}>
+            <Component {...iconProps} />
+        </Pressable>
+    )
+}
+
+export function MinusAction({asChild, ref, iconProps, ...props}: ActionProps) {
     const Component = asChild ? Slot.Text : Text;
     return (
         <Pressable ref={ref} {...props}>
