@@ -17,7 +17,7 @@ export const NumericInputMoreLess = (
 
 
     return (
-        <NumericInput.Root style={inputContainerStyle}>
+        <NumericInput.Root {...props} style={inputContainerStyle}>
             <NumericInput.NumericField {...props}/>
         </NumericInput.Root>
     )
@@ -41,7 +41,7 @@ export const NumericInputUpDown = (
     }, rounded ? {borderRadius: borderRadiusTotal} : {}, props.containerStyle]
 
     return (
-        <NumericInput.Root style={inputContainerStyle}>
+        <NumericInput.Root {...props} style={inputContainerStyle}>
             <NumericInput.NumericField {...props}/>
         </NumericInput.Root>
     )
