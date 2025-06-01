@@ -58,17 +58,7 @@ export function NumericField(
         minValue = null,
         maxValue = null,
         step = 1,
-        upDownButtonsBackgroundColor = 'white',
-        rightButtonBackgroundColor = 'white',
-        leftButtonBackgroundColor = 'white',
         editable = true,
-        validateOnBlur = true,
-        reachMaxIncIconStyle = {},
-        reachMaxDecIconStyle = {},
-        reachMinIncIconStyle = {},
-        reachMinDecIconStyle = {},
-        onLimitReached = (isMax, msg) => {
-        },
         extraTextInputProps = {},
         ...props
     }: Props) {
