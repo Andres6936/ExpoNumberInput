@@ -296,6 +296,14 @@ export function Root(
     )
 }
 
+function useRootContext() {
+    const context = React.useContext(RootContext);
+    if (!context) {
+        throw new Error('Input compound components cannot be rendered outside the Root component');
+    }
+    return context;
+}
+
 export function Container() {
     return (null)
 }
