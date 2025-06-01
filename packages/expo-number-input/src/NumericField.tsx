@@ -32,10 +32,6 @@ export type Props = {
     onLimitReached?: (isMax: boolean, msg: string) => void
     editable?: boolean
     validateOnBlur?: boolean
-    reachMaxIncIconStyle?: StyleProp<ViewStyle>,
-    reachMaxDecIconStyle?: StyleProp<ViewStyle>,
-    reachMinIncIconStyle?: StyleProp<ViewStyle>,
-    reachMinDecIconStyle?: StyleProp<ViewStyle>,
     extraTextInputProps?: object,
     onBlur?: () => void,
     onFocus?: () => void,
@@ -44,14 +40,8 @@ export type Props = {
 export function NumericField(
     {
         value: propValue = 0,
-        iconSize = 30,
         borderColor = '#d4d4d4',
         iconStyle: propIconStyle = {},
-        totalWidth = 220,
-        separatorWidth = 1,
-        type = 'plus-minus',
-        rounded = false,
-        textColor = 'black',
         containerStyle = {},
         inputStyle: propInputStyle = {},
         valueType = 'integer',
@@ -66,36 +56,10 @@ export function NumericField(
     const {
         ref,
         valueAsText,
-        valueAsNumber,
         onChange,
         onFocus,
         onBlur,
     } = useRootContext()
-
-    const totalHeight = props.totalHeight ? props.totalHeight : (totalWidth * 0.4)
-    const inputWidth = type === 'up-down' ? (totalWidth * 0.6) : (totalWidth * 0.4)
-    const fontSize = totalHeight * 0.38
-
-    const inputStyle = type === 'up-down' ?
-        [style.inputUpDown, {
-            width: inputWidth,
-            height: totalHeight,
-            fontSize: fontSize,
-            color: textColor,
-            borderRightWidth: 2,
-            borderRightColor: borderColor
-        }, propInputStyle] :
-        [style.inputPlusMinus, {
-            width: inputWidth,
-            height: totalHeight,
-            fontSize: fontSize,
-            color: textColor,
-            borderRightWidth: separatorWidth,
-            borderLeftWidth: separatorWidth,
-            borderLeftColor: borderColor,
-            borderRightColor: borderColor
-        }, propInputStyle]
-
 
     return (
         <TextInput
@@ -106,7 +70,6 @@ export function NumericField(
             keyboardType='numeric'
             value={valueAsText}
             onChangeText={onChange}
-            style={inputStyle}
             ref={ref}
             onBlur={onBlur}
             onFocus={onFocus}
