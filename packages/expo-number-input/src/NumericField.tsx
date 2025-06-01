@@ -231,6 +231,14 @@ export function NumericField(
                     decrement()
                     console.log("DECREMENT")
                 }}
+                rootStyle={[{
+                    backgroundColor: rightButtonBackgroundColor,
+                }, rounded ?
+                    {
+                        borderTopRightRadius: borderRadiusTotal,
+                        borderBottomRightRadius: borderRadiusTotal
+                    }
+                    : {}]}
             />
             <View style={[inputWraperStyle]}>
                 <TextInput
@@ -257,6 +265,14 @@ export function NumericField(
                     increment()
                     console.log("INCREMENT")
                 }}
+                 rootStyle={[{
+                    backgroundColor: leftButtonBackgroundColor,
+                }, rounded ?
+                    {
+                        borderTopLeftRadius: borderRadiusTotal,
+                        borderBottomLeftRadius: borderRadiusTotal
+                    }
+                    : {}]}
             />
         </Fragment>
     )
@@ -280,6 +296,7 @@ type AnyComponent = React.ComponentType<any>
 type ActionProps<T extends AnyComponent> = ComponentPropsWithRef<typeof Pressable> & {
     Icon: T,
     iconProps: React.ComponentProps<T>,
+    rootStyle: StyleProp<ViewStyle>,
 }
 
 export function UpAction<T extends AnyComponent>({ref, ...props}: ActionProps<T>) {
@@ -294,18 +311,22 @@ export function DownAction<T extends AnyComponent>({ref, ...props}: ActionProps<
     )
 }
 
-export function PlusAction<T extends AnyComponent>({Icon, iconProps, ref, ...props}: ActionProps<T>) {
+export function PlusAction<T extends AnyComponent>({Icon, iconProps, ...props}: ActionProps<T>) {
     return (
-        <Pressable ref={ref} {...props}>
-            <Icon {...iconProps} />
+        <Pressable {...props}>
+            <View style={props.rootStyle} >
+                <Icon {...iconProps} />
+            </View>
         </Pressable>
     )
 }
 
-export function MinusAction<T extends AnyComponent>({Icon, iconProps, ref, ...props}: ActionProps<T>) {
+export function MinusAction<T extends AnyComponent>({Icon, iconProps, ...props}: ActionProps<T>) {
     return (
-        <Pressable ref={ref} {...props}>
-            <Icon {...iconProps} />
+        <Pressable {...props}>
+            <View style={props.rootStyle} >
+                <Icon {...iconProps} />
+            </View>
         </Pressable>
     )
 }
