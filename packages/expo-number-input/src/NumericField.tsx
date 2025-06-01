@@ -146,29 +146,6 @@ export function NumericField(
                     onBlur={onBlur}
                     onFocus={onFocus}
                 />
-                <View style={upDownStyle}>
-                    <DecrementAction
-                        Icon={ChevronUp}
-                        iconProps={{
-                            size: fontSize,
-                            style: [...iconStyle, maxReached ? reachMaxIncIconStyle : {}, minReached ? reachMinIncIconStyle : {}]
-                        }}
-                        viewProps={{
-                            style: {flex: 1, width: '100%', alignItems: 'center'}
-                        }}
-
-                    />
-                    <IncrementAction
-                        Icon={ChevronDown}
-                        iconProps={{
-                            size: fontSize,
-                            style: [...iconStyle, maxReached ? reachMaxDecIconStyle : {}, minReached ? reachMinDecIconStyle : {}]
-                        }}
-                        viewProps={{
-                            style: {flex: 1, width: '100%', alignItems: 'center'}
-                        }}
-                    />
-                </View>
             </Fragment>)
     else return (
         <Fragment>

@@ -1,7 +1,7 @@
 import React from "react";
-import {Minus, Plus} from "lucide-react-native";
+import {ChevronDown, ChevronUp, Minus, Plus} from "lucide-react-native";
 import * as NumericInput from 'expo-number-input'
-import {StyleProp, StyleSheet, ViewStyle} from "react-native";
+import {StyleProp, StyleSheet, View, ViewStyle} from "react-native";
 
 export const NumericInputMoreLess = (
     {
@@ -48,24 +48,43 @@ export const NumericInputMoreLess = (
 
 export const NumericInputUpDown = (
     {
-        totalWidth = 220,
         borderColor = '#d4d4d4',
         rounded = false,
+        rightButtonBackgroundColor = 'white',
+        leftButtonBackgroundColor = 'white',
         ...props
     }: NumericInput.Props
 ) => {
-    const totalHeight = props.totalHeight ? props.totalHeight : (totalWidth * 0.4)
-    const borderRadiusTotal = totalHeight * 0.18
-
     const inputContainerStyle = [style.inputContainerUpDown, {
-        width: totalWidth,
-        height: totalHeight,
         borderColor: borderColor
-    }, rounded ? {borderRadius: borderRadiusTotal} : {}, props.containerStyle]
+    }, props.containerStyle]
+
+    const iconStyle = [style.icon, props.iconStyle]
 
     return (
         <NumericInput.Root {...props} style={inputContainerStyle}>
             <NumericInput.NumericField {...props}/>
+            <NumericInput.Container style={{justifyContent: "space-between", flexDirection: "column"}}>
+                <NumericInput.DecrementAction
+                    Icon={ChevronUp}
+                    iconProps={({isMaxReached, isMinReached}) => ({
+                        style: [...iconStyle, isMaxReached ? props.reachMaxIncIconStyle : {}, isMinReached ? props.reachMinIncIconStyle : {}]
+                    })}
+                    viewProps={{
+                        style: {flex: 1, width: '100%', alignItems: 'center'}
+                    }}
+
+                />
+                <NumericInput.IncrementAction
+                    Icon={ChevronDown}
+                    iconProps={({isMaxReached, isMinReached}) => ({
+                        style: [...iconStyle, isMaxReached ? props.reachMaxDecIconStyle : {}, isMinReached ? props.reachMinDecIconStyle : {}]
+                    })}
+                    viewProps={{
+                        style: {flex: 1, width: '100%', alignItems: 'center'}
+                    }}
+                />
+            </NumericInput.Container>
         </NumericInput.Root>
     )
 }
