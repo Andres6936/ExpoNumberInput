@@ -7,7 +7,7 @@ import {useNumericInput} from "./useNumericInput";
 import {ComponentPropsWithAsChild} from "./types";
 
 
-type Props = {
+export type Props = {
     value: number
     defaultValue?: number | null
     minValue?: number | null
