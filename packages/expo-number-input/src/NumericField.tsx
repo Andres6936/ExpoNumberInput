@@ -226,7 +226,6 @@ export function NumericField(
                     decrement()
                     console.log("DECREMENT")
                 }}
-                style={leftButtonStyle}
             >
                 <Minus
                     size={fontSize}
@@ -253,7 +252,6 @@ export function NumericField(
                     increment()
                     console.log("INCREMENT")
                 }}
-                style={rightButtonStyle}
             >
                 <Plus
                     size={fontSize}

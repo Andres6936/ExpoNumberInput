@@ -15,7 +15,10 @@ export const NumericInputMoreLess = (
     const inputContainerStyle =  [style.inputContainerPlusMinus, {
         width: totalWidth,
         height: totalHeight,
-        borderColor: borderColor
+        borderColor: borderColor,
+        justifyContent: "space-between",
+        alignItems: "center",
+        flexDirection: "row",
     }, rounded ? {borderRadius: borderRadiusTotal} : {}, props.containerStyle]
 
 
