@@ -236,9 +236,64 @@ export function NumericField(
     )
 }
 
-export function Root({asChild, ref, ...viewProps}: ComponentPropsWithAsChild<typeof View>) {
+type IRootContext = {
+    ref: React.RefObject<TextInput | null>,
+    valueAsText: string,
+    valueAsNumber: number,
+    increment: () => void,
+    decrement: () => void,
+    onChange: (value: string) => void,
+    onFocus: () => void,
+    onBlur: () => void,
+}
+
+const RootContext = React.createContext<IRootContext | null>(null);
+
+type RootProps = ComponentPropsWithAsChild<typeof View> & {
+    value: number
+    step?: number
+    minValue?: number | null
+    maxValue?: number | null
+    valueType?: 'integer' | 'real'
+    validateOnBlur?: boolean
+}
+
+export function Root(
+    {
+        asChild,
+        value = 0,
+        step = 1,
+        minValue = null,
+        maxValue = null,
+        valueType = 'integer',
+        validateOnBlur = true,
+        ...viewProps
+    }: RootProps
+) {
+    const {
+        ref,
+        valueAsText,
+        valueAsNumber,
+        increment,
+        decrement,
+        onChange,
+        onFocus,
+        onBlur,
+    } = useNumericInput({
+        step,
+        value,
+        minValue,
+        maxValue,
+        valueType,
+        validateOnBlur,
+    })
+
     const Component = asChild ? Slot.View : View;
-    return <Component ref={ref} {...viewProps} />
+    return (
+        <RootContext value={{ref, valueAsText, valueAsNumber, increment, decrement, onChange, onFocus, onBlur}}>
+            <Component {...viewProps} />
+        </RootContext>
+    )
 }
 
 export function Container() {
