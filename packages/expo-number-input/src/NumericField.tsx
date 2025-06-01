@@ -253,47 +253,50 @@ type ActionProps<T extends AnyComponent> = ComponentPropsWithRef<typeof Pressabl
     viewProps: React.ComponentProps<typeof View>,
 }
 
-export function IncrementAction<T extends AnyComponent>({Icon, ...props}: ActionProps<T>) {
-    const {valueAsNumber, maxValue, minValue, increment} = useRootContext()
+function useActionProps<T extends AnyComponent>(args: Pick<ActionProps<T>, 'iconProps'>) {
+    const {valueAsNumber, maxValue, minValue, increment, decrement} = useRootContext()
 
     const withIconProps = useMemo(() => {
-        if (typeof props.iconProps === 'function') {
-            return (props.iconProps as Function)({
+        if (typeof args.iconProps === 'function') {
+            return (args.iconProps as Function)({
                 isMaxReached: valueAsNumber === maxValue,
                 isMinReached: valueAsNumber === minValue,
             })
         }
 
-        return props.iconProps
-    }, [props.iconProps, valueAsNumber, maxValue, minValue]);
+        return args.iconProps
+    }, [args.iconProps, valueAsNumber, maxValue, minValue]);
+
+    return {
+        increment,
+        decrement,
+        iconProps: withIconProps,
+    }
+}
+
+export function IncrementAction<T extends AnyComponent>({Icon, ...props}: ActionProps<T>) {
+    const {iconProps, increment} = useActionProps<T>({
+        iconProps: props.iconProps,
+    })
 
     return (
         <Pressable onPress={increment} {...props}>
             <View {...props.viewProps}>
-                <Icon {...withIconProps} />
+                <Icon {...iconProps} />
             </View>
         </Pressable>
     )
 }
 
 export function DecrementAction<T extends AnyComponent>({Icon, ...props}: ActionProps<T>) {
-    const {valueAsNumber, maxValue, minValue, decrement} = useRootContext()
-
-    const withIconProps = useMemo(() => {
-        if (typeof props.iconProps === 'function') {
-            return (props.iconProps as Function)({
-                isMaxReached: valueAsNumber === maxValue,
-                isMinReached: valueAsNumber === minValue,
-            })
-        }
-
-        return props.iconProps
-    }, [props.iconProps, valueAsNumber, maxValue, minValue]);
+    const {iconProps, decrement} = useActionProps<T>({
+        iconProps: props.iconProps,
+    })
 
     return (
         <Pressable onPress={decrement} {...props}>
             <View {...props.viewProps}>
-                <Icon {...withIconProps} />
+                <Icon {...iconProps} />
             </View>
         </Pressable>
     )
