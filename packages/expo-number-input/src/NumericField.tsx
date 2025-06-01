@@ -1,5 +1,15 @@
 import React, {Fragment} from "react";
-import {Pressable, StyleProp, StyleSheet, Text, TextInput, TextStyle, View, ViewStyle} from "react-native";
+import {
+    Pressable,
+    PressableProps,
+    StyleProp,
+    StyleSheet,
+    Text,
+    TextInput, TextProps,
+    TextStyle,
+    View,
+    ViewStyle
+} from "react-native";
 import {ChevronDown, ChevronUp, Minus, Plus} from "lucide-react-native";
 
 import * as Slot from './Slot'
@@ -282,11 +292,15 @@ export function PlusButton() {
     return (null)
 }
 
-export function MinusButton({asChild, ref, ...textProps}: ComponentPropsWithAsChild<typeof Text>) {
+type MinusButtonProps =  ComponentPropsWithAsChild<typeof Pressable> & {
+    iconProps: TextProps,
+}
+
+export function MinusButton({asChild, ref, iconProps, ...props}: MinusButtonProps) {
     const Component = asChild ? Slot.Text : Text;
     return (
-        <Pressable>
-            <Component ref={ref} {...textProps} />
+        <Pressable ref={ref} {...props}>
+            <Component {...iconProps} />
         </Pressable>
     )
 }
