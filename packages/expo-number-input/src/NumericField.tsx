@@ -115,40 +115,22 @@ export function NumericField(
     } as ViewStyle
 
 
-    if (type === 'up-down')
-        return (
-            <Fragment>
-                <TextInput
-                    {...extraTextInputProps}
-                    editable={editable}
-                    returnKeyType='done'
-                    underlineColorAndroid='rgba(0,0,0,0)'
-                    keyboardType='numeric'
-                    value={valueAsText}
-                    onChangeText={onChange}
-                    style={inputStyle} ref={ref}
-                    onBlur={onBlur}
-                    onFocus={onFocus}
-                />
-            </Fragment>)
-    else return (
-        <Fragment>
-            <View style={[inputWraperStyle]}>
-                <TextInput
-                    {...extraTextInputProps}
-                    editable={editable}
-                    returnKeyType='done'
-                    underlineColorAndroid='rgba(0,0,0,0)'
-                    keyboardType='numeric'
-                    value={valueAsText}
-                    onChangeText={onChange}
-                    style={inputStyle}
-                    ref={ref}
-                    onBlur={onBlur}
-                    onFocus={onFocus}
-                />
-            </View>
-        </Fragment>
+    return (
+        <View style={[inputWraperStyle]}>
+            <TextInput
+                {...extraTextInputProps}
+                editable={editable}
+                returnKeyType='done'
+                underlineColorAndroid='rgba(0,0,0,0)'
+                keyboardType='numeric'
+                value={valueAsText}
+                onChangeText={onChange}
+                style={inputStyle}
+                ref={ref}
+                onBlur={onBlur}
+                onFocus={onFocus}
+            />
+        </View>
     )
 }
 
