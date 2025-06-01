@@ -157,7 +157,7 @@ export function NumericField(
                     onFocus={onFocus}
                 />
                 <View style={upDownStyle}>
-                    <PlusAction
+                    <DecrementAction
                         Icon={ChevronUp}
                         iconProps={{
                             size: fontSize,
@@ -168,7 +168,7 @@ export function NumericField(
                         }}
 
                     />
-                    <MinusAction
+                    <IncrementAction
                         Icon={ChevronDown}
                         iconProps={{
                             size:fontSize,
@@ -182,7 +182,7 @@ export function NumericField(
             </Fragment>)
     else return (
         <Fragment>
-            <MinusAction
+            <DecrementAction
                 Icon={Minus}
                 iconProps={{
                     size: fontSize,
@@ -210,7 +210,7 @@ export function NumericField(
                     onFocus={onFocus}
                 />
             </View>
-            <PlusAction
+            <IncrementAction
                 Icon={Plus}
                 iconProps={{
                     size: fontSize,
@@ -311,7 +311,7 @@ type ActionProps<T extends AnyComponent> = ComponentPropsWithRef<typeof Pressabl
     viewProps: React.ComponentProps<typeof View>,
 }
 
-export function PlusAction<T extends AnyComponent>({Icon, iconProps, ...props}: ActionProps<T>) {
+export function IncrementAction<T extends AnyComponent>({Icon, iconProps, ...props}: ActionProps<T>) {
     const {increment} = useRootContext()
 
     return (
@@ -323,7 +323,7 @@ export function PlusAction<T extends AnyComponent>({Icon, iconProps, ...props}: 
     )
 }
 
-export function MinusAction<T extends AnyComponent>({Icon, iconProps, ...props}: ActionProps<T>) {
+export function DecrementAction<T extends AnyComponent>({Icon, iconProps, ...props}: ActionProps<T>) {
     const {decrement} = useRootContext()
 
     return (
