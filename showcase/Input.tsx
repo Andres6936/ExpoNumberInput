@@ -31,8 +31,34 @@ export const NumericInputMoreLess = (
     )
 }
 
-export const NumericInputUpDown = () => {
+export const NumericInputUpDown = (
+    {
+        totalWidth = 220,
+        borderColor = '#d4d4d4',
+        rounded = false,
+        ...props
+    }: NumericInput.Props
+) => {
+    const totalHeight = props.totalHeight ? props.totalHeight : (totalWidth * 0.4)
+    const borderRadiusTotal = totalHeight * 0.18
 
+    const inputContainerStyle = props.type === 'up-down' ?
+        [style.inputContainerUpDown, {
+            width: totalWidth,
+            height: totalHeight,
+            borderColor: borderColor
+        }, rounded ? {borderRadius: borderRadiusTotal} : {}, props.containerStyle] :
+        [style.inputContainerPlusMinus, {
+            width: totalWidth,
+            height: totalHeight,
+            borderColor: borderColor
+        }, rounded ? {borderRadius: borderRadiusTotal} : {}, props.containerStyle]
+
+    return (
+        <NumericInput.Root style={inputContainerStyle}>
+            <NumericInput.NumericField {...props}/>
+        </NumericInput.Root>
+    )
 }
 
 
