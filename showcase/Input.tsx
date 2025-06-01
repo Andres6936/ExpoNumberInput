@@ -1,3 +1,5 @@
+import React from "react";
+import {Minus, Plus} from "lucide-react-native";
 import * as NumericInput from 'expo-number-input'
 import {StyleProp, StyleSheet, ViewStyle} from "react-native";
 
@@ -5,6 +7,8 @@ export const NumericInputMoreLess = (
     {
         borderColor = '#d4d4d4',
         rounded = false,
+        rightButtonBackgroundColor = 'white',
+        leftButtonBackgroundColor = 'white',
         ...props
     }: NumericInput.Props
 ) => {
@@ -15,10 +19,29 @@ export const NumericInputMoreLess = (
         flexDirection: "row",
     }, props.containerStyle] satisfies StyleProp<ViewStyle>
 
+    const iconStyle = [style.icon, props.iconStyle]
 
     return (
         <NumericInput.Root {...props} style={inputContainerStyle}>
+            <NumericInput.DecrementAction
+                Icon={Minus}
+                iconProps={{
+                    style: [...iconStyle, maxReached ? props.reachMaxDecIconStyle : {}, minReached ? props.reachMinDecIconStyle : {}]
+                }}
+                viewProps={{
+                    style: {backgroundColor: rightButtonBackgroundColor},
+                }}
+            />
             <NumericInput.NumericField {...props}/>
+            <NumericInput.IncrementAction
+                Icon={Plus}
+                iconProps={{
+                    style: [...iconStyle, maxReached ? props.reachMaxIncIconStyle : {}, minReached ? props.reachMinIncIconStyle : {}]
+                }}
+                viewProps={{
+                    style: {backgroundColor: leftButtonBackgroundColor},
+                }}
+            />
         </NumericInput.Root>
     )
 }
