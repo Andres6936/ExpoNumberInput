@@ -259,6 +259,13 @@ function useRootContext() {
     return context;
 }
 
+export function Container ({asChild, ...props}: ComponentPropsWithAsChild<typeof View>) {
+    const Component = asChild ? Slot.View : View;
+    return (
+        <Component {...props} />
+    )
+}
+
 type AnyComponent = React.ComponentType<any>
 
 type ComponentStatus = {
