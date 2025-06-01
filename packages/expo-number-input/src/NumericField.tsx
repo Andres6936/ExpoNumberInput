@@ -1,15 +1,5 @@
 import React, {ComponentPropsWithRef, Fragment} from "react";
-import {
-    Pressable,
-    PressableProps,
-    StyleProp,
-    StyleSheet,
-    Text,
-    TextInput, TextProps,
-    TextStyle,
-    View,
-    ViewStyle
-} from "react-native";
+import {Pressable, StyleProp, StyleSheet, TextInput, TextStyle, View, ViewStyle} from "react-native";
 import {ChevronDown, ChevronUp, Minus, Plus} from "lucide-react-native";
 
 import * as Slot from './Slot'
