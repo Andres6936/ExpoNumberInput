@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Fragment} from "react";
 import {Pressable, StyleProp, StyleSheet, TextInput, TextStyle, View, ViewStyle} from "react-native";
 import {ChevronDown, ChevronUp, Minus, Plus} from "lucide-react-native";
 
@@ -100,17 +100,6 @@ export function NumericField(
     const fontSize = totalHeight * 0.38
     const maxReached = valueAsNumber === maxValue
     const minReached = valueAsNumber === minValue
-    const inputContainerStyle = type === 'up-down' ?
-        [style.inputContainerUpDown, {
-            width: totalWidth,
-            height: totalHeight,
-            borderColor: borderColor
-        }, rounded ? {borderRadius: borderRadiusTotal} : {}, containerStyle] :
-        [style.inputContainerPlusMinus, {
-            width: totalWidth,
-            height: totalHeight,
-            borderColor: borderColor
-        }, rounded ? {borderRadius: borderRadiusTotal} : {}, containerStyle]
 
     const inputStyle = type === 'up-down' ?
         [style.inputUpDown, {
@@ -192,7 +181,7 @@ export function NumericField(
 
     if (type === 'up-down')
         return (
-            <View style={inputContainerStyle}>
+            <Fragment>
                 <TextInput
                     {...extraTextInputProps}
                     editable={editable}
@@ -222,9 +211,9 @@ export function NumericField(
                         />
                     </Pressable>
                 </View>
-            </View>)
+            </Fragment>)
     else return (
-        <View style={inputContainerStyle}>
+        <Fragment>
             <Pressable
                 onPress={() => {
                     decrement()
@@ -264,7 +253,7 @@ export function NumericField(
                     style={[...iconStyle, maxReached ? reachMaxIncIconStyle : {}, minReached ? reachMinIncIconStyle : {}]}
                 />
             </Pressable>
-        </View>
+        </Fragment>
     )
 }
 
