@@ -108,24 +108,11 @@ export function useNumericInput(args: Args) {
             }
 
         } else if (!isLegal && args.validateOnBlur) {
-            setValueAsText(value)
-            let parsedValue = args.valueType === 'real' ? parseFloat(value) : parseInt(value)
-            parsedValue = isNaN(parsedValue) ? 0 : parsedValue
-            if (parsedValue !== args.value) {
-                args.onChange?.(parsedValue)
-            }
-            setValueAsNumber(parsedValue)
-            setValueAsText(parsedValue.toString())
+            setTimeout(() => {
+                setValueAsText(lastValid.toString())
+            }, 0)
         } else {
             setValueAsText(value)
-            let parsedValue = args.valueType === 'real' ? parseFloat(value) : parseInt(value)
-            parsedValue = isNaN(parsedValue) ? 0 : parsedValue
-            if (parsedValue !== args.value) {
-                args.onChange?.(parsedValue)
-            }
-            setValueAsNumber(parsedValue)
-            setValueAsText(parsedValue.toString())
-
         }
     }
 
@@ -136,12 +123,17 @@ export function useNumericInput(args: Args) {
         (args.minValue === null || parseFloat(value) >= args.minValue)
 
 
-
     const onBlur = () => {
-
-        let match = valueAsText.match(/-?[0-9]\d*(\.\d+)?/)
-        let legal = match && match[0] === match.input && ((args.maxValue === null || (parseFloat(valueAsText) <= args.maxValue)) && (args.minValue === null || (parseFloat(valueAsText) >= args.minValue)))
-        if (!legal) {
+        let isLegal = isLegalValue(valueAsText)
+        if (isLegal) {
+            let parsedValue = args.valueType === 'real' ? parseFloat(valueAsText) : parseInt(valueAsText)
+            parsedValue = isNaN(parsedValue) ? 0 : parsedValue
+            if (parsedValue !== args.value) {
+                args.onChange?.(parsedValue)
+            }
+            setValueAsNumber(parsedValue)
+            setValueAsText(parsedValue.toString())
+        } else {
             if (args.minValue !== null && (parseFloat(valueAsText) <= args.minValue)) {
                 args.onLimitReached?.(true, 'Reached Minimum Value!')
             }
