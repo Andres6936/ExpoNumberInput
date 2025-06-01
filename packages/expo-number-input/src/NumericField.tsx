@@ -77,18 +77,13 @@ export function NumericField(
         ref,
         valueAsText,
         valueAsNumber,
-        increment,
-        decrement,
         onChange,
         onFocus,
         onBlur,
     } = useRootContext()
 
-
-    const iconStyle = [style.icon, propIconStyle]
     const totalHeight = props.totalHeight ? props.totalHeight : (totalWidth * 0.4)
     const inputWidth = type === 'up-down' ? (totalWidth * 0.6) : (totalWidth * 0.4)
-    const borderRadiusTotal = totalHeight * 0.18
     const fontSize = totalHeight * 0.38
     const maxReached = valueAsNumber === maxValue
     const minReached = valueAsNumber === minValue
@@ -112,15 +107,6 @@ export function NumericField(
             borderLeftColor: borderColor,
             borderRightColor: borderColor
         }, propInputStyle]
-
-    const upDownStyle = [{
-        alignItems: 'center',
-        width: totalWidth - inputWidth,
-        backgroundColor: upDownButtonsBackgroundColor,
-        borderRightWidth: 1,
-        borderRightColor: borderColor
-    }, rounded ? {borderTopRightRadius: borderRadiusTotal, borderBottomRightRadius: borderRadiusTotal} : {}
-    ] as ViewStyle[]
 
     const inputWraperStyle = {
         alignSelf: 'center',
