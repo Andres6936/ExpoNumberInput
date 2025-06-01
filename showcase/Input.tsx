@@ -12,17 +12,12 @@ export const NumericInputMoreLess = (
     const totalHeight = props.totalHeight ? props.totalHeight : (totalWidth * 0.4)
     const borderRadiusTotal = totalHeight * 0.18
 
-    const inputContainerStyle = props.type === 'up-down' ?
-        [style.inputContainerUpDown, {
-            width: totalWidth,
-            height: totalHeight,
-            borderColor: borderColor
-        }, rounded ? {borderRadius: borderRadiusTotal} : {}, props.containerStyle] :
-        [style.inputContainerPlusMinus, {
-            width: totalWidth,
-            height: totalHeight,
-            borderColor: borderColor
-        }, rounded ? {borderRadius: borderRadiusTotal} : {}, props.containerStyle]
+    const inputContainerStyle =  [style.inputContainerPlusMinus, {
+        width: totalWidth,
+        height: totalHeight,
+        borderColor: borderColor
+    }, rounded ? {borderRadius: borderRadiusTotal} : {}, props.containerStyle]
+
 
     return (
         <NumericInput.Root style={inputContainerStyle}>
@@ -42,17 +37,11 @@ export const NumericInputUpDown = (
     const totalHeight = props.totalHeight ? props.totalHeight : (totalWidth * 0.4)
     const borderRadiusTotal = totalHeight * 0.18
 
-    const inputContainerStyle = props.type === 'up-down' ?
-        [style.inputContainerUpDown, {
-            width: totalWidth,
-            height: totalHeight,
-            borderColor: borderColor
-        }, rounded ? {borderRadius: borderRadiusTotal} : {}, props.containerStyle] :
-        [style.inputContainerPlusMinus, {
-            width: totalWidth,
-            height: totalHeight,
-            borderColor: borderColor
-        }, rounded ? {borderRadius: borderRadiusTotal} : {}, props.containerStyle]
+    const inputContainerStyle = [style.inputContainerUpDown, {
+        width: totalWidth,
+        height: totalHeight,
+        borderColor: borderColor
+    }, rounded ? {borderRadius: borderRadiusTotal} : {}, props.containerStyle]
 
     return (
         <NumericInput.Root style={inputContainerStyle}>
