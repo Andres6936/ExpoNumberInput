@@ -23,10 +23,7 @@ const View = function (props: React.ComponentPropsWithRef<typeof RNView> ) {
         return null;
     }
 
-    return React.cloneElement<
-        React.ComponentPropsWithoutRef<typeof RNView>,
-        React.ComponentRef<typeof RNView>
-    >(
+    return React.cloneElement<React.ComponentPropsWithRef<typeof RNView>>(
         isTextChildren(children) ? <Fragment/> : children, {
             ...mergeProps(viewSlotProps, children.props as AnyProps),
             ref: ref ? composeRefs(ref, (children as any).ref) : (children as any).ref,
