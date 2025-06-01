@@ -311,30 +311,6 @@ type ActionProps<T extends AnyComponent> = ComponentPropsWithRef<typeof Pressabl
     viewProps: React.ComponentProps<typeof View>,
 }
 
-export function UpAction<T extends AnyComponent>({Icon, iconProps, ...props}: ActionProps<T>) {
-    const {increment} = useRootContext()
-
-    return (
-        <Pressable onPress={increment} {...props}>
-            <View {...props.viewProps}>
-                <Icon {...iconProps} />
-            </View>
-        </Pressable>
-    )
-}
-
-export function DownAction<T extends AnyComponent>({Icon, iconProps, ...props}: ActionProps<T>) {
-    const {decrement} = useRootContext()
-
-    return (
-        <Pressable onPress={decrement} {...props}>
-            <View {...props.viewProps}>
-                <Icon {...iconProps} />
-            </View>
-        </Pressable>
-    )
-}
-
 export function PlusAction<T extends AnyComponent>({Icon, iconProps, ...props}: ActionProps<T>) {
     const {increment} = useRootContext()
 
