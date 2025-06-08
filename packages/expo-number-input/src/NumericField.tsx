@@ -111,13 +111,7 @@ export function Root(
 }
 
 
-export function Input(
-    {
-        editable = true,
-        extraTextInputProps = {},
-        ...props
-    }: Props) {
-
+export function Input(props: React.ComponentProps<typeof TextInput>) {
     const {
         ref,
         valueAsText,
@@ -128,14 +122,12 @@ export function Input(
 
     return (
         <TextInput
-            {...extraTextInputProps}
-            editable={editable}
+            {...props}
+            ref={ref}
             returnKeyType='done'
-            underlineColorAndroid='rgba(0,0,0,0)'
             keyboardType='numeric'
             value={valueAsText}
             onChangeText={onChange}
-            ref={ref}
             onBlur={onBlur}
             onFocus={onFocus}
         />
