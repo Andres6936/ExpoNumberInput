@@ -1,6 +1,5 @@
-import React, {ComponentPropsWithRef, Fragment, useCallback, useMemo} from "react";
+import React, {ComponentPropsWithRef, useMemo} from "react";
 import {Pressable, StyleProp, StyleSheet, TextInput, TextStyle, View, ViewStyle} from "react-native";
-import {ChevronDown, ChevronUp, Minus, Plus} from "lucide-react-native";
 
 import * as Slot from './Slot'
 import {useNumericInput} from "./useNumericInput";
