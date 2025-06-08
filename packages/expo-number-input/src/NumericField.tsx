@@ -113,15 +113,6 @@ export function Root(
 
 export function Input(
     {
-        value: propValue = 0,
-        borderColor = '#d4d4d4',
-        iconStyle: propIconStyle = {},
-        containerStyle = {},
-        inputStyle: propInputStyle = {},
-        valueType = 'integer',
-        minValue = null,
-        maxValue = null,
-        step = 1,
         editable = true,
         extraTextInputProps = {},
         ...props
