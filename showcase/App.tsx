@@ -218,7 +218,7 @@ function NumericInputCustomStyle() {
 export default function App() {
     return (
         <View style={{paddingHorizontal: 20}}>
-            <ScrollView style={{paddingBottom: 200}} contentContainerStyle={styles.container}>
+            <ScrollView style={{paddingBottom: 200}} showsVerticalScrollIndicator={false} contentContainerStyle={styles.container}>
                 <NumericInputExample/>
                 <NumericInputBasic/>
                 <NumericInputRounded/>
