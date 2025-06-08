@@ -36,45 +36,6 @@ export type Props = {
     onFocus?: () => void,
 }
 
-export function NumericField(
-    {
-        value: propValue = 0,
-        borderColor = '#d4d4d4',
-        iconStyle: propIconStyle = {},
-        containerStyle = {},
-        inputStyle: propInputStyle = {},
-        valueType = 'integer',
-        minValue = null,
-        maxValue = null,
-        step = 1,
-        editable = true,
-        extraTextInputProps = {},
-        ...props
-    }: Props) {
-
-    const {
-        ref,
-        valueAsText,
-        onChange,
-        onFocus,
-        onBlur,
-    } = useRootContext()
-
-    return (
-        <TextInput
-            {...extraTextInputProps}
-            editable={editable}
-            returnKeyType='done'
-            underlineColorAndroid='rgba(0,0,0,0)'
-            keyboardType='numeric'
-            value={valueAsText}
-            onChangeText={onChange}
-            ref={ref}
-            onBlur={onBlur}
-            onFocus={onFocus}
-        />
-    )
-}
 
 type IRootContext = {
     ref: React.RefObject<TextInput | null>,
@@ -146,6 +107,47 @@ export function Root(
         }}>
             <Component {...viewProps} />
         </RootContext>
+    )
+}
+
+
+export function Input(
+    {
+        value: propValue = 0,
+        borderColor = '#d4d4d4',
+        iconStyle: propIconStyle = {},
+        containerStyle = {},
+        inputStyle: propInputStyle = {},
+        valueType = 'integer',
+        minValue = null,
+        maxValue = null,
+        step = 1,
+        editable = true,
+        extraTextInputProps = {},
+        ...props
+    }: Props) {
+
+    const {
+        ref,
+        valueAsText,
+        onChange,
+        onFocus,
+        onBlur,
+    } = useRootContext()
+
+    return (
+        <TextInput
+            {...extraTextInputProps}
+            editable={editable}
+            returnKeyType='done'
+            underlineColorAndroid='rgba(0,0,0,0)'
+            keyboardType='numeric'
+            value={valueAsText}
+            onChangeText={onChange}
+            ref={ref}
+            onBlur={onBlur}
+            onFocus={onFocus}
+        />
     )
 }
 

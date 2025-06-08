@@ -32,7 +32,7 @@ export const NumericInputMoreLess = (
                     style: {backgroundColor: rightButtonBackgroundColor},
                 }}
             />
-            <NumberInputPrimitive.NumericField {...props}/>
+            <NumberInputPrimitive.Input {...props}/>
             <NumberInputPrimitive.IncrementAction
                 Icon={Plus}
                 iconProps={({isMaxReached, isMinReached}) => ({
@@ -63,7 +63,7 @@ export const NumericInputUpDown = (
 
     return (
         <NumberInputPrimitive.Root {...props} style={inputContainerStyle}>
-            <NumberInputPrimitive.NumericField {...props}/>
+            <NumberInputPrimitive.Input {...props}/>
             <NumberInputPrimitive.Container style={{justifyContent: "space-between", flexDirection: "column"}}>
                 <NumberInputPrimitive.IncrementAction
                     Icon={ChevronUp}
