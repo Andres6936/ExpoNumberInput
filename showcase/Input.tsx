@@ -72,23 +72,25 @@ export const NumericInputUpDown = (
     return (
         <NumberInputPrimitive.Root {...props} style={inputContainerStyle}>
             <NumberInputPrimitive.Input style={{flex: 1, width: "100%"}}/>
-            <NumberInputPrimitive.Container style={{justifyContent: "space-between", flexDirection: "column"}}>
+            <NumberInputPrimitive.Container style={{aspectRatio: "1/1", justifyContent: "space-between", flexDirection: "column"}}>
                 <NumberInputPrimitive.IncrementAction
                     Icon={ChevronUp}
                     iconProps={({isMaxReached, isMinReached}) => ({
+                        size: 20,
                         style: [...iconStyle, isMaxReached ? props.reachMaxDecIconStyle : {}, isMinReached ? props.reachMinDecIconStyle : {}]
                     })}
                     viewProps={{
-                        style: {flex: 1, width: '100%', alignItems: 'center'}
+                        style: {flex: 1, height: '100%', aspectRatio: "1/1", alignItems: 'center'}
                     }}
                 />
                 <NumberInputPrimitive.DecrementAction
                     Icon={ChevronDown}
                     iconProps={({isMaxReached, isMinReached}) => ({
+                        size: 20,
                         style: [...iconStyle, isMaxReached ? props.reachMaxIncIconStyle : {}, isMinReached ? props.reachMinIncIconStyle : {}]
                     })}
                     viewProps={{
-                        style: {flex: 1, width: '100%', alignItems: 'center'}
+                        style: {flex: 1, height: '100%', aspectRatio: "1/1", alignItems: 'center'}
                     }}
 
                 />
