@@ -1,6 +1,5 @@
 import React, {Fragment} from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
-import {NumericField} from 'expo-number-input'
 import {NumericInputMoreLess, NumericInputUpDown} from "./Input";
 
 
@@ -9,7 +8,7 @@ function NumericInputExample() {
     const [value2, setValue2] = React.useState(0);
 
     return (
-        <Fragment>
+        <View style={{flex: 1, flexDirection: "column", gap: 8, marginBottom: 20}}>
             <Text style={styles.welcome}>
                 Numeric Input Examples
             </Text>
@@ -46,7 +45,7 @@ function NumericInputExample() {
                 rightButtonBackgroundColor='#C7CBD6'
                 leftButtonBackgroundColor='#C7CBD6'
             />
-        </Fragment>
+        </View>
     )
 }
 
@@ -218,17 +217,19 @@ function NumericInputCustomStyle() {
 
 export default function App() {
     return (
-        <ScrollView style={{paddingBottom: 200}} contentContainerStyle={styles.container}>
-            <NumericInputExample/>
-            <NumericInputBasic/>
-            <NumericInputRounded/>
-            <NumericInputReal/>
-            <NumericInputMax/>
-            <NumericInputBasicStyle/>
-            <NumericInputRoundedStyle/>
-            <NumericInputCustom/>
-            <NumericInputCustomStyle/>
-        </ScrollView>
+        <View style={{paddingHorizontal: 20}}>
+            <ScrollView style={{paddingBottom: 200}} contentContainerStyle={styles.container}>
+                <NumericInputExample/>
+                <NumericInputBasic/>
+                <NumericInputRounded/>
+                <NumericInputReal/>
+                <NumericInputMax/>
+                <NumericInputBasicStyle/>
+                <NumericInputRoundedStyle/>
+                <NumericInputCustom/>
+                <NumericInputCustomStyle/>
+            </ScrollView>
+        </View>
     );
 }
 

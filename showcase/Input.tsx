@@ -12,12 +12,15 @@ export const NumericInputMoreLess = (
         ...props
     }: NumberInputPrimitive.Props
 ) => {
-    const inputContainerStyle = [style.inputContainerPlusMinus, {
+    const inputContainerStyle = [{
         borderColor: borderColor,
         justifyContent: "space-between",
         alignItems: "center",
         flexDirection: "row",
-    }, props.containerStyle] satisfies StyleProp<ViewStyle>
+        flex: 1,
+        width: '100%',
+        borderWidth: 0.7,
+    }] satisfies StyleProp<ViewStyle>
 
     const iconStyle = [style.icon, props.iconStyle]
 
@@ -29,17 +32,17 @@ export const NumericInputMoreLess = (
                     style: [...iconStyle, isMaxReached ? props.reachMaxDecIconStyle : {}, isMinReached ? props.reachMinDecIconStyle : {}]
                 })}
                 viewProps={{
-                    style: {backgroundColor: rightButtonBackgroundColor},
+                    style: {backgroundColor: rightButtonBackgroundColor, height: '100%', aspectRatio: "1/1", alignItems: 'center', justifyContent: 'center'},
                 }}
             />
-            <NumberInputPrimitive.Input {...props}/>
+            <NumberInputPrimitive.Input style={{flex: 1, width: "100%",}}/>
             <NumberInputPrimitive.IncrementAction
                 Icon={Plus}
                 iconProps={({isMaxReached, isMinReached}) => ({
                     style: [...iconStyle, isMaxReached ? props.reachMaxIncIconStyle : {}, isMinReached ? props.reachMinIncIconStyle : {}]
                 })}
                 viewProps={{
-                    style: {backgroundColor: leftButtonBackgroundColor},
+                    style: {backgroundColor: leftButtonBackgroundColor, height: '100%', aspectRatio: "1/1", alignItems: 'center', justifyContent: 'center'},
                 }}
             />
         </NumberInputPrimitive.Root>
@@ -56,14 +59,16 @@ export const NumericInputUpDown = (
     }: NumberInputPrimitive.Props
 ) => {
     const inputContainerStyle = [style.inputContainerUpDown, {
-        borderColor: borderColor
+        borderColor: borderColor,
+        flex: 1,
+        width: '100%',
     }, props.containerStyle]
 
     const iconStyle = [style.icon, props.iconStyle]
 
     return (
         <NumberInputPrimitive.Root {...props} style={inputContainerStyle}>
-            <NumberInputPrimitive.Input {...props}/>
+            <NumberInputPrimitive.Input/>
             <NumberInputPrimitive.Container style={{justifyContent: "space-between", flexDirection: "column"}}>
                 <NumberInputPrimitive.IncrementAction
                     Icon={ChevronUp}
