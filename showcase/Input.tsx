@@ -35,7 +35,7 @@ export const NumericInputMoreLess = (
                     style: {backgroundColor: rightButtonBackgroundColor, height: '100%', aspectRatio: "1/1", alignItems: 'center', justifyContent: 'center'},
                 }}
             />
-            <NumberInputPrimitive.Input style={{flex: 1, width: "100%",}}/>
+            <NumberInputPrimitive.Input style={{flex: 1, width: "100%", borderColor: "red", borderWidth: 1}}/>
             <NumberInputPrimitive.IncrementAction
                 Icon={Plus}
                 iconProps={({isMaxReached, isMinReached}) => ({
@@ -58,17 +58,20 @@ export const NumericInputUpDown = (
         ...props
     }: NumberInputPrimitive.Props
 ) => {
-    const inputContainerStyle = [style.inputContainerUpDown, {
+    const inputContainerStyle = [{
+        flexDirection: 'row',
+        alignItems: "center",
         borderColor: borderColor,
         flex: 1,
         width: '100%',
-    }, props.containerStyle]
+        borderWidth: 0.7,
+    }]
 
     const iconStyle = [style.icon, props.iconStyle]
 
     return (
         <NumberInputPrimitive.Root {...props} style={inputContainerStyle}>
-            <NumberInputPrimitive.Input/>
+            <NumberInputPrimitive.Input style={{flex: 1, width: "100%"}}/>
             <NumberInputPrimitive.Container style={{justifyContent: "space-between", flexDirection: "column"}}>
                 <NumberInputPrimitive.IncrementAction
                     Icon={ChevronUp}
