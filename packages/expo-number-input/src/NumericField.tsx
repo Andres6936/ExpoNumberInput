@@ -6,37 +6,6 @@ import {useNumericInput} from "./useNumericInput";
 import {ComponentPropsWithAsChild} from "./types";
 
 
-export type Props = {
-    value: number
-    defaultValue?: number | null
-    minValue?: number | null
-    maxValue?: number | null
-    step?: number
-    valueType?: 'integer' | 'real'
-    iconSize?: number
-    borderColor?: string
-    iconStyle?: StyleProp<TextStyle>,
-    totalWidth?: number
-    separatorWidth?: number
-    type?: 'plus-minus' | 'up-down'
-    rounded?: boolean
-    textColor?: string
-    containerStyle?: StyleProp<ViewStyle>,
-    inputStyle?: StyleProp<TextStyle>,
-    upDownButtonsBackgroundColor?: string
-    rightButtonBackgroundColor?: string
-    leftButtonBackgroundColor?: string
-    totalHeight?: number
-    onChange: (value: number) => void
-    onLimitReached?: (isMax: boolean, msg: string) => void
-    editable?: boolean
-    validateOnBlur?: boolean
-    extraTextInputProps?: object,
-    onBlur?: () => void,
-    onFocus?: () => void,
-}
-
-
 type IRootContext = {
     ref: React.RefObject<TextInput | null>,
     maxValue: number | null,
