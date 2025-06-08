@@ -1,6 +1,6 @@
 import React from "react";
 import {ChevronDown, ChevronUp, Minus, Plus} from "lucide-react-native";
-import * as NumericInput from 'expo-number-input'
+import * as NumberInputPrimitive from 'expo-number-input'
 import {StyleProp, StyleSheet, View, ViewStyle} from "react-native";
 
 export const NumericInputMoreLess = (
@@ -10,7 +10,7 @@ export const NumericInputMoreLess = (
         rightButtonBackgroundColor = 'white',
         leftButtonBackgroundColor = 'white',
         ...props
-    }: NumericInput.Props
+    }: NumberInputPrimitive.Props
 ) => {
     const inputContainerStyle = [style.inputContainerPlusMinus, {
         borderColor: borderColor,
@@ -22,8 +22,8 @@ export const NumericInputMoreLess = (
     const iconStyle = [style.icon, props.iconStyle]
 
     return (
-        <NumericInput.Root {...props} style={inputContainerStyle}>
-            <NumericInput.DecrementAction
+        <NumberInputPrimitive.Root {...props} style={inputContainerStyle}>
+            <NumberInputPrimitive.DecrementAction
                 Icon={Minus}
                 iconProps={({isMaxReached, isMinReached}) => ({
                     style: [...iconStyle, isMaxReached ? props.reachMaxDecIconStyle : {}, isMinReached ? props.reachMinDecIconStyle : {}]
@@ -32,8 +32,8 @@ export const NumericInputMoreLess = (
                     style: {backgroundColor: rightButtonBackgroundColor},
                 }}
             />
-            <NumericInput.NumericField {...props}/>
-            <NumericInput.IncrementAction
+            <NumberInputPrimitive.NumericField {...props}/>
+            <NumberInputPrimitive.IncrementAction
                 Icon={Plus}
                 iconProps={({isMaxReached, isMinReached}) => ({
                     style: [...iconStyle, isMaxReached ? props.reachMaxIncIconStyle : {}, isMinReached ? props.reachMinIncIconStyle : {}]
@@ -42,7 +42,7 @@ export const NumericInputMoreLess = (
                     style: {backgroundColor: leftButtonBackgroundColor},
                 }}
             />
-        </NumericInput.Root>
+        </NumberInputPrimitive.Root>
     )
 }
 
@@ -53,7 +53,7 @@ export const NumericInputUpDown = (
         rightButtonBackgroundColor = 'white',
         leftButtonBackgroundColor = 'white',
         ...props
-    }: NumericInput.Props
+    }: NumberInputPrimitive.Props
 ) => {
     const inputContainerStyle = [style.inputContainerUpDown, {
         borderColor: borderColor
@@ -62,10 +62,10 @@ export const NumericInputUpDown = (
     const iconStyle = [style.icon, props.iconStyle]
 
     return (
-        <NumericInput.Root {...props} style={inputContainerStyle}>
-            <NumericInput.NumericField {...props}/>
-            <NumericInput.Container style={{justifyContent: "space-between", flexDirection: "column"}}>
-                <NumericInput.IncrementAction
+        <NumberInputPrimitive.Root {...props} style={inputContainerStyle}>
+            <NumberInputPrimitive.NumericField {...props}/>
+            <NumberInputPrimitive.Container style={{justifyContent: "space-between", flexDirection: "column"}}>
+                <NumberInputPrimitive.IncrementAction
                     Icon={ChevronUp}
                     iconProps={({isMaxReached, isMinReached}) => ({
                         style: [...iconStyle, isMaxReached ? props.reachMaxDecIconStyle : {}, isMinReached ? props.reachMinDecIconStyle : {}]
@@ -74,7 +74,7 @@ export const NumericInputUpDown = (
                         style: {flex: 1, width: '100%', alignItems: 'center'}
                     }}
                 />
-                <NumericInput.DecrementAction
+                <NumberInputPrimitive.DecrementAction
                     Icon={ChevronDown}
                     iconProps={({isMaxReached, isMinReached}) => ({
                         style: [...iconStyle, isMaxReached ? props.reachMaxIncIconStyle : {}, isMinReached ? props.reachMinIncIconStyle : {}]
@@ -84,8 +84,8 @@ export const NumericInputUpDown = (
                     }}
 
                 />
-            </NumericInput.Container>
-        </NumericInput.Root>
+            </NumberInputPrimitive.Container>
+        </NumberInputPrimitive.Root>
     )
 }
 
