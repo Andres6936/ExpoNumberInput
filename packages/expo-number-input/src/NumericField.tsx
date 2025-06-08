@@ -1,5 +1,5 @@
 import React, {ComponentPropsWithRef, useMemo} from "react";
-import {Pressable, StyleProp, StyleSheet, TextInput, TextStyle, View, ViewStyle} from "react-native";
+import {Pressable, StyleProp, TextInput, TextStyle, View, ViewStyle} from "react-native";
 
 import * as Slot from './Slot'
 import {useNumericInput} from "./useNumericInput";
