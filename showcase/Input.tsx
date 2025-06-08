@@ -65,8 +65,17 @@ export const NumericInputUpDown = (
         <NumericInput.Root {...props} style={inputContainerStyle}>
             <NumericInput.NumericField {...props}/>
             <NumericInput.Container style={{justifyContent: "space-between", flexDirection: "column"}}>
-                <NumericInput.DecrementAction
+                <NumericInput.IncrementAction
                     Icon={ChevronUp}
+                    iconProps={({isMaxReached, isMinReached}) => ({
+                        style: [...iconStyle, isMaxReached ? props.reachMaxDecIconStyle : {}, isMinReached ? props.reachMinDecIconStyle : {}]
+                    })}
+                    viewProps={{
+                        style: {flex: 1, width: '100%', alignItems: 'center'}
+                    }}
+                />
+                <NumericInput.DecrementAction
+                    Icon={ChevronDown}
                     iconProps={({isMaxReached, isMinReached}) => ({
                         style: [...iconStyle, isMaxReached ? props.reachMaxIncIconStyle : {}, isMinReached ? props.reachMinIncIconStyle : {}]
                     })}
@@ -74,15 +83,6 @@ export const NumericInputUpDown = (
                         style: {flex: 1, width: '100%', alignItems: 'center'}
                     }}
 
-                />
-                <NumericInput.IncrementAction
-                    Icon={ChevronDown}
-                    iconProps={({isMaxReached, isMinReached}) => ({
-                        style: [...iconStyle, isMaxReached ? props.reachMaxDecIconStyle : {}, isMinReached ? props.reachMinDecIconStyle : {}]
-                    })}
-                    viewProps={{
-                        style: {flex: 1, width: '100%', alignItems: 'center'}
-                    }}
                 />
             </NumericInput.Container>
         </NumericInput.Root>
