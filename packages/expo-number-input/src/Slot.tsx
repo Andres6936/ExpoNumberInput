@@ -1,19 +1,14 @@
 import * as React from 'react';
+import {Fragment} from 'react';
 import {
-    Image as RNImage,
-    Pressable as RNPressable,
-    Text as RNText,
-    View as RNView,
-    StyleSheet,
-    type PressableStateCallbackType,
-    type ImageProps as RNImageProps,
     type ImageStyle as RNImageStyle,
     type PressableProps as RNPressableProps,
-    type TextProps as RNTextProps,
-    type ViewProps as RNViewProps,
+    type PressableStateCallbackType,
     type StyleProp,
+    StyleSheet,
+    Text as RNText,
+    View as RNView,
 } from 'react-native';
-import {Fragment} from "react";
 
 const View = function (props: React.ComponentPropsWithRef<typeof RNView> ) {
     const {children, ref, ...viewSlotProps} = props;
