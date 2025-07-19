@@ -21,7 +21,7 @@ type IRootContext = {
 
 const RootContext = React.createContext<IRootContext | null>(null);
 
-type RootProps = ComponentPropsWithAsChild<typeof View> & {
+export type RootProps = ComponentPropsWithAsChild<typeof View> & {
     value: number
     step?: number
     minValue?: number | null

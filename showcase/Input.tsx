@@ -10,7 +10,7 @@ export const NumericInputMoreLess = (
         rightButtonBackgroundColor = 'white',
         leftButtonBackgroundColor = 'white',
         ...props
-    }: NumberInputPrimitive.Props
+    }: NumberInputPrimitive.RootProps
 ) => {
     const inputContainerStyle = [{
         borderColor: borderColor,
@@ -32,7 +32,7 @@ export const NumericInputMoreLess = (
                     style: [...iconStyle, isMaxReached ? props.reachMaxDecIconStyle : {}, isMinReached ? props.reachMinDecIconStyle : {}]
                 })}
                 viewProps={{
-                    style: {backgroundColor: rightButtonBackgroundColor, height: '100%', aspectRatio: "1/1", alignItems: 'center', justifyContent: 'center', borderRightColor: "#CCC", borderRightWidth: 1},
+                    style: {backgroundColor: rightButtonBackgroundColor, height: '100%', aspectRatio: "1/1", alignItems: 'center', justifyContent: 'center', borderRightColor: "#CCC", borderRightWidth: 0.7},
                 }}
             />
             <NumberInputPrimitive.Input style={{flex: 1, width: "100%"}}/>
@@ -42,7 +42,7 @@ export const NumericInputMoreLess = (
                     style: [...iconStyle, isMaxReached ? props.reachMaxIncIconStyle : {}, isMinReached ? props.reachMinIncIconStyle : {}]
                 })}
                 viewProps={{
-                    style: {backgroundColor: leftButtonBackgroundColor, height: '100%', aspectRatio: "1/1", alignItems: 'center', justifyContent: 'center', borderLeftColor: "#CCC", borderLeftWidth: 1},
+                    style: {backgroundColor: leftButtonBackgroundColor, height: '100%', aspectRatio: "1/1", alignItems: 'center', justifyContent: 'center', borderLeftColor: "#CCC", borderLeftWidth: 0.7},
                 }}
             />
         </NumberInputPrimitive.Root>
@@ -56,7 +56,7 @@ export const NumericInputUpDown = (
         rightButtonBackgroundColor = 'white',
         leftButtonBackgroundColor = 'white',
         ...props
-    }: NumberInputPrimitive.Props
+    }: NumberInputPrimitive.RootProps
 ) => {
     const inputContainerStyle = [{
         flexDirection: 'row',
@@ -71,7 +71,7 @@ export const NumericInputUpDown = (
     return (
         <NumberInputPrimitive.Root {...props} style={inputContainerStyle}>
             <NumberInputPrimitive.Input style={{flex: 1}}/>
-            <NumberInputPrimitive.Container style={{aspectRatio: "1/1", alignItems: "center", justifyContent:"center", backgroundColor:"white", borderLeftColor: "#CCC", borderLeftWidth: 1, flexDirection: "column", height: "100%"}}>
+            <NumberInputPrimitive.Container style={{aspectRatio: "1/1", alignItems: "center", justifyContent:"center", backgroundColor:"white", borderLeftColor: "#CCC", borderLeftWidth: 0.7, flexDirection: "column", height: "100%"}}>
                 <NumberInputPrimitive.IncrementAction
                     Icon={ChevronUp}
                     iconProps={({isMaxReached, isMinReached}) => ({
