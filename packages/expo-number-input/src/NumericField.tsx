@@ -130,7 +130,7 @@ type CallbackComponentStatus<T extends AnyComponent> = (status: ComponentStatus)
 type ActionProps<T extends AnyComponent> = ComponentPropsWithRef<typeof Pressable> & {
     Icon: T,
     iconProps: React.ComponentProps<T> | CallbackComponentStatus<T>,
-    viewProps: React.ComponentProps<typeof View>,
+    viewProps?: React.ComponentProps<typeof View>,
 }
 
 function useActionProps<T extends AnyComponent>(args: Pick<ActionProps<T>, 'iconProps'>) {
