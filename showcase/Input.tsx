@@ -35,7 +35,7 @@ export const NumericInputMoreLess = (
                     style: {backgroundColor: rightButtonBackgroundColor, height: '100%', aspectRatio: "1/1", alignItems: 'center', justifyContent: 'center'},
                 }}
             />
-            <NumberInputPrimitive.Input style={{flex: 1, width: "100%", borderColor: "red", borderWidth: 1}}/>
+            <NumberInputPrimitive.Input style={{flex: 1, width: "100%"}}/>
             <NumberInputPrimitive.IncrementAction
                 Icon={Plus}
                 iconProps={({isMaxReached, isMinReached}) => ({
