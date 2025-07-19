@@ -3,14 +3,21 @@ import {ChevronDown, ChevronUp, Minus, Plus} from "lucide-react-native";
 import * as NumberInputPrimitive from 'expo-number-input'
 import {StyleProp, StyleSheet, View, ViewStyle} from "react-native";
 
+
+type NumericInputProps = {
+    borderColor : string,
+    rightButtonBackgroundColor : string,
+    leftButtonBackgroundColor : string,
+}
+
+
 export const NumericInputMoreLess = (
     {
         borderColor = '#d4d4d4',
-        rounded = false,
         rightButtonBackgroundColor = 'white',
         leftButtonBackgroundColor = 'white',
         ...props
-    }: NumberInputPrimitive.RootProps
+    }: NumberInputPrimitive.RootProps & NumericInputProps
 ) => {
     const inputContainerStyle = [{
         borderColor: borderColor,
@@ -22,7 +29,7 @@ export const NumericInputMoreLess = (
         borderWidth: 0.7,
     }] satisfies StyleProp<ViewStyle>
 
-    const iconStyle = [style.icon, props.iconStyle]
+    const iconStyle = [style.icon]
 
     return (
         <NumberInputPrimitive.Root {...props} style={inputContainerStyle}>
@@ -52,11 +59,10 @@ export const NumericInputMoreLess = (
 export const NumericInputUpDown = (
     {
         borderColor = '#d4d4d4',
-        rounded = false,
         rightButtonBackgroundColor = 'white',
         leftButtonBackgroundColor = 'white',
         ...props
-    }: NumberInputPrimitive.RootProps
+    }: NumberInputPrimitive.RootProps & NumericInputProps
 ) => {
     const inputContainerStyle = [{
         flexDirection: 'row',
@@ -64,9 +70,9 @@ export const NumericInputUpDown = (
         borderColor: borderColor,
         flex: 1,
         borderWidth: 0.7,
-    }]
+    }] satisfies StyleProp<ViewStyle>
 
-    const iconStyle = [style.icon, props.iconStyle]
+    const iconStyle = [style.icon]
 
     return (
         <NumberInputPrimitive.Root {...props} style={inputContainerStyle}>
