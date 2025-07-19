@@ -29,7 +29,7 @@ export const NumericInputMoreLess = (
         borderWidth: 0.7,
     }] satisfies StyleProp<ViewStyle>
 
-    const iconStyle = [style.icon]
+    const iconStyle = [style.icon, {fontSize: 15, color: '#434A5E'}]
 
     return (
         <NumberInputPrimitive.Root {...props} style={inputContainerStyle}>
@@ -72,7 +72,7 @@ export const NumericInputUpDown = (
         borderWidth: 0.7,
     }] satisfies StyleProp<ViewStyle>
 
-    const iconStyle = [style.icon]
+    const iconStyle = [style.icon, {fontSize: 15, color: '#434A5E'}]
 
     return (
         <NumberInputPrimitive.Root {...props} style={inputContainerStyle}>

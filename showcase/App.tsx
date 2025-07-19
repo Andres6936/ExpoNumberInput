@@ -25,7 +25,6 @@ function NumericInputExample() {
                 valueType="real"
                 rounded editable={false}
                 textColor="#B0228C"
-                iconStyle={{color: "white"}}
                 rightButtonBackgroundColor="#18c2ef"
                 leftButtonBackgroundColor="#ff8080"
             />
@@ -38,7 +37,6 @@ function NumericInputExample() {
                 maxValue={9999}
                 onLimitReached={(isMAx, msg) => console.log(msg)}
                 step={5}
-                iconStyle={{fontSize: 15, color: '#434A5E'}}
                 inputStyle={{fontSize: 18, color: '#434A5E'}}
                 valueType='real'
                 borderColor='#C7CBD6'
@@ -143,7 +141,6 @@ function NumericInputBasicStyle() {
                 rounded
                 type='up-down'
                 textColor='#26547C'
-                iconStyle={{color: 'green'}}
                 upDownButtonsBackgroundColor='#06D6A0'/>
             <View style={styles.seprator}/>
         </Fragment>
@@ -164,7 +161,6 @@ function NumericInputRoundedStyle() {
                 onChange={(v6) => setValue1(v6)}
                 rounded
                 textColor='#59656F'
-                iconStyle={{color: 'white'}}
                 rightButtonBackgroundColor='#AC9FBB'
                 leftButtonBackgroundColor='#DDBDD5'/>
             <View style={styles.seprator}/>
@@ -187,7 +183,6 @@ function NumericInputCustom() {
                 totalWidth={200}
                 rounded
                 textColor='#103900'
-                iconStyle={{color: 'white'}}
                 rightButtonBackgroundColor='#0FFF95'
                 leftButtonBackgroundColor='#06BA63'/>
             <View style={styles.seprator}/>
@@ -208,7 +203,6 @@ function NumericInputCustomStyle() {
                 value={value1}
                 onChange={(v8) => setValue1(v8)}
                 textColor='#B0228C'
-                iconStyle={{color: 'white'}}
                 rightButtonBackgroundColor='#EA3788'
                 leftButtonBackgroundColor='#E56B70'/>
         </Fragment>
