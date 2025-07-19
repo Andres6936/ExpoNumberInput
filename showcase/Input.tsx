@@ -8,6 +8,10 @@ type NumericInputProps = {
     borderColor : string,
     rightButtonBackgroundColor : string,
     leftButtonBackgroundColor : string,
+    reachMaxIncIconStyle : StyleProp<ViewStyle>,
+    reachMinIncIconStyle : StyleProp<ViewStyle>,
+    reachMaxDecIconStyle : StyleProp<ViewStyle>,
+    reachMinDecIconStyle : StyleProp<ViewStyle>,
 }
 
 
@@ -36,7 +40,7 @@ export const NumericInputMoreLess = (
             <NumberInputPrimitive.DecrementAction
                 Icon={Minus}
                 iconProps={({isMaxReached, isMinReached}) => ({
-                    style: [...iconStyle, isMaxReached ? props.reachMaxDecIconStyle : {}, isMinReached ? props.reachMinDecIconStyle : {}]
+                    style: [...iconStyle, isMaxReached ? props.reachMaxDecIconStyle : {}, isMinReached ? props.reachMinDecIconStyle : {}] as StyleProp<ViewStyle>
                 })}
                 viewProps={{
                     style: {backgroundColor: rightButtonBackgroundColor, height: '100%', aspectRatio: "1/1", alignItems: 'center', justifyContent: 'center', borderRightColor: "#CCC", borderRightWidth: 0.7},
@@ -46,7 +50,7 @@ export const NumericInputMoreLess = (
             <NumberInputPrimitive.IncrementAction
                 Icon={Plus}
                 iconProps={({isMaxReached, isMinReached}) => ({
-                    style: [...iconStyle, isMaxReached ? props.reachMaxIncIconStyle : {}, isMinReached ? props.reachMinIncIconStyle : {}]
+                    style: [...iconStyle, isMaxReached ? props.reachMaxIncIconStyle : {}, isMinReached ? props.reachMinIncIconStyle : {}] as StyleProp<ViewStyle>
                 })}
                 viewProps={{
                     style: {backgroundColor: leftButtonBackgroundColor, height: '100%', aspectRatio: "1/1", alignItems: 'center', justifyContent: 'center', borderLeftColor: "#CCC", borderLeftWidth: 0.7},
@@ -82,14 +86,14 @@ export const NumericInputUpDown = (
                     Icon={ChevronUp}
                     iconProps={({isMaxReached, isMinReached}) => ({
                         size: 20,
-                        style: [...iconStyle, isMaxReached ? props.reachMaxDecIconStyle : {}, isMinReached ? props.reachMinDecIconStyle : {}]
+                        style: [...iconStyle, isMaxReached ? props.reachMaxDecIconStyle : {}, isMinReached ? props.reachMinDecIconStyle : {}] as StyleProp<ViewStyle>
                     })}
                 />
                 <NumberInputPrimitive.DecrementAction
                     Icon={ChevronDown}
                     iconProps={({isMaxReached, isMinReached}) => ({
                         size: 20,
-                        style: [...iconStyle, isMaxReached ? props.reachMaxIncIconStyle : {}, isMinReached ? props.reachMinIncIconStyle : {}]
+                        style: [...iconStyle, isMaxReached ? props.reachMaxIncIconStyle : {}, isMinReached ? props.reachMinIncIconStyle : {}] as StyleProp<ViewStyle>
                     })}
                 />
             </NumberInputPrimitive.Container>
