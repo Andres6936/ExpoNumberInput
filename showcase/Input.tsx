@@ -70,8 +70,8 @@ export const NumericInputUpDown = (
 
     return (
         <NumberInputPrimitive.Root {...props} style={inputContainerStyle}>
-            <NumberInputPrimitive.Input style={{flex: 1, width: "100%", flexBasis: "100%"}}/>
-            <NumberInputPrimitive.Container style={{aspectRatio: "1/1", alignItems: "center", justifyContent:"center", backgroundColor:"white", flexDirection: "column", height: "100%"}}>
+            <NumberInputPrimitive.Input style={{flex: 1}}/>
+            <NumberInputPrimitive.Container style={{aspectRatio: "1/1", alignItems: "center", justifyContent:"center", backgroundColor:"white", borderLeftColor: "#CCC", borderLeftWidth: 1, flexDirection: "column", height: "100%"}}>
                 <NumberInputPrimitive.IncrementAction
                     Icon={ChevronUp}
                     iconProps={({isMaxReached, isMinReached}) => ({
