@@ -118,8 +118,8 @@ function NumericInputMax() {
                 onChange={value => setValue1(value)}
                 rounded type='up-down'
                 minValue={0}
-                validateOnBlur
                 maxValue={5}
+                validateOnBlur
                 onLimitReached={(isMax, msg) => console.log(isMax, msg)}/>
             <View style={styles.seprator}/>
         </Fragment>
