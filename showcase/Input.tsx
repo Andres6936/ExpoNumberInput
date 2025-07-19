@@ -32,7 +32,7 @@ export const NumericInputMoreLess = (
                     style: [...iconStyle, isMaxReached ? props.reachMaxDecIconStyle : {}, isMinReached ? props.reachMinDecIconStyle : {}]
                 })}
                 viewProps={{
-                    style: {backgroundColor: rightButtonBackgroundColor, height: '100%', aspectRatio: "1/1", alignItems: 'center', justifyContent: 'center'},
+                    style: {backgroundColor: rightButtonBackgroundColor, height: '100%', aspectRatio: "1/1", alignItems: 'center', justifyContent: 'center', borderRightColor: "#CCC", borderRightWidth: 1},
                 }}
             />
             <NumberInputPrimitive.Input style={{flex: 1, width: "100%"}}/>
@@ -42,7 +42,7 @@ export const NumericInputMoreLess = (
                     style: [...iconStyle, isMaxReached ? props.reachMaxIncIconStyle : {}, isMinReached ? props.reachMinIncIconStyle : {}]
                 })}
                 viewProps={{
-                    style: {backgroundColor: leftButtonBackgroundColor, height: '100%', aspectRatio: "1/1", alignItems: 'center', justifyContent: 'center'},
+                    style: {backgroundColor: leftButtonBackgroundColor, height: '100%', aspectRatio: "1/1", alignItems: 'center', justifyContent: 'center', borderLeftColor: "#CCC", borderLeftWidth: 1},
                 }}
             />
         </NumberInputPrimitive.Root>
