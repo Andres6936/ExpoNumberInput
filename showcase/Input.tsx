@@ -21,7 +21,7 @@ export const NumericInputMoreLess = (
         rightButtonBackgroundColor = 'white',
         leftButtonBackgroundColor = 'white',
         ...props
-    }: NumberInputPrimitive.RootProps & NumericInputProps
+    }: NumberInputPrimitive.RootProps & Partial<NumericInputProps>
 ) => {
     const inputContainerStyle = [{
         borderColor: borderColor,
@@ -66,7 +66,7 @@ export const NumericInputUpDown = (
         rightButtonBackgroundColor = 'white',
         leftButtonBackgroundColor = 'white',
         ...props
-    }: NumberInputPrimitive.RootProps & NumericInputProps
+    }: NumberInputPrimitive.RootProps & Partial<NumericInputProps>
 ) => {
     const inputContainerStyle = [{
         flexDirection: 'row',

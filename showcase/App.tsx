@@ -18,12 +18,9 @@ function NumericInputExample() {
                 onChange={value1 => {
                     setValue1(value1);
                 }}
-                iconSize={10}
                 step={1}
                 minValue={0}
                 valueType="real"
-                rounded editable={false}
-                textColor="#B0228C"
                 rightButtonBackgroundColor="#18c2ef"
                 leftButtonBackgroundColor="#ff8080"
             />
@@ -35,7 +32,6 @@ function NumericInputExample() {
                 minValue={0}
                 maxValue={9999}
                 step={5}
-                inputStyle={{fontSize: 18, color: '#434A5E'}}
                 valueType='real'
                 borderColor='#C7CBD6'
                 rightButtonBackgroundColor='#C7CBD6'
@@ -133,8 +129,7 @@ function NumericInputBasicStyle() {
             <NumericInputUpDown
                 value={value1}
                 onChange={(v5) => setValue1(v5)}
-                textColor='#26547C'
-                upDownButtonsBackgroundColor='#06D6A0'/>
+            />
             <View style={styles.seprator}/>
         </Fragment>
     )
@@ -171,9 +166,9 @@ function NumericInputCustom() {
             <NumericInputMoreLess
                 value={value1}
                 onChange={(v7) => setValue1(v7)}
-                textColor='#103900'
                 rightButtonBackgroundColor='#0FFF95'
-                leftButtonBackgroundColor='#06BA63'/>
+                leftButtonBackgroundColor='#06BA63'
+            />
             <View style={styles.seprator}/>
         </Fragment>
     )
