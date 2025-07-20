@@ -1,4 +1,4 @@
-import React, {ComponentPropsWithRef, useMemo} from "react";
+import React, {ComponentPropsWithRef, useEffect, useMemo} from "react";
 import {Pressable, StyleProp, TextInput, TextStyle, View, ViewStyle} from "react-native";
 
 import * as Slot from './Slot'
@@ -28,6 +28,7 @@ export type RootProps = ComponentPropsWithAsChild<typeof View> & {
     maxValue?: number | null
     valueType?: 'integer' | 'real'
     validateOnBlur?: boolean
+    onChange?: (value: number) => void
 }
 
 export function Root(
@@ -39,7 +40,7 @@ export function Root(
         maxValue = null,
         valueType = 'integer',
         validateOnBlur = true,
-        ...viewProps
+        ...props
     }: RootProps
 ) {
     const {
@@ -60,6 +61,10 @@ export function Root(
         validateOnBlur,
     })
 
+    useEffect(() => {
+        props.onChange?.(valueAsNumber)
+    }, [valueAsNumber])
+
     const Component = asChild ? Slot.View : View;
     return (
         <RootContext value={{
@@ -74,7 +79,7 @@ export function Root(
             onFocus,
             onBlur
         }}>
-            <Component {...viewProps} />
+            <Component {...props} />
         </RootContext>
     )
 }
