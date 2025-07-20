@@ -28,7 +28,11 @@ export type RootProps = ComponentPropsWithAsChild<typeof View> & {
     maxValue?: number | null
     valueType?: 'integer' | 'real'
     validateOnBlur?: boolean
+
+    onBlur?: () => void,
+    onFocus?: () => void,
     onChange?: (value: number) => void
+    onLimitReached?: (isMax: boolean, msg: string) => void
 }
 
 export function Root(
@@ -59,11 +63,12 @@ export function Root(
         maxValue,
         valueType,
         validateOnBlur,
-    })
 
-    useEffect(() => {
-        props.onChange?.(valueAsNumber)
-    }, [valueAsNumber])
+        onBlur: props.onBlur,
+        onFocus: props.onFocus,
+        onChange: props.onChange,
+        onLimitReached: props.onLimitReached,
+    })
 
     const Component = asChild ? Slot.View : View;
     return (
