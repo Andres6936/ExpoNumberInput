@@ -76,7 +76,6 @@ function NumericInputRounded() {
             <NumericInputMoreLess
                 value={value1}
                 onChange={(v3) => setValue1(v3)}
-                rounded
                 minValue={0}
                 onLimitReached={(isMax, msg) => console.log(isMax, msg)}/>
             <View style={styles.seprator}/>
@@ -116,7 +115,7 @@ function NumericInputMax() {
             <NumericInputUpDown
                 value={value1}
                 onChange={value => setValue1(value)}
-                rounded type='up-down'
+                type='up-down'
                 minValue={0}
                 maxValue={5}
                 validateOnBlur
@@ -138,7 +137,6 @@ function NumericInputBasicStyle() {
             <NumericInputUpDown
                 value={value1}
                 onChange={(v5) => setValue1(v5)}
-                rounded
                 type='up-down'
                 textColor='#26547C'
                 upDownButtonsBackgroundColor='#06D6A0'/>
@@ -159,7 +157,6 @@ function NumericInputRoundedStyle() {
             <NumericInputMoreLess
                 value={value1}
                 onChange={(v6) => setValue1(v6)}
-                rounded
                 textColor='#59656F'
                 rightButtonBackgroundColor='#AC9FBB'
                 leftButtonBackgroundColor='#DDBDD5'/>
@@ -180,7 +177,6 @@ function NumericInputCustom() {
             <NumericInputMoreLess
                 value={value1}
                 onChange={(v7) => setValue1(v7)}
-                totalWidth={200}
                 rounded
                 textColor='#103900'
                 rightButtonBackgroundColor='#0FFF95'
@@ -202,7 +198,6 @@ function NumericInputCustomStyle() {
             <NumericInputMoreLess
                 value={value1}
                 onChange={(v8) => setValue1(v8)}
-                textColor='#B0228C'
                 rightButtonBackgroundColor='#EA3788'
                 leftButtonBackgroundColor='#E56B70'/>
         </Fragment>
