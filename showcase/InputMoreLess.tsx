@@ -24,27 +24,25 @@ export const NumericInputMoreLess = (
         borderWidth: 0.7,
     }] satisfies StyleProp<ViewStyle>
 
-    const iconStyle = [style.icon, {fontSize: 15, color: '#434A5E'}]
-
     return (
         <NumberInputPrimitive.Root {...props} style={inputContainerStyle}>
             <NumberInputPrimitive.DecrementAction
                 Icon={Minus}
                 iconProps={({isMaxReached, isMinReached}) => ({
-                    style: [...iconStyle, isMaxReached ? props.reachMaxDecIconStyle : {}, isMinReached ? props.reachMinDecIconStyle : {}] as StyleProp<ViewStyle>
+                    style: [style.Icon, isMaxReached ? props.reachMaxDecIconStyle : {}, isMinReached ? props.reachMinDecIconStyle : {}] as StyleProp<ViewStyle>
                 })}
                 viewProps={{
-                    style: {backgroundColor: rightButtonBackgroundColor, height: '100%', aspectRatio: "1/1", alignItems: 'center', justifyContent: 'center', borderRightColor: "#CCC", borderRightWidth: 0.7},
+                    style: [style.Action, {backgroundColor: rightButtonBackgroundColor}],
                 }}
             />
             <NumberInputPrimitive.Input style={{flex: 1, width: "100%"}}/>
             <NumberInputPrimitive.IncrementAction
                 Icon={Plus}
                 iconProps={({isMaxReached, isMinReached}) => ({
-                    style: [...iconStyle, isMaxReached ? props.reachMaxIncIconStyle : {}, isMinReached ? props.reachMinIncIconStyle : {}] as StyleProp<ViewStyle>
+                    style: [style.Icon, isMaxReached ? props.reachMaxIncIconStyle : {}, isMinReached ? props.reachMinIncIconStyle : {}] as StyleProp<ViewStyle>
                 })}
                 viewProps={{
-                    style: {backgroundColor: leftButtonBackgroundColor, height: '100%', aspectRatio: "1/1", alignItems: 'center', justifyContent: 'center', borderLeftColor: "#CCC", borderLeftWidth: 0.7},
+                    style: [style.Action, {backgroundColor: leftButtonBackgroundColor}],
                 }}
             />
         </NumberInputPrimitive.Root>
@@ -53,8 +51,18 @@ export const NumericInputMoreLess = (
 
 
 const style = StyleSheet.create({
-    icon: {
+    Icon: {
         fontWeight: '900',
-        backgroundColor: 'rgba(0,0,0,0)'
+        backgroundColor: 'rgba(0,0,0,0)',
+        fontSize: 15,
+        color: '#434A5E'
     },
+    Action: {
+        height: '100%',
+        aspectRatio: "1/1",
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderLeftColor: "#CCC",
+        borderLeftWidth: 0.7
+    }
 })
