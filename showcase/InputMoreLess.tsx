@@ -29,20 +29,20 @@ export const NumericInputMoreLess = (
             <NumberInputPrimitive.DecrementAction
                 Icon={Minus}
                 iconProps={({isMaxReached, isMinReached}) => ({
-                    style: [style.Icon, isMaxReached ? props.reachMaxDecIconStyle : {}, isMinReached ? props.reachMinDecIconStyle : {}] as StyleProp<ViewStyle>
+                    style: [styles.Icon, isMaxReached ? props.reachMaxDecIconStyle : {}, isMinReached ? props.reachMinDecIconStyle : {}] as StyleProp<ViewStyle>
                 })}
                 viewProps={{
-                    style: [style.Action, {backgroundColor: rightButtonBackgroundColor}],
+                    style: [styles.Action, {backgroundColor: rightButtonBackgroundColor}],
                 }}
             />
             <NumberInputPrimitive.Input style={{flex: 1, width: "100%"}}/>
             <NumberInputPrimitive.IncrementAction
                 Icon={Plus}
                 iconProps={({isMaxReached, isMinReached}) => ({
-                    style: [style.Icon, isMaxReached ? props.reachMaxIncIconStyle : {}, isMinReached ? props.reachMinIncIconStyle : {}] as StyleProp<ViewStyle>
+                    style: [styles.Icon, isMaxReached ? props.reachMaxIncIconStyle : {}, isMinReached ? props.reachMinIncIconStyle : {}] as StyleProp<ViewStyle>
                 })}
                 viewProps={{
-                    style: [style.Action, {backgroundColor: leftButtonBackgroundColor}],
+                    style: [styles.Action, {backgroundColor: leftButtonBackgroundColor}],
                 }}
             />
         </NumberInputPrimitive.Root>
@@ -50,7 +50,7 @@ export const NumericInputMoreLess = (
 }
 
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
     Icon: {
         fontWeight: '900',
         backgroundColor: 'rgba(0,0,0,0)',
