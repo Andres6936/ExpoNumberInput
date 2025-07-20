@@ -1,6 +1,8 @@
 import React, {Fragment} from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
-import {NumericInputMoreLess, NumericInputUpDown} from "./Input";
+
+import {NumericInputUpDown} from "./InputUpDown";
+import { NumericInputMoreLess } from './InputMoreLess';
 
 
 function NumericInputExample() {
