@@ -21,24 +21,22 @@ export const NumericInputUpDown = (
         borderWidth: 0.7,
     }] satisfies StyleProp<ViewStyle>
 
-    const iconStyle = [style.icon, {fontSize: 15, color: '#434A5E'}]
-
     return (
         <NumberInputPrimitive.Root {...props} style={inputContainerStyle}>
             <NumberInputPrimitive.Input style={{flex: 1}}/>
-            <NumberInputPrimitive.Container style={{aspectRatio: "1/1", alignItems: "center", justifyContent:"center", backgroundColor:"white", borderLeftColor: "#CCC", borderLeftWidth: 0.7, flexDirection: "column", height: "100%"}}>
+            <NumberInputPrimitive.Container style={styles.Container}>
                 <NumberInputPrimitive.IncrementAction
                     Icon={ChevronUp}
                     iconProps={({isMaxReached, isMinReached}) => ({
                         size: 20,
-                        style: [...iconStyle, isMaxReached ? props.reachMaxDecIconStyle : {}, isMinReached ? props.reachMinDecIconStyle : {}] as StyleProp<ViewStyle>
+                        style: [styles.Icon, isMaxReached ? props.reachMaxDecIconStyle : {}, isMinReached ? props.reachMinDecIconStyle : {}] as StyleProp<ViewStyle>
                     })}
                 />
                 <NumberInputPrimitive.DecrementAction
                     Icon={ChevronDown}
                     iconProps={({isMaxReached, isMinReached}) => ({
                         size: 20,
-                        style: [...iconStyle, isMaxReached ? props.reachMaxIncIconStyle : {}, isMinReached ? props.reachMinIncIconStyle : {}] as StyleProp<ViewStyle>
+                        style: [styles.Icon, isMaxReached ? props.reachMaxIncIconStyle : {}, isMinReached ? props.reachMinIncIconStyle : {}] as StyleProp<ViewStyle>
                     })}
                 />
             </NumberInputPrimitive.Container>
@@ -47,9 +45,21 @@ export const NumericInputUpDown = (
 }
 
 
-const style = StyleSheet.create({
-    icon: {
+const styles = StyleSheet.create({
+    Icon: {
         fontWeight: '900',
-        backgroundColor: 'rgba(0,0,0,0)'
+        backgroundColor: 'rgba(0,0,0,0)',
+        fontSize: 15,
+        color: '#434A5E'
     },
+    Container: {
+        aspectRatio: "1/1",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "white",
+        borderLeftColor: "#CCC",
+        borderLeftWidth: 0.7,
+        flexDirection: "column",
+        height: "100%"
+    }
 })
