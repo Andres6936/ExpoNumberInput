@@ -18,7 +18,6 @@
     "react-native-svg": "15.12.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.25.2",
     "@types/react": "~19.1.10",
     "typescript": "~5.9.2"
   },
