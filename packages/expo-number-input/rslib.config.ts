@@ -1,5 +1,5 @@
-import { pluginReact } from '@rsbuild/plugin-react';
 import { defineConfig } from '@rslib/core';
+import { pluginReact } from '@rsbuild/plugin-react';
 
 export default defineConfig({
     source: {
@@ -12,6 +12,9 @@ export default defineConfig({
             bundle: false,
             dts: true,
             format: 'esm',
+            experiments: {
+                advancedEsm: true
+            }
         },
     ],
     output: {
