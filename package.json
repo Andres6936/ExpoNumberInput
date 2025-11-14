@@ -3,6 +3,9 @@
   "version": "1.9.1",
   "workspaces": ["packages/*", "showcase"],
   "description": "a stylish numeric input for react native",
+  "scripts": {
+    "formatter" : "bunx oxfmt@latest"
+  },
   "keywords": [
     "react-native",
     "react-component",
