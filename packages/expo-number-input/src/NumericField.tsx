@@ -69,7 +69,7 @@ export function Root({
 
   const Component = asChild ? Slot.View : View;
   return (
-    <RootContext
+    <RootContext.Provider
       value={{
         ref,
         maxValue,
@@ -84,7 +84,7 @@ export function Root({
       }}
     >
       <Component {...props} />
-    </RootContext>
+    </RootContext.Provider>
   );
 }
 

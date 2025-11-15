@@ -16,19 +16,27 @@ type Args = {
 };
 
 const isReal = (value: string): boolean => {
-  if (!value) return false;
-  const isReal = value.match(/-?\d+(\.(\d+)?)?/)!;
-  const isPart = value.match(/-?\d+(\.(\d+)?)?/)![0];
-  const isExact = value.match(/-?\d+(\.(\d+)?)?/)!;
-  return isReal && isPart === isExact.input;
+    if (!value) return false;
+
+    const match = value.match(/-?\d+(\.(\d+)?)?/);
+    if (!match) return false;
+
+    const isPart = match[0];
+    const isExactInput = match.input ?? value;
+
+    return isPart === isExactInput;
 };
 
 const isInt = (value: string): boolean => {
-  if (!value) return false;
-  const isInt = value.match(/-?\d+/)!;
-  const isPart = value.match(/-?\d+/)![0];
-  const isExact = value.match(/-?\d+/)!;
-  return isInt && isPart === isExact.input;
+    if (!value) return false;
+
+    const match = value.match(/-?\d+/);
+    if (!match) return false;
+
+    const isPart = match[0];
+    const isExactInput = match.input ?? value;
+
+    return isPart === isExactInput;
 };
 
 export function useNumericInput(args: Args) {
