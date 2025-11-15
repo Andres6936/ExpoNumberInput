@@ -8,7 +8,7 @@ import {
   View,
   Pressable,
 } from "react-native";
-import { useNumberInput } from "expo-number-input";
+import { useNumberInput, type UseNumberInputArgs } from "expo-number-input";
 
 import { NumericInputProps } from "./Input";
 
@@ -17,7 +17,7 @@ export const NumericInputUpDown = ({
   rightButtonBackgroundColor = "white",
   leftButtonBackgroundColor = "white",
   ...props
-}: Partial<NumericInputProps>) => {
+}: Partial<NumericInputProps & UseNumberInputArgs>) => {
   const inputContainerStyle = [
     {
       flexDirection: "row",
@@ -38,11 +38,11 @@ export const NumericInputUpDown = ({
     onFocus,
     onBlur,
   } = useNumberInput({
-    step: 1,
-    value: 0,
-    valueType: "integer",
-    maxValue: null,
-    minValue: null,
+    value: props.value || 0,
+    step: props.step || 1,
+    valueType: props.valueType || "integer",
+    maxValue: props.maxValue || null,
+    minValue: props.minValue || null,
     validateOnBlur: true,
   });
 
