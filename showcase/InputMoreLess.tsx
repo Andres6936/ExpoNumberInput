@@ -1,7 +1,7 @@
 import React from "react";
 import { Minus, Plus } from "lucide-react-native";
-import { StyleProp, StyleSheet, ViewStyle } from "react-native";
-import * as NumberInputPrimitive from "expo-number-input";
+import { StyleProp, StyleSheet, ViewStyle, TextInput, View, Pressable } from "react-native";
+import { useNumericInput } from "expo-number-input";
 
 import { NumericInputProps } from "./Input";
 
@@ -10,7 +10,7 @@ export const NumericInputMoreLess = ({
   rightButtonBackgroundColor = "white",
   leftButtonBackgroundColor = "white",
   ...props
-}: NumberInputPrimitive.RootProps & Partial<NumericInputProps>) => {
+}: Partial<NumericInputProps>) => {
   const inputContainerStyle = [
     {
       borderColor: borderColor,
@@ -23,42 +23,38 @@ export const NumericInputMoreLess = ({
     },
   ] satisfies StyleProp<ViewStyle>;
 
+  const {
+      valueAsText,
+      valueAsNumber,
+      increment,
+      decrement,
+      onChange,
+      onFocus,
+      onBlur,
+  } = useNumericInput({step: 1, value: 0, valueType: 'integer', maxValue: null, minValue: null, validateOnBlur: true});
+
   return (
-    <NumberInputPrimitive.Root {...props} style={inputContainerStyle}>
-      <NumberInputPrimitive.DecrementAction
-        Icon={Minus}
-        iconProps={({ isMaxReached, isMinReached }) => ({
-          style: [
-            styles.Icon,
-            isMaxReached ? props.reachMaxDecIconStyle : {},
-            isMinReached ? props.reachMinDecIconStyle : {},
-          ] as StyleProp<ViewStyle>,
-        })}
-        viewProps={{
-          style: [
-            styles.Action,
-            { backgroundColor: rightButtonBackgroundColor },
-          ],
-        }}
-      />
-      <NumberInputPrimitive.Input style={{ flex: 1, width: "100%" }} />
-      <NumberInputPrimitive.IncrementAction
-        Icon={Plus}
-        iconProps={({ isMaxReached, isMinReached }) => ({
-          style: [
-            styles.Icon,
-            isMaxReached ? props.reachMaxIncIconStyle : {},
-            isMinReached ? props.reachMinIncIconStyle : {},
-          ] as StyleProp<ViewStyle>,
-        })}
-        viewProps={{
-          style: [
-            styles.Action,
-            { backgroundColor: leftButtonBackgroundColor },
-          ],
-        }}
-      />
-    </NumberInputPrimitive.Root>
+    <View style={inputContainerStyle}>
+        <Pressable onPress={decrement}>
+            <View style={[styles.Action, { backgroundColor: rightButtonBackgroundColor }]}>
+                <Minus style={styles.Icon} size={20} color="#434A5E"/>
+            </View>
+        </Pressable>
+        <TextInput
+            style={{flex: 1, width: "100%"}}
+            returnKeyType="done"
+            keyboardType="numeric"
+            value={valueAsText}
+            onChangeText={onChange}
+            onBlur={onBlur}
+            onFocus={onFocus}
+        />
+        <Pressable onPress={increment}>
+            <View style={[styles.Action, { backgroundColor: leftButtonBackgroundColor }]}>
+                <Plus style={styles.Icon} size={20} color="#434A5E"/>
+            </View>
+        </Pressable>
+    </View>
   );
 };
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { ChevronDown, ChevronUp } from "lucide-react-native";
-import { StyleProp, StyleSheet, ViewStyle } from "react-native";
-import * as NumberInputPrimitive from "expo-number-input";
+import { StyleProp, StyleSheet, TextInput, ViewStyle, View, Pressable } from "react-native";
+import { useNumericInput } from "expo-number-input";
 
 import { NumericInputProps } from "./Input";
 
@@ -10,7 +10,7 @@ export const NumericInputUpDown = ({
   rightButtonBackgroundColor = "white",
   leftButtonBackgroundColor = "white",
   ...props
-}: NumberInputPrimitive.RootProps & Partial<NumericInputProps>) => {
+}: Partial<NumericInputProps>) => {
   const inputContainerStyle = [
     {
       flexDirection: "row",
@@ -21,34 +21,42 @@ export const NumericInputUpDown = ({
     },
   ] satisfies StyleProp<ViewStyle>;
 
-  return (
-    <NumberInputPrimitive.Root {...props} style={inputContainerStyle}>
-      <NumberInputPrimitive.Input style={{ flex: 1 }} />
-      <NumberInputPrimitive.Container style={styles.Container}>
-        <NumberInputPrimitive.IncrementAction
-          Icon={ChevronUp}
-          iconProps={({ isMaxReached, isMinReached }) => ({
-            size: 20,
-            style: [
-              styles.Icon,
-              isMaxReached ? props.reachMaxDecIconStyle : {},
-              isMinReached ? props.reachMinDecIconStyle : {},
-            ] as StyleProp<ViewStyle>,
-          })}
+    const {
+        valueAsText,
+        valueAsNumber,
+        increment,
+        decrement,
+        onChange,
+        onFocus,
+        onBlur,
+    } = useNumericInput({step: 1, value: 0, valueType: 'integer', maxValue: null, minValue: null, validateOnBlur: true});
+
+
+    return (
+    <View style={inputContainerStyle}>
+        <TextInput
+            style={{flex: 1}}
+            returnKeyType="done"
+            keyboardType="numeric"
+            value={valueAsText}
+            onChangeText={onChange}
+            onBlur={onBlur}
+            onFocus={onFocus}
         />
-        <NumberInputPrimitive.DecrementAction
-          Icon={ChevronDown}
-          iconProps={({ isMaxReached, isMinReached }) => ({
-            size: 20,
-            style: [
-              styles.Icon,
-              isMaxReached ? props.reachMaxIncIconStyle : {},
-              isMinReached ? props.reachMinIncIconStyle : {},
-            ] as StyleProp<ViewStyle>,
-          })}
-        />
-      </NumberInputPrimitive.Container>
-    </NumberInputPrimitive.Root>
+
+      <View style={styles.Container}>
+          <Pressable onPress={increment}>
+              <View>
+                  <ChevronUp style={styles.Icon} size={20} color="#434A5E"/>
+              </View>
+          </Pressable>
+          <Pressable onPress={decrement}>
+              <View>
+                  <ChevronDown style={styles.Icon} size={20} color="#434A5E"/>
+              </View>
+          </Pressable>
+      </View>
+    </View>
   );
 };
 

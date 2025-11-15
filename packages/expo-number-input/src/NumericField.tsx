@@ -1,12 +1,10 @@
 import React, { ComponentPropsWithRef, useMemo } from "react";
 import { Pressable, TextInput, View } from "react-native";
 
-import * as Slot from "./Slot";
 import { useNumericInput } from "./useNumericInput";
 import { ComponentPropsWithAsChild } from "./types";
 
 type IRootContext = {
-  ref: React.RefObject<TextInput | null>;
   maxValue: number | null;
   minValue: number | null;
   valueAsText: string;
@@ -45,7 +43,6 @@ export function Root({
   ...props
 }: RootProps) {
   const {
-    ref,
     valueAsText,
     valueAsNumber,
     increment,
@@ -67,11 +64,9 @@ export function Root({
     onLimitReached: props.onLimitReached,
   });
 
-  const Component = asChild ? Slot.View : View;
   return (
     <RootContext.Provider
       value={{
-        ref,
         maxValue,
         minValue,
         valueAsText,
@@ -83,18 +78,17 @@ export function Root({
         onBlur,
       }}
     >
-      <Component {...props} />
+      <View {...props} />
     </RootContext.Provider>
   );
 }
 
 export function Input(props: React.ComponentProps<typeof TextInput>) {
-  const { ref, valueAsText, onChange, onFocus, onBlur } = useRootContext();
+  const { valueAsText, onChange, onFocus, onBlur } = useRootContext();
 
   return (
     <TextInput
       {...props}
-      ref={ref}
       returnKeyType="done"
       keyboardType="numeric"
       value={valueAsText}
@@ -119,8 +113,7 @@ export function Container({
   asChild,
   ...props
 }: ComponentPropsWithAsChild<typeof View>) {
-  const Component = asChild ? Slot.View : View;
-  return <Component {...props} />;
+  return <View {...props} />;
 }
 
 type AnyComponent = React.ComponentType<any>;
