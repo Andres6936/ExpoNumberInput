@@ -16,27 +16,27 @@ export type UseNumberInputArgs = {
 };
 
 const isReal = (value: string): boolean => {
-    if (!value) return false;
+  if (!value) return false;
 
-    const match = value.match(/-?\d+(\.(\d+)?)?/);
-    if (!match) return false;
+  const match = value.match(/-?\d+(\.(\d+)?)?/);
+  if (!match) return false;
 
-    const isPart = match[0];
-    const isExactInput = match.input ?? value;
+  const isPart = match[0];
+  const isExactInput = match.input ?? value;
 
-    return isPart === isExactInput;
+  return isPart === isExactInput;
 };
 
 const isInt = (value: string): boolean => {
-    if (!value) return false;
+  if (!value) return false;
 
-    const match = value.match(/-?\d+/);
-    if (!match) return false;
+  const match = value.match(/-?\d+/);
+  if (!match) return false;
 
-    const isPart = match[0];
-    const isExactInput = match.input ?? value;
+  const isPart = match[0];
+  const isExactInput = match.input ?? value;
 
-    return isPart === isExactInput;
+  return isPart === isExactInput;
 };
 
 export function useNumberInput(args: UseNumberInputArgs) {

@@ -1,6 +1,13 @@
 import React from "react";
 import { ChevronDown, ChevronUp } from "lucide-react-native";
-import { StyleProp, StyleSheet, TextInput, ViewStyle, View, Pressable } from "react-native";
+import {
+  StyleProp,
+  StyleSheet,
+  TextInput,
+  ViewStyle,
+  View,
+  Pressable,
+} from "react-native";
 import { useNumberInput } from "expo-number-input";
 
 import { NumericInputProps } from "./Input";
@@ -21,42 +28,48 @@ export const NumericInputUpDown = ({
     },
   ] satisfies StyleProp<ViewStyle>;
 
-    const {
-        ref,
-        valueAsText,
-        valueAsNumber,
-        increment,
-        decrement,
-        onChange,
-        onFocus,
-        onBlur,
-    } = useNumberInput({step: 1, value: 0, valueType: 'integer', maxValue: null, minValue: null, validateOnBlur: true});
+  const {
+    ref,
+    valueAsText,
+    valueAsNumber,
+    increment,
+    decrement,
+    onChange,
+    onFocus,
+    onBlur,
+  } = useNumberInput({
+    step: 1,
+    value: 0,
+    valueType: "integer",
+    maxValue: null,
+    minValue: null,
+    validateOnBlur: true,
+  });
 
-
-    return (
+  return (
     <View style={inputContainerStyle}>
-        <TextInput
-            ref={ref}
-            style={{flex: 1}}
-            returnKeyType="done"
-            keyboardType="numeric"
-            value={valueAsText}
-            onChangeText={onChange}
-            onBlur={onBlur}
-            onFocus={onFocus}
-        />
+      <TextInput
+        ref={ref}
+        style={{ flex: 1 }}
+        returnKeyType="done"
+        keyboardType="numeric"
+        value={valueAsText}
+        onChangeText={onChange}
+        onBlur={onBlur}
+        onFocus={onFocus}
+      />
 
       <View style={styles.Container}>
-          <Pressable onPress={increment}>
-              <View>
-                  <ChevronUp style={styles.Icon} size={20} color="#434A5E"/>
-              </View>
-          </Pressable>
-          <Pressable onPress={decrement}>
-              <View>
-                  <ChevronDown style={styles.Icon} size={20} color="#434A5E"/>
-              </View>
-          </Pressable>
+        <Pressable onPress={increment}>
+          <View>
+            <ChevronUp style={styles.Icon} size={20} color="#434A5E" />
+          </View>
+        </Pressable>
+        <Pressable onPress={decrement}>
+          <View>
+            <ChevronDown style={styles.Icon} size={20} color="#434A5E" />
+          </View>
+        </Pressable>
       </View>
     </View>
   );

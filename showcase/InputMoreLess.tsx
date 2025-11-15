@@ -1,6 +1,13 @@
 import React from "react";
 import { Minus, Plus } from "lucide-react-native";
-import { StyleProp, StyleSheet, ViewStyle, TextInput, View, Pressable } from "react-native";
+import {
+  StyleProp,
+  StyleSheet,
+  ViewStyle,
+  TextInput,
+  View,
+  Pressable,
+} from "react-native";
 import { useNumberInput } from "expo-number-input";
 
 import { NumericInputProps } from "./Input";
@@ -24,38 +31,55 @@ export const NumericInputMoreLess = ({
   ] satisfies StyleProp<ViewStyle>;
 
   const {
-      ref,
-      valueAsText,
-      valueAsNumber,
-      increment,
-      decrement,
-      onChange,
-      onFocus,
-      onBlur,
-  } = useNumberInput({step: 1, value: 0, valueType: 'integer', maxValue: null, minValue: null, validateOnBlur: true});
+    ref,
+    valueAsText,
+    valueAsNumber,
+    increment,
+    decrement,
+    onChange,
+    onFocus,
+    onBlur,
+  } = useNumberInput({
+    step: 1,
+    value: 0,
+    valueType: "integer",
+    maxValue: null,
+    minValue: null,
+    validateOnBlur: true,
+  });
 
   return (
     <View style={inputContainerStyle}>
-        <Pressable onPress={decrement}>
-            <View style={[styles.Action, { backgroundColor: rightButtonBackgroundColor }]}>
-                <Minus style={styles.Icon} size={20} color="#434A5E"/>
-            </View>
-        </Pressable>
-        <TextInput
-            ref={ref}
-            style={{flex: 1, width: "100%"}}
-            returnKeyType="done"
-            keyboardType="numeric"
-            value={valueAsText}
-            onChangeText={onChange}
-            onBlur={onBlur}
-            onFocus={onFocus}
-        />
-        <Pressable onPress={increment}>
-            <View style={[styles.Action, { backgroundColor: leftButtonBackgroundColor }]}>
-                <Plus style={styles.Icon} size={20} color="#434A5E"/>
-            </View>
-        </Pressable>
+      <Pressable onPress={decrement}>
+        <View
+          style={[
+            styles.Action,
+            { backgroundColor: rightButtonBackgroundColor },
+          ]}
+        >
+          <Minus style={styles.Icon} size={20} color="#434A5E" />
+        </View>
+      </Pressable>
+      <TextInput
+        ref={ref}
+        style={{ flex: 1, width: "100%" }}
+        returnKeyType="done"
+        keyboardType="numeric"
+        value={valueAsText}
+        onChangeText={onChange}
+        onBlur={onBlur}
+        onFocus={onFocus}
+      />
+      <Pressable onPress={increment}>
+        <View
+          style={[
+            styles.Action,
+            { backgroundColor: leftButtonBackgroundColor },
+          ]}
+        >
+          <Plus style={styles.Icon} size={20} color="#434A5E" />
+        </View>
+      </Pressable>
     </View>
   );
 };
