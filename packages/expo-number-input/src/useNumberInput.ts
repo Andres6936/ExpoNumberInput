@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
-import { TextInput } from "react-native";
+import { type TextInput } from "react-native";
 
-type Args = {
+export type UseNumberInputArgs = {
   step: number;
   value: number;
   minValue: number | null;
@@ -39,7 +39,7 @@ const isInt = (value: string): boolean => {
     return isPart === isExactInput;
 };
 
-export function useNumericInput(args: Args) {
+export function useNumberInput(args: UseNumberInputArgs) {
   const ref = useRef<TextInput | null>(null);
 
   const [lastValid, setLastValid] = useState(args.value);

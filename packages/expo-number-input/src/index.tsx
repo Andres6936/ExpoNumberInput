@@ -1,1 +1,1 @@
-export * from "./useNumericInput";
+export * from "./useNumberInput";
