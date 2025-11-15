@@ -24,6 +24,7 @@ export const NumericInputMoreLess = ({
   ] satisfies StyleProp<ViewStyle>;
 
   const {
+      ref,
       valueAsText,
       valueAsNumber,
       increment,
@@ -41,6 +42,7 @@ export const NumericInputMoreLess = ({
             </View>
         </Pressable>
         <TextInput
+            ref={ref}
             style={{flex: 1, width: "100%"}}
             returnKeyType="done"
             keyboardType="numeric"

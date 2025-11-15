@@ -22,6 +22,7 @@ export const NumericInputUpDown = ({
   ] satisfies StyleProp<ViewStyle>;
 
     const {
+        ref,
         valueAsText,
         valueAsNumber,
         increment,
@@ -35,6 +36,7 @@ export const NumericInputUpDown = ({
     return (
     <View style={inputContainerStyle}>
         <TextInput
+            ref={ref}
             style={{flex: 1}}
             returnKeyType="done"
             keyboardType="numeric"
