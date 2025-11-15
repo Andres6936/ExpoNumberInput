@@ -1,7 +1,7 @@
 import React from "react";
 import { Minus, Plus } from "lucide-react-native";
 import { StyleProp, StyleSheet, ViewStyle, TextInput, View, Pressable } from "react-native";
-import { useNumericInput } from "expo-number-input";
+import { useNumberInput } from "expo-number-input";
 
 import { NumericInputProps } from "./Input";
 
@@ -31,7 +31,7 @@ export const NumericInputMoreLess = ({
       onChange,
       onFocus,
       onBlur,
-  } = useNumericInput({step: 1, value: 0, valueType: 'integer', maxValue: null, minValue: null, validateOnBlur: true});
+  } = useNumberInput({step: 1, value: 0, valueType: 'integer', maxValue: null, minValue: null, validateOnBlur: true});
 
   return (
     <View style={inputContainerStyle}>
