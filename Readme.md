@@ -1,60 +1,168 @@
-# Expo Numeric Input
+# Expo Number Input
 
-A customizable numeric input component for React Native and Expo applications.
+A customizable React hook for building numeric input components in React Native and Expo applications.
 
 ## Features
 
-- Fully customizable numeric input
-- Increment and decrement buttons
-- Min/max value constraints
-- Custom styling support
-- React Native Vector Icons integration
-- TypeScript support
+- 🎯 **Hook-based API** - Build your own numeric input UI with full control
+- ⬆️⬇️ Increment and decrement functionality
+- 🔒 Min/max value constraints with limit detection
+- 🔢 Support for integers and real numbers
+- ✅ Input validation (on blur or on change)
+- 📱 Full React Native and Expo support
+- 🎨 Complete styling freedom
+- 💪 TypeScript support
 
-````typescript jsx
-import {NumericInput} from 'expo-number-input';
+## Installation
 
-// Basic usage 
-<NumericInput
-    value={0} onChange={(value) => console.log(value)}
-/>
+```bash
+bun add expo-number-input
+```
 
-// With min/max constraints 
-<NumericInput
-    value={5} minValue={0} maxValue={10} onChange={(value) => console.log(value)}
-/>
+## Basic Usage
 
-// Custom styling 
-<NumericInput
-    value={0} onChange={(value) => console.log(value)}
-    containerStyle={{backgroundColor: '#f0f0f0', borderRadius: 8, padding: 10}}
-    inputStyle={{fontSize: 18, color: '#333'}} buttonStyle={{backgroundColor: '#007AFF'}}
-/>
+The package exports a `useNumberInput` hook that handles all the numeric input logic. You can use it to create your own
+custom components:
 
-````
+### Simple Input Component
 
+```typescript jsx
+import React from 'react';
+import { View, TextInput, Button, StyleSheet } from 'react-native';
+import { useNumberInput } from 'expo-number-input';
 
-## Props
+function NumberInput({value, onChange, minValue = null, maxValue = null}) {
+    const {ref, valueAsText, onChange: handleChange, onBlur, onFocus} = useNumberInput({
+        step: 1,
+        value,
+        minValue,
+        maxValue,
+        valueType: 'integer',
+        validateOnBlur: true,
+        onChange,
+    });
+    return (
+        <TextInput
+            ref={ref}
+            value={valueAsText}
+            onChangeText={handleChange}
+            onBlur={onBlur}
+            onFocus={onFocus}
+        />
+    );
+}
+```
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| value | number | 0 | Current value of the input |
-| onChange | (value: number) => void | required | Callback function when value changes |
-| minValue | number | undefined | Minimum allowed value |
-| maxValue | number | undefined | Maximum allowed value |
-| step | number | 1 | Step value for increment/decrement |
-| containerStyle | ViewStyle | {} | Style for the container component |
-| inputStyle | TextStyle | {} | Style for the input field |
-| buttonStyle | ViewStyle | {} | Style for increment/decrement buttons |
-| iconSize | number | 24 | Size of the increment/decrement icons |
-| iconColor | string | '#000' | Color of the increment/decrement icons |
-| disabled | boolean | false | Disables the input component |
+```typescript jsx
+import React from 'react';
+import { View, TextInput, TouchableOpacity, Text, Alert } from 'react-native';
+import { useNumberInput } from 'expo-number-input';
+
+function DecimalInput({value, onChange}) {
+    const {ref, valueAsText, increment, decrement, onChange: handleChange, onBlur, onFocus} = useNumberInput({
+        step: 0.1,
+        value,
+        minValue: -10,
+        maxValue: 10,
+        valueType: 'real',
+        validateOnBlur: true,
+        onChange,
+        onLimitReached: (isMax, message) => {
+            Alert.alert('Limit Reached', message);
+        },
+    });
+    return (
+        <View style={{flexDirection: 'row', alignItems: 'center', gap: 8}}>
+            <TouchableOpacity
+                onPress={decrement}
+                style={{
+                    backgroundColor: '#007AFF',
+                    padding: 12,
+                    borderRadius: 8
+                }}>
+                <Text style={{color: 'white', fontSize: 20}}>−</Text>
+            </TouchableOpacity>
+            <TextInput
+                ref={ref}
+                style={{
+                    borderWidth: 1,
+                    borderColor: '#ddd',
+                    borderRadius: 8,
+                    padding: 12,
+                    minWidth: 100,
+                    textAlign: 'center',
+                    fontSize: 18,
+                }}
+                value={valueAsText}
+                onChangeText={handleChange}
+                onBlur={onBlur}
+                onFocus={onFocus}
+                keyboardType="decimal-pad"
+            />
+            <TouchableOpacity
+                onPress={increment}
+                style={{
+                    backgroundColor: '#007AFF',
+                    padding: 12,
+                    borderRadius: 8
+                }}
+            >
+                <Text style={{color: 'white', fontSize: 20}}>+</Text>
+            </TouchableOpacity>
+        </View>
+    )
+};
+
+```
+
+## API Reference
+
+### `useNumberInput(args: UseNumberInputArgs)`
+
+#### Arguments
+
+| Prop           | Type                    | Default   | Description                            |
+|----------------|-------------------------|-----------|----------------------------------------|
+| value          | number                  | 0         | Current value of the input             |
+| onChange       | (value: number) => void | required  | Callback function when value changes   |
+| minValue       | number                  | undefined | Minimum allowed value                  |
+| maxValue       | number                  | undefined | Maximum allowed value                  |
+| step           | number                  | 1         | Step value for increment/decrement     |
+| containerStyle | ViewStyle               | {}        | Style for the container component      |
+| inputStyle     | TextStyle               | {}        | Style for the input field              |
+| buttonStyle    | ViewStyle               | {}        | Style for increment/decrement buttons  |
+| iconSize       | number                  | 24        | Size of the increment/decrement icons  |
+| iconColor      | string                  | '#000'    | Color of the increment/decrement icons |
+| disabled       | boolean                 | false     | Disables the input component           |
+
+#### Returns
+
+| Property        | Type                     | Description                          |
+|-----------------|--------------------------|--------------------------------------|
+| `ref`           | `RefObject<TextInput>`   | Ref to attach to the TextInput       |
+| `valueAsText`   | `string`                 | Current value as text for display    |
+| `valueAsNumber` | `number`                 | Current value as number              |
+| `increment`     | `() => void`             | Function to increment the value      |
+| `decrement`     | `() => void`             | Function to decrement the value      |
+| `onChange`      | `(text: string) => void` | Handler for TextInput's onChangeText |
+| `onBlur`        | `() => void`             | Handler for TextInput's onBlur       |
+| `onFocus`       | `() => void`             | Handler for TextInput's onFocus      |
+
+## Tips
+
+- Always pass `ref` to your `TextInput` for proper validation behavior
+- Use `valueAsText` (not `valueAsNumber`) as the TextInput's `value` prop
+- Connect `onChange`, `onBlur`, and `onFocus` from the hook to your TextInput
+- Set `validateOnBlur: true` for better UX when typing negative numbers or decimals
+- Use `valueType: 'real'` with `keyboardType="decimal-pad"` for decimal inputs
+- Use `valueType: 'integer'` with `keyboardType="numeric"` for integer inputs
+
 
 ## Requirements
 
 - React Native or Expo project
 - React Native Vector Icons (automatically installed with the package)
-- React 17.0.0 or higher
+- React 19.0.0 or higher
 
 ## License
 
