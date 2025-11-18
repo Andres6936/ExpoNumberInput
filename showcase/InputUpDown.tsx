@@ -40,9 +40,9 @@ export const NumericInputUpDown = ({
   } = useNumberInput({
     value: props.value || 0,
     step: props.step || 1,
-    valueType: props.valueType || "integer",
-    maxValue: props.maxValue || null,
-    minValue: props.minValue || null,
+    valueType: props.valueType ?? "integer",
+    maxValue: props.maxValue ?? null,
+    minValue: props.minValue ?? null,
     validateOnBlur: true,
   });
 
