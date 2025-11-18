@@ -50,17 +50,18 @@ export function useNumberInput(args: UseNumberInputArgs) {
   const [valueAsText, setValueAsText] = useState(args.value.toString());
   const [valueAsNumber, setValueAsNumber] = useState(args.value);
 
-  const getValueByType = (value: number) =>
-    args.valueType === "real"
-      ? parseFloat(value.toFixed(12))
-      : parseInt(value.toFixed(12));
+  const getValueType = (value: string) =>
+    args.valueType === "real" ? parseFloat(value) : parseInt(value);
+
+  const getValueWithPrecision = (value: number) =>
+    getValueType(value.toFixed(12));
 
   const increment = () => {
     let newValue = args.value ? args.value : valueAsNumber;
     const optimisticValue = newValue + args.step;
 
     if (isNullOrUndefined(args.maxValue) || optimisticValue < args.maxValue) {
-      newValue = getValueByType(optimisticValue);
+      newValue = getValueWithPrecision(optimisticValue);
       setValueAsNumber(newValue);
       setValueAsText(newValue.toString());
     } else if (!isNullOrUndefined(args.maxValue)) {
@@ -79,7 +80,7 @@ export function useNumberInput(args: UseNumberInputArgs) {
     const optimisticValue = newValue - args.step;
 
     if (isNullOrUndefined(args.minValue) || optimisticValue > args.minValue) {
-      newValue = getValueByType(optimisticValue);
+      newValue = getValueWithPrecision(optimisticValue);
       setValueAsNumber(newValue);
       setValueAsText(newValue.toString());
     } else if (!isNullOrUndefined(args.minValue)) {
@@ -153,10 +154,7 @@ export function useNumberInput(args: UseNumberInputArgs) {
   const onBlur = () => {
     let isLegal = isLegalValue(valueAsText);
     if (isLegal) {
-      let parsedValue =
-        args.valueType === "real"
-          ? parseFloat(valueAsText)
-          : parseInt(valueAsText);
+      let parsedValue = getValueType(valueAsText);
       parsedValue = isNaN(parsedValue) ? 0 : parsedValue;
       if (parsedValue !== args.value) {
         args.onChange?.(parsedValue);
