@@ -135,9 +135,7 @@ export function useNumberInput(args: UseNumberInputArgs) {
         setTimeout(() => ref.current?.focus(), 20);
       }
     } else if (!isLegal && args.validateOnBlur) {
-      setTimeout(() => {
-        setValueAsText(lastValid.toString());
-      }, 0);
+      setTimeout(() => setValueAsText(lastValid.toString()), 0);
     } else {
       setValueAsText(value);
     }
@@ -145,11 +143,11 @@ export function useNumberInput(args: UseNumberInputArgs) {
 
   const isLegalValue = (value: string) =>
     value === "" ||
-    (((args.valueType === "real" && isReal(value)) ||
+    ((args.valueType === "real" && isReal(value)) ||
       (args.valueType !== "real" && isInt(value))) &&
       (isNullOrUndefined(args.maxValue) ||
         parseFloat(value) <= args.maxValue) &&
-      (isNullOrUndefined(args.minValue) || parseFloat(value) >= args.minValue));
+      (isNullOrUndefined(args.minValue) || parseFloat(value) >= args.minValue);
 
   const onBlur = () => {
     let isLegal = isLegalValue(valueAsText);
