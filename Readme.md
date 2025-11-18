@@ -128,11 +128,6 @@ function DecimalInput({value, onChange}) {
 | minValue       | number                  | undefined | Minimum allowed value                  |
 | maxValue       | number                  | undefined | Maximum allowed value                  |
 | step           | number                  | 1         | Step value for increment/decrement     |
-| containerStyle | ViewStyle               | {}        | Style for the container component      |
-| inputStyle     | TextStyle               | {}        | Style for the input field              |
-| buttonStyle    | ViewStyle               | {}        | Style for increment/decrement buttons  |
-| iconSize       | number                  | 24        | Size of the increment/decrement icons  |
-| iconColor      | string                  | '#000'    | Color of the increment/decrement icons |
 | disabled       | boolean                 | false     | Disables the input component           |
 
 #### Returns
