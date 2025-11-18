@@ -121,14 +121,18 @@ function DecimalInput({value, onChange}) {
 
 #### Arguments
 
-| Prop           | Type                    | Default   | Description                            |
-|----------------|-------------------------|-----------|----------------------------------------|
-| value          | number                  | 0         | Current value of the input             |
-| onChange       | (value: number) => void | required  | Callback function when value changes   |
-| minValue       | number                  | undefined | Minimum allowed value                  |
-| maxValue       | number                  | undefined | Maximum allowed value                  |
-| step           | number                  | 1         | Step value for increment/decrement     |
-| disabled       | boolean                 | false     | Disables the input component           |
+| Property         | Type                                    | Default      | Description                                                                        |
+|------------------|-----------------------------------------|--------------|------------------------------------------------------------------------------------|
+| `value`          | `number`                                | **required** | Current value (controlled)                                                         |
+| `step`           | `number`                                | **required** | Increment/decrement step                                                           |
+| `minValue`       | `number \| null`                        | **required** | Minimum allowed value (null for no limit)                                          |
+| `maxValue`       | `number \| null`                        | **required** | Maximum allowed value (null for no limit)                                          |
+| `valueType`      | `'integer' \| 'real'`                   | **required** | Type of number to handle                                                           |
+| `validateOnBlur` | `boolean`                               | **required** | When `true`, validates input only on blur; when `false`, validates on every change |
+| `onChange`       | `(value: number) => void`               | optional     | Callback when value changes                                                        |
+| `onBlur`         | `() => void`                            | optional     | Callback when input loses focus                                                    |
+| `onFocus`        | `() => void`                            | optional     | Callback when input gains focus                                                    |
+| `onLimitReached` | `(isMax: boolean, msg: string) => void` | optional     | Callback when min/max limit is reached                                             |
 
 #### Returns
 
@@ -151,7 +155,6 @@ function DecimalInput({value, onChange}) {
 - Set `validateOnBlur: true` for better UX when typing negative numbers or decimals
 - Use `valueType: 'real'` with `keyboardType="decimal-pad"` for decimal inputs
 - Use `valueType: 'integer'` with `keyboardType="numeric"` for integer inputs
-
 
 ## Requirements
 
