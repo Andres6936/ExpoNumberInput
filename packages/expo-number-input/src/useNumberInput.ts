@@ -1,6 +1,5 @@
 import { useRef, useState } from "react";
 import { type TextInput } from "react-native";
-import { NullLiteral } from "typescript";
 
 export type UseNumberInputArgs = {
   step: number;
@@ -50,8 +49,7 @@ export function useNumberInput(args: UseNumberInputArgs) {
   const [valueAsNumber, setValueAsNumber] = useState(args.value);
 
   const increment = () => {
-    let newValue =
-      args.value && typeof args.value === "number" ? args.value : valueAsNumber;
+    let newValue = args.value ? args.value : valueAsNumber;
 
     if (isNullOrUndefined(args.maxValue) || newValue + args.step < args.maxValue) {
       const numericAs = (newValue + args.step).toFixed(12);
@@ -72,8 +70,7 @@ export function useNumberInput(args: UseNumberInputArgs) {
   };
 
   const decrement = () => {
-    let newValue =
-      args.value && typeof args.value === "number" ? args.value : valueAsNumber;
+    let newValue = args.value ? args.value : valueAsNumber;
 
     if (isNullOrUndefined(args.minValue) || newValue - args.step > args.minValue) {
       const numericAs = (newValue - args.step).toFixed(12);
