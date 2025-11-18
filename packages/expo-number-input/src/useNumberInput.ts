@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { type TextInput } from "react-native";
+import { NullLiteral } from "typescript";
 
 export type UseNumberInputArgs = {
   step: number;
@@ -14,6 +15,8 @@ export type UseNumberInputArgs = {
   onChange?: (value: number) => void;
   onLimitReached?: (isMax: boolean, msg: string) => void;
 };
+
+const isNullOrUndefined = <T,>(value: T | null | undefined): value is null | undefined => value === null || value === undefined;
 
 const isReal = (value: string): boolean => {
   if (!value) return false;
@@ -49,13 +52,15 @@ export function useNumberInput(args: UseNumberInputArgs) {
   const increment = () => {
     let newValue =
       args.value && typeof args.value === "number" ? args.value : valueAsNumber;
-    if (args.maxValue === null || newValue + args.step < args.maxValue) {
+
+    if (isNullOrUndefined(args.maxValue) || newValue + args.step < args.maxValue) {
       const numericAs = (newValue + args.step).toFixed(12);
       newValue =
         args.valueType === "real" ? parseFloat(numericAs) : parseInt(numericAs);
       setValueAsNumber(newValue);
       setValueAsText(newValue.toString());
-    } else if (args.maxValue !== null) {
+
+    } else if (!isNullOrUndefined(args.maxValue)) {
       args.onLimitReached?.(true, "Reached Maximum Value!");
       newValue = args.maxValue;
       setValueAsNumber(newValue);
@@ -69,11 +74,13 @@ export function useNumberInput(args: UseNumberInputArgs) {
   const decrement = () => {
     let newValue =
       args.value && typeof args.value === "number" ? args.value : valueAsNumber;
-    if (args.minValue === null || newValue - args.step > args.minValue) {
+
+    if (isNullOrUndefined(args.minValue) || newValue - args.step > args.minValue) {
       const numericAs = (newValue - args.step).toFixed(12);
       newValue =
         args.valueType === "real" ? parseFloat(numericAs) : parseInt(numericAs);
-    } else if (args.minValue !== null) {
+
+    } else if (!isNullOrUndefined(args.minValue)) {
       args.onLimitReached?.(false, "Reached Minimum Value!");
       newValue = args.minValue;
     }
@@ -137,8 +144,8 @@ export function useNumberInput(args: UseNumberInputArgs) {
     value === "" ||
     (((args.valueType === "real" && isReal(value)) ||
       (args.valueType !== "real" && isInt(value))) &&
-      (args.maxValue === null || parseFloat(value) <= args.maxValue) &&
-      (args.minValue === null || parseFloat(value) >= args.minValue));
+      (isNullOrUndefined(args.maxValue) || parseFloat(value) <= args.maxValue) &&
+      (isNullOrUndefined(args.minValue) || parseFloat(value) >= args.minValue));
 
   const onBlur = () => {
     let isLegal = isLegalValue(valueAsText);
