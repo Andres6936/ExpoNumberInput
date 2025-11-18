@@ -50,9 +50,10 @@ export function useNumberInput(args: UseNumberInputArgs) {
 
   const increment = () => {
     let newValue = args.value ? args.value : valueAsNumber;
+    const optimisticValue = newValue + args.step;
 
-    if (isNullOrUndefined(args.maxValue) || newValue + args.step < args.maxValue) {
-      const numericAs = (newValue + args.step).toFixed(12);
+    if (isNullOrUndefined(args.maxValue) || optimisticValue < args.maxValue) {
+      const numericAs = optimisticValue.toFixed(12);
       newValue =
         args.valueType === "real" ? parseFloat(numericAs) : parseInt(numericAs);
       setValueAsNumber(newValue);
@@ -71,9 +72,10 @@ export function useNumberInput(args: UseNumberInputArgs) {
 
   const decrement = () => {
     let newValue = args.value ? args.value : valueAsNumber;
+    const optimisticValue = newValue - args.step;
 
-    if (isNullOrUndefined(args.minValue) || newValue - args.step > args.minValue) {
-      const numericAs = (newValue - args.step).toFixed(12);
+    if (isNullOrUndefined(args.minValue) || optimisticValue > args.minValue) {
+      const numericAs = optimisticValue.toFixed(12);
       newValue =
         args.valueType === "real" ? parseFloat(numericAs) : parseInt(numericAs);
 
