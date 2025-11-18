@@ -15,7 +15,9 @@ export type UseNumberInputArgs = {
   onLimitReached?: (isMax: boolean, msg: string) => void;
 };
 
-const isNullOrUndefined = <T,>(value: T | null | undefined): value is null | undefined => value === null || value === undefined;
+const isNullOrUndefined = <T>(
+  value: T | null | undefined,
+): value is null | undefined => value === null || value === undefined;
 
 const isReal = (value: string): boolean => {
   if (!value) return false;
@@ -48,17 +50,19 @@ export function useNumberInput(args: UseNumberInputArgs) {
   const [valueAsText, setValueAsText] = useState(args.value.toString());
   const [valueAsNumber, setValueAsNumber] = useState(args.value);
 
+  const getValueByType = (value: number) =>
+    args.valueType === "real"
+      ? parseFloat(value.toFixed(12))
+      : parseInt(value.toFixed(12));
+
   const increment = () => {
     let newValue = args.value ? args.value : valueAsNumber;
     const optimisticValue = newValue + args.step;
 
     if (isNullOrUndefined(args.maxValue) || optimisticValue < args.maxValue) {
-      const numericAs = optimisticValue.toFixed(12);
-      newValue =
-        args.valueType === "real" ? parseFloat(numericAs) : parseInt(numericAs);
+      newValue = getValueByType(optimisticValue);
       setValueAsNumber(newValue);
       setValueAsText(newValue.toString());
-
     } else if (!isNullOrUndefined(args.maxValue)) {
       args.onLimitReached?.(true, "Reached Maximum Value!");
       newValue = args.maxValue;
@@ -75,19 +79,18 @@ export function useNumberInput(args: UseNumberInputArgs) {
     const optimisticValue = newValue - args.step;
 
     if (isNullOrUndefined(args.minValue) || optimisticValue > args.minValue) {
-      const numericAs = optimisticValue.toFixed(12);
-      newValue =
-        args.valueType === "real" ? parseFloat(numericAs) : parseInt(numericAs);
-
+      newValue = getValueByType(optimisticValue);
+      setValueAsNumber(newValue);
+      setValueAsText(newValue.toString());
     } else if (!isNullOrUndefined(args.minValue)) {
       args.onLimitReached?.(false, "Reached Minimum Value!");
       newValue = args.minValue;
+      setValueAsNumber(newValue);
+      setValueAsText(newValue.toString());
     }
     if (newValue !== args.value) {
       args.onChange?.(Number(newValue));
     }
-    setValueAsNumber(newValue);
-    setValueAsText(newValue.toString());
   };
 
   const onChange = (value: string) => {
@@ -143,7 +146,8 @@ export function useNumberInput(args: UseNumberInputArgs) {
     value === "" ||
     (((args.valueType === "real" && isReal(value)) ||
       (args.valueType !== "real" && isInt(value))) &&
-      (isNullOrUndefined(args.maxValue) || parseFloat(value) <= args.maxValue) &&
+      (isNullOrUndefined(args.maxValue) ||
+        parseFloat(value) <= args.maxValue) &&
       (isNullOrUndefined(args.minValue) || parseFloat(value) >= args.minValue));
 
   const onBlur = () => {
